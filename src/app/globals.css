@@ -1,26 +1,346 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ==========================================================================
+   Good Looking Digital — design system
+   Structure from concept A, surface from B, proof from C.
+   Two signal colours carry the two customer paths; everything else is neutral.
+   ========================================================================== */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  /* neutrals — cool-biased, never pure grey */
+  --paper: #f5f6f4;
+  --surface: #ffffff;
+  --surface-2: #eceeea;
+  --ink: #14191a;
+  --ink-2: #45514f;
+  /* muted and grow are tuned to clear 4.5:1 on --paper, not picked by eye */
+  --muted: #646f6e;
+  --rule: #dde2de;
+  --rule-strong: #bcc5c0;
+
+  /* signals — grow (warm) and platform (cool) */
+  --grow: #b55028;
+  /* kept light enough that grow-coloured text stays legible on the hover tint */
+  --grow-soft: #faf2ed;
+  --grow-ink: #ffffff;
+  --platform: #0f5b55;
+  --platform-soft: #dceae7;
+  --platform-ink: #ffffff;
+
+  /* semantic — status only, never decorative */
+  --pass: #1f7a4d;
+  --fail: #b3341f;
+
+  --shadow-sm: 0 1px 2px rgba(20, 25, 26, 0.05);
+  --shadow-md: 0 12px 32px -12px rgba(20, 25, 26, 0.18);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --paper: #0b0f0f;
+    --surface: #121818;
+    --surface-2: #1a2221;
+    --ink: #e9efec;
+    --ink-2: #b0bdb9;
+    --muted: #77857f;
+    --rule: #212b29;
+    --rule-strong: #35423f;
+
+    --grow: #e8834f;
+    --grow-soft: #2a1a12;
+    --grow-ink: #1a0f08;
+    --platform: #46b3a4;
+    --platform-soft: #0f2321;
+    --platform-ink: #05201d;
+
+    --pass: #4ec98a;
+    --fail: #ef7a63;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 12px 32px -12px rgba(0, 0, 0, 0.6);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:root[data-theme="dark"] {
+  --paper: #0b0f0f;
+  --surface: #121818;
+  --surface-2: #1a2221;
+  --ink: #e9efec;
+  --ink-2: #b0bdb9;
+  --muted: #77857f;
+  --rule: #212b29;
+  --rule-strong: #35423f;
+
+  --grow: #e8834f;
+  --grow-soft: #2a1a12;
+  --grow-ink: #1a0f08;
+  --platform: #46b3a4;
+  --platform-soft: #0f2321;
+  --platform-ink: #05201d;
+
+  --pass: #4ec98a;
+  --fail: #ef7a63;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+
+  --color-grow: var(--grow);
+  --color-grow-soft: var(--grow-soft);
+  --color-grow-ink: var(--grow-ink);
+  --color-platform: var(--platform);
+  --color-platform-soft: var(--platform-soft);
+  --color-platform-ink: var(--platform-ink);
+
+  --color-pass: var(--pass);
+  --color-fail: var(--fail);
+
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, Menlo, Consolas, monospace;
+
+  /* type scale — fluid, one ratio, used everywhere */
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.78rem;
+  --text-sm: 0.9rem;
+  --text-base: 1.02rem;
+  --text-lg: 1.16rem;
+  --text-xl: clamp(1.3rem, 1.15rem + 0.6vw, 1.55rem);
+  --text-2xl: clamp(1.55rem, 1.25rem + 1.3vw, 2.15rem);
+  --text-3xl: clamp(1.95rem, 1.4rem + 2.4vw, 3.1rem);
+  --text-4xl: clamp(2.4rem, 1.4rem + 4.2vw, 4.4rem);
+  --text-5xl: clamp(2.9rem, 1.2rem + 6.8vw, 6rem);
+  /* hero only — the scale that carries the authority */
+  --text-6xl: clamp(3rem, 0.9rem + 8.6vw, 7.5rem);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--grow);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--grow);
+    color: var(--grow-ink);
+  }
+}
+
+@layer utilities {
+  /*
+   * Art-directed canvas: a layered gradient mesh standing in for photography
+   * until real project photos exist. Grain is an inline SVG turbulence filter
+   * so it costs no network request and never blurs on scale.
+   */
+  /*
+   * Fixed values, not palette tokens. The canvas stands in for photography, and
+   * a photograph does not invert with the theme — if it followed --grow and
+   * --platform it would brighten in dark mode and strand the white text on it
+   * below readable contrast.
+   */
+  .canvas {
+    --canvas-warm: #8f3f1e;
+    --canvas-cool: #0c4a45;
+    background:
+      radial-gradient(
+        ellipse 55% 80% at 12% 105%,
+        var(--canvas-warm) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 50% 70% at 88% -5%,
+        var(--canvas-cool) 0%,
+        transparent 62%
+      ),
+      radial-gradient(
+        ellipse 70% 60% at 50% 50%,
+        rgba(12, 18, 17, 0.55) 0%,
+        transparent 70%
+      ),
+      linear-gradient(118deg, #1a2220 0%, #26332f 48%, #141b19 100%);
+    position: relative;
+    isolation: isolate;
+  }
+
+  .canvas::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.42;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  /*
+   * Theme-toggle labels. Both are in the DOM; CSS picks which one shows, using
+   * the same three-state pattern as the palette (bare :root, OS preference,
+   * explicit stamp). The label names the theme you would switch TO.
+   */
+  .theme-label-dark {
+    display: inline-flex;
+  }
+
+  .theme-label-light {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-label-dark {
+      display: none;
+    }
+
+    :root:not([data-theme="light"]) .theme-label-light {
+      display: inline-flex;
+    }
+  }
+
+  :root[data-theme="dark"] .theme-label-dark {
+    display: none;
+  }
+
+  :root[data-theme="dark"] .theme-label-light {
+    display: inline-flex;
+  }
+
+  /* uppercase mono labels — used for eyebrows and metadata */
+  .label {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .measure {
+    max-width: 66ch;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ==========================================================================
+   Motion — kept unlayered.
+   Unlayered rules win over anything in a cascade layer, so these motion
+   primitives cannot be accidentally overridden by a Tailwind opacity or
+   transform utility landing on the same element.
+
+   The hidden state is gated on html[data-js="true"], set by the head script
+   before first paint, so nothing is stranded invisible if JS never runs.
+   ========================================================================== */
+
+html[data-js="true"] .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+html[data-js="true"] .reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero load sequence — staggered by an inline --delay */
+html[data-js="true"] .rise {
+  animation: rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * Ticker. Two identical tracks sit side by side and the pair slides exactly
+ * half its own width, so the loop is seamless with no visible reset.
+ */
+.ticker-track {
+  display: inline-flex;
+  gap: 2.5rem;
+  animation: ticker 38s linear infinite;
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Show revealed content outright rather than snapping it into place. */
+  html[data-js="true"] .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  /*
+   * Stop the ticker at its start. Without this the blanket rule above runs it
+   * to completion instantly, leaving the strip translated half off-screen.
+   */
+  .ticker-track {
+    animation: none !important;
+    transform: none !important;
+  }
 }
