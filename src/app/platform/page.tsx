@@ -4,7 +4,7 @@ import { Container, Eyebrow } from "@/components/ui";
 import { PathPageLayout } from "@/components/PathPageLayout";
 import { Reveal } from "@/components/Reveal";
 import { TestRunPanel } from "@/components/TestRunPanel";
-import { pathContent } from "@/lib/site";
+import { pathContent, stack } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: pathContent.platform.metaTitle,
@@ -48,6 +48,44 @@ export default function PlatformPage() {
             <Reveal delay={120}>
               <TestRunPanel />
             </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      {/* The stack, where a technical reader will look for it — not buried
+          in an FAQ three screens further down. */}
+      <section className="border-rule border-t py-[clamp(2.75rem,2rem+3vw,4.5rem)]">
+        <Container>
+          <Reveal>
+            <Eyebrow tone="platform">What we work in</Eyebrow>
+            <h2 className="mt-3 max-w-[20ch] text-3xl">
+              Nine years of it, including for a Fortune 5 company
+            </h2>
+            <p className="text-ink-2 measure mt-4">
+              Listed so you can check for a match before spending a call on it.
+              If your stack is not here, say so — adjacent is often fine, and we
+              will tell you when it is not.
+            </p>
+          </Reveal>
+
+          <div className="mt-10 flex flex-col gap-7">
+            {stack.map((group, i) => (
+              <Reveal key={group.group} delay={i * 70}>
+                <div className="border-rule grid gap-x-8 gap-y-3 border-t pt-4 md:grid-cols-[10rem_minmax(0,1fr)]">
+                  <p className="label text-platform">{group.group}</p>
+                  <ul className="flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <li
+                        key={item}
+                        className="border-rule text-ink-2 border px-2.5 py-1 text-sm"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </Container>
       </section>

@@ -79,7 +79,10 @@ export const paths: ServicePath[] = [
 
 /** Headline numbers. Each has to be defensible if a prospect asks. */
 export const proofPoints = [
-  { figure: "9 yrs", note: "Full-stack engineering, not a template reseller" },
+  {
+    figure: "9 yrs",
+    note: "Full-stack software engineering, including for a Fortune 5 company",
+  },
   { figure: "100%", note: "Of critical flows covered by automated tests" },
   { figure: "< 1s", note: "Target load time on every page we ship" },
   {
@@ -325,7 +328,7 @@ export const pathContent: Record<PathId, PathPage> = {
       },
       {
         q: "What stack do you work in?",
-        a: "TypeScript and JavaScript across React, Next.js and Node, with MongoDB or Postgres behind it, and Playwright for end-to-end coverage. Nine years of full-stack engineering, not a design studio subcontracting the hard part.",
+        a: "TypeScript and JavaScript across React, Next.js and Angular on the front end; Node and Express or Java and Spring Boot on the back; SQL and MongoDB for data; Playwright for end-to-end coverage and Vitest, Jest and React Testing Library for unit tests. Nine years of it, including for a Fortune 5 company — not a design studio subcontracting the hard part.",
       },
       {
         q: "Will you work alongside our developers?",
@@ -466,7 +469,7 @@ export const about = {
   photoCaption: "Rafal — Mokena, Illinois",
   story: [
     "Most agencies put a salesperson in front of you and a junior behind the scenes. The person who understood your business is not the person who builds the thing, and something is lost in between.",
-    "Here, the person you speak to on the first call is the person writing the code, and the person who answers when something breaks two years later. Nine years of full-stack engineering sits behind that — React, TypeScript, Node, databases and automated testing — the kind of work most local web shops send elsewhere.",
+    "Here, the person you speak to on the first call is the person writing the code, and the person who answers when something breaks two years later. Nine years of full-stack software engineering sits behind that, including for a Fortune 5 company — React and Angular, TypeScript, Node, Java and Spring Boot, SQL and MongoDB, and automated testing at every level. The kind of work most local web shops send elsewhere.",
     "That means the range is unusual. A five-page site for a landscaper and a customer portal with logins and integrations are both genuinely in scope, and you are not handed to a different company when the second one comes up.",
   ],
   principles: [
@@ -495,3 +498,38 @@ export const about = {
     "Work that would be better served by a large agency gets said out loud",
   ],
 } as const;
+
+/**
+ * The stack, grouped for a technical reader scanning for a match.
+ * Only list what can actually be delivered — this is the section a technology
+ * director will check hardest.
+ */
+export const stack = [
+  {
+    group: "Front end",
+    items: [
+      "TypeScript",
+      "JavaScript",
+      "React",
+      "Next.js",
+      "Angular",
+      "HTML & CSS",
+    ],
+  },
+  {
+    group: "Back end",
+    items: ["Node", "Express", "Java", "Spring Boot", "REST APIs"],
+  },
+  {
+    group: "Data",
+    items: ["MongoDB", "SQL", "PostgreSQL"],
+  },
+  {
+    group: "Quality",
+    items: ["Playwright", "Vitest", "Jest", "React Testing Library"],
+  },
+  {
+    group: "Delivery",
+    items: ["CI/CD", "GitHub Actions", "Docker", "Cloud deployment"],
+  },
+] as const;
