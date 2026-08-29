@@ -346,3 +346,152 @@ export const pathContent: Record<PathId, PathPage> = {
     ctaLabel: "Book an assessment",
   },
 };
+
+/* ------------------------------------------------------------------ */
+/* Stage 05 — pricing and about                                        */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Care plan tiers. The $95–$250/mo band on the path pages resolves here.
+ * Contents are a proposal until signed off — the bands themselves were
+ * already published, these tiers are what fills them.
+ */
+export const carePlans = [
+  {
+    name: "Essential",
+    price: "$95",
+    period: "/mo",
+    forWho: "A business site that needs to stay up and stay current",
+    includes: [
+      "Hosting, SSL and daily backups",
+      "Uptime monitoring",
+      "Security and dependency updates",
+      "Small text and photo changes",
+      "Email support, replies within two business days",
+    ],
+  },
+  {
+    name: "Growth",
+    price: "$175",
+    period: "/mo",
+    forWho: "A site that keeps changing as the business does",
+    includes: [
+      "Everything in Essential",
+      "Content updates and new pages as needed",
+      "A monthly note on traffic and enquiries",
+      "Google Business Profile kept current",
+      "Priority response, same business day",
+    ],
+    featured: true,
+  },
+  {
+    name: "Care+",
+    price: "$250",
+    period: "/mo",
+    forWho: "A site or application doing real work every day",
+    includes: [
+      "Everything in Growth",
+      "Ongoing improvements, not just fixes",
+      "Quarterly review of what is and is not working",
+      "Automated test maintenance where applicable",
+      "Direct line, same-day response",
+    ],
+  },
+];
+
+/** How pricing works. Written to pre-empt the awkward parts of a first call. */
+export const pricingPrinciples = [
+  {
+    title: "Fixed price wherever it can be fixed",
+    body: "Most defined projects get a number before work starts, and that number does not move unless you change what you asked for. Open-ended work gets a rate and an agreed ceiling instead of a running meter.",
+  },
+  {
+    title: "Bands, not quotes",
+    body: "Every figure here is a starting point. A five-page site for a landscaper and a five-page site for a law firm are not the same job. The real number comes after a short conversation, and it comes in writing.",
+  },
+  {
+    title: "No lock-in",
+    body: "Care plans are month to month. You own the site, the domain, the content and your Google and Facebook pages from day one. Leaving is a matter of pointing DNS somewhere else, not negotiating a release.",
+  },
+];
+
+/** What actually moves a number up or down. Honesty here saves a bad call later. */
+export const pricingFactors = [
+  { factor: "Number of pages", effect: "Direct" },
+  { factor: "Whether copy and photos exist", effect: "Large" },
+  { factor: "Custom design vs. adapting a layout", effect: "Large" },
+  { factor: "Logins, databases or payments", effect: "Large" },
+  { factor: "Integrations with tools you already run", effect: "Moderate" },
+  { factor: "Automated test coverage", effect: "Moderate" },
+  { factor: "Migrating content from an old site", effect: "Moderate" },
+  { factor: "How fast you need it", effect: "Moderate" },
+];
+
+export const pricingFaqs = [
+  {
+    q: "Why not just list exact prices?",
+    a: "Because the same request means different work for different businesses, and a fixed menu price would mean padding every quote to cover the worst case. Bands plus a short call gets you a truer number than a price list would.",
+  },
+  {
+    q: "Do you take payment in stages?",
+    a: "Yes. Typically a deposit to start, and the balance on launch. Larger projects are split across milestones so you are never far ahead of what has been delivered.",
+  },
+  {
+    q: "What is not included?",
+    a: "Domain registration, third-party subscriptions, stock photography, print production and advertising spend are all billed at cost or paid by you directly. Nothing is marked up quietly.",
+  },
+  {
+    q: "Is the assessment fee wasted if I do not go ahead?",
+    a: "No. You keep the findings and the prioritised list, and they are written so another developer could act on them. If you do go ahead with us, the fee credits toward the build.",
+  },
+  {
+    q: "Do you work with tight budgets?",
+    a: "Sometimes, if the scope shrinks to match. What we will not do is quietly cut corners to hit a number — you will get told what a smaller budget buys and what it leaves out.",
+  },
+];
+
+/** About page copy. Written for a one-person studio that says so. */
+export const about = {
+  metaTitle: "About",
+  metaDescription:
+    "Good Looking Digital is one engineer with nine years of full-stack experience, building websites and software for businesses around Chicagoland.",
+  heroTitle: "One person. Nine years. No account managers.",
+  heroLede:
+    "Good Looking Digital is a one-person studio, and that is the point rather than an apology for it.",
+  /**
+   * The photo slot is designed to look deliberate while empty — a typographic
+   * plate rather than an obvious gap — so a real photograph can drop in later
+   * without touching the layout.
+   */
+  photoCaption: "Rafal — Mokena, Illinois",
+  story: [
+    "Most agencies put a salesperson in front of you and a junior behind the scenes. The person who understood your business is not the person who builds the thing, and something is lost in between.",
+    "Here, the person you speak to on the first call is the person writing the code, and the person who answers when something breaks two years later. Nine years of full-stack engineering sits behind that — React, TypeScript, Node, databases and automated testing — the kind of work most local web shops send elsewhere.",
+    "That means the range is unusual. A five-page site for a landscaper and a customer portal with logins and integrations are both genuinely in scope, and you are not handed to a different company when the second one comes up.",
+  ],
+  principles: [
+    {
+      title: "Say the number early",
+      body: "Price bands are on the site. If a project is not a fit for the budget, that conversation happens on the first call rather than after three meetings.",
+    },
+    {
+      title: "Build the proof, then make the claim",
+      body: "Every capability on this site is one the work can back. When something is not offered yet, it says so plainly rather than being quietly implied.",
+    },
+    {
+      title: "Test what ships",
+      body: "The flows that lose you money get automated tests, so a broken form is caught by a machine rather than reported by a customer who gave up.",
+    },
+    {
+      title: "You own everything",
+      body: "The site, the domain, the content, the Google and Facebook pages. Access is delegated, never held hostage. Leaving should be easy, which is why it is.",
+    },
+  ],
+  /** Saying what you do not do reads as confidence, not limitation. */
+  limits: [
+    "Advertising spend is not managed here — pages and profiles are set up, but campaigns are not run",
+    "Desktop and robotic process automation of legacy software is out of scope",
+    "This runs alongside a full-time job, so timelines are honest rather than optimistic",
+    "Work that would be better served by a large agency gets said out loud",
+  ],
+} as const;

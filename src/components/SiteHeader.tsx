@@ -4,12 +4,14 @@ import { Container } from "@/components/ui";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 /**
- * Only routes that exist. Work and Pricing join as Stages 05 and 07 land —
- * a nav link that 404s costs more trust than a shorter menu does.
+ * Only routes that exist. Work joins when Stage 07 lands — a nav link that
+ * 404s costs more trust than a shorter menu does.
  */
 const nav = [
   { label: "Grow", href: "/grow" },
   { label: "Platform", href: "/platform" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "About", href: "/about" },
 ];
 
 export function SiteHeader() {

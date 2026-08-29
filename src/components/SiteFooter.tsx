@@ -63,10 +63,25 @@ export function SiteFooter() {
             </p>
             <a
               href={`mailto:${site.email}`}
-              className="text-ink hover:text-grow mt-4 inline-block text-sm font-semibold transition-colors duration-200"
+              className="text-ink hover:text-grow mt-4 inline-block text-sm font-semibold [overflow-wrap:anywhere] transition-colors duration-200"
             >
               {site.email}
             </a>
+
+            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+              <Link
+                href="/pricing"
+                className="text-ink-2 hover:text-ink text-sm transition-colors duration-200"
+              >
+                Pricing
+              </Link>
+              <Link
+                href="/about"
+                className="text-ink-2 hover:text-ink text-sm transition-colors duration-200"
+              >
+                About
+              </Link>
+            </div>
           </div>
         </div>
 

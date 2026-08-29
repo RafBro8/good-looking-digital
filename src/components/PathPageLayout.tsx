@@ -103,7 +103,7 @@ export function PathPageLayout({
             <div className="mt-10">
               {path.services.map((service, i) => (
                 <Reveal key={service.name} delay={i * 60}>
-                  <div className="border-rule grid grid-cols-[2.5rem_minmax(0,1fr)_auto] items-baseline gap-4 border-b py-4">
+                  <div className="border-rule grid max-w-[46rem] grid-cols-[2.5rem_minmax(0,1fr)_auto] items-baseline gap-4 border-b py-4">
                     <span className="label tnum text-muted">
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -165,7 +165,7 @@ export function PathPageLayout({
               </h2>
             </Reveal>
 
-            <ol className="mt-10 grid gap-px sm:grid-cols-2 lg:grid-cols-4">
+            <ol className="mt-10 grid gap-x-10 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
               {content.process.map((step, i) => (
                 <Reveal key={step.title} delay={i * 90}>
                   <li className="border-rule flex h-full flex-col gap-3 border-t-2 pt-4 lg:border-t-2">

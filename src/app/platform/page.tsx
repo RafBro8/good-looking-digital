@@ -68,7 +68,7 @@ export default function PlatformPage() {
           </Reveal>
 
           <Reveal delay={100}>
-            <ul className="mt-9 grid gap-px sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-9 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
               {assessmentScope.map((item) => (
                 <li
                   key={item}
