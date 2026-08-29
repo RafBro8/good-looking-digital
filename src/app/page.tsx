@@ -6,7 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TestRunPanel } from "@/components/TestRunPanel";
-import { capabilities, paths, proofPoints, site, work } from "@/lib/site";
+import { capabilities, paths, proofPoints, site } from "@/lib/site";
 
 export default function HomePage() {
   return (
@@ -205,59 +205,6 @@ export default function HomePage() {
                       {capability.description}
                     </p>
                   </div>
-                </Reveal>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        {/* ================= work ================= */}
-        <section className="py-[clamp(3rem,2rem+4vw,5.5rem)]">
-          <Container>
-            <Reveal>
-              <div className="mb-10 flex flex-wrap items-baseline justify-between gap-3">
-                <div>
-                  <Eyebrow>Recent work</Eyebrow>
-                  <h2 className="mt-3 text-3xl">Selected projects</h2>
-                </div>
-                <Link
-                  href="/work"
-                  className="text-ink hover:text-grow text-sm font-semibold transition-colors duration-200"
-                >
-                  See everything →
-                </Link>
-              </div>
-            </Reveal>
-
-            <div className="grid gap-6 md:grid-cols-3">
-              {work.map((item, i) => (
-                <Reveal key={item.title} delay={i * 100}>
-                  <Link
-                    href="/work"
-                    className="group border-rule hover:border-rule-strong flex h-full flex-col border transition-colors duration-200"
-                  >
-                    <div className="canvas h-40 w-full overflow-hidden" />
-                    <div className="flex flex-1 flex-col gap-2 p-5">
-                      <div className="flex items-center gap-2">
-                        <span
-                          className={`label ${
-                            item.path === "grow" ? "text-grow" : "text-platform"
-                          }`}
-                        >
-                          {item.tag}
-                        </span>
-                        {item.concept && (
-                          <span className="label border-rule text-muted border px-1.5 py-0.5">
-                            Concept
-                          </span>
-                        )}
-                      </div>
-                      <h3 className="text-xl">{item.title}</h3>
-                      <p className="text-muted text-sm leading-relaxed">
-                        {item.summary}
-                      </p>
-                    </div>
-                  </Link>
                 </Reveal>
               ))}
             </div>

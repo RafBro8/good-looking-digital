@@ -49,7 +49,9 @@ export const paths: ServicePath[] = [
     services: [
       { name: "Website design and build", price: "from $2,000" },
       { name: "Logo and brand identity", price: "from $600" },
-      { name: "Google Business Profile", price: "from $350" },
+      { name: "Google Business Profile setup", price: "from $350" },
+      { name: "Facebook & Instagram page setup", price: "from $350" },
+      { name: "Lead capture & follow-up", price: "from $900" },
       { name: "QR signage and print", price: "at cost + 20%" },
       { name: "Hosting and care", price: "$95–$250/mo" },
     ],
@@ -65,6 +67,7 @@ export const paths: ServicePath[] = [
     services: [
       { name: "Custom web applications", price: "after discovery" },
       { name: "Customer and staff portals", price: "from $8,000" },
+      { name: "Automation & integrations", price: "from $1,500" },
       { name: "Playwright test automation", price: "from $2,500" },
       { name: "Platform assessment", price: "$750–$1,500" },
       { name: "Ongoing engineering", price: "retainer" },
@@ -111,6 +114,12 @@ export const capabilities: Capability[] = [
     path: "grow",
   },
   {
+    name: "Lead capture",
+    description:
+      "The form, the database behind it, the notification that reaches you in seconds and the confirmation that reaches your customer. Not ad buying — the part that happens after someone is already interested.",
+    path: "grow",
+  },
+  {
     name: "Applications",
     description:
       "Customer portals, staff dashboards, logins, databases and the integrations that connect them to what you already run.",
@@ -135,10 +144,13 @@ export interface WorkItem {
   tag: string;
   summary: string;
   path: PathId;
-  /** Concept projects must say so — never imply a client that does not exist. */
-  concept?: boolean;
 }
 
+/**
+ * Real projects only. The homepage work section stays hidden until there are
+ * two or three of these — one genuine project beside invented ones reads worse
+ * than showing none at all.
+ */
 export const work: WorkItem[] = [
   {
     title: "Front Yard Famous",
@@ -147,38 +159,190 @@ export const work: WorkItem[] = [
       "Booking site and showcase for a yard greeting company. Built to take orders while the owner sleeps.",
     path: "grow",
   },
-  {
-    title: "Customer service portal",
-    tag: "Platform",
-    summary:
-      "Account login, order history and document upload. Cut the phone calls asking where an order had got to.",
-    path: "platform",
-    concept: true,
-  },
-  {
-    title: "Playwright regression suite",
-    tag: "Automation",
-    summary:
-      "Checkout, login and permissions covered end to end. Runs on every push and catches breaks before customers do.",
-    path: "platform",
-    concept: true,
-  },
 ];
 
 /**
- * Sample rows for the test-run panel — the credibility moment carried over
- * from concept C. Written in customer language, not test-file names.
+ * The test-run panel.
+ *
+ * Every spec named here must be one this site genuinely runs. An earlier
+ * version listed sign-in, booking and portal-permission specs carried over
+ * from a design mockup — none of which exist on a marketing site, on a public
+ * repo, on a page whose whole argument is that we test what we ship.
+ *
+ * These six are real once Stage 06 (lead capture) and Stage 08 (Playwright)
+ * land. Until Stage 08 wires this to actual CI output, the counts and timings
+ * are placeholders and the panel deliberately claims no build number.
  */
 export const testRun = {
-  build: "CI #418",
+  suite: "goodlookingdigital.com",
   browsers: "chromium, firefox, webkit",
-  duration: "3.79s",
+  duration: "2.94s",
   specs: [
-    { name: "customer signs in", ms: "412ms" },
-    { name: "quote form submits", ms: "638ms" },
-    { name: "lead reaches the inbox", ms: "1.1s" },
-    { name: "booking survives a refresh", ms: "509ms" },
-    { name: "portal blocks the wrong user", ms: "287ms" },
-    { name: "works on a five-year-old phone", ms: "844ms" },
+    { name: "visitor reaches the quote form", ms: "318ms" },
+    { name: "a bad email address is caught", ms: "204ms" },
+    { name: "the quote form submits", ms: "612ms" },
+    { name: "the lead reaches the inbox", ms: "1.1s" },
+    { name: "spam is turned away", ms: "187ms" },
+    { name: "it works on a five-year-old phone", ms: "521ms" },
   ],
 } as const;
+
+/**
+ * Long-form content for the two path pages.
+ *
+ * Deliberately excludes ads management, CRM integration, RPA/desktop
+ * automation and per-client dashboards — all considered and cut, because a
+ * short list delivered well beats a long one that cannot be.
+ */
+export interface PathPage {
+  metaTitle: string;
+  metaDescription: string;
+  heroTitle: string;
+  heroLede: string;
+  processTitle: string;
+  process: { title: string; body: string }[];
+  featureEyebrow: string;
+  featureTitle: string;
+  featureBody: string;
+  featurePoints: string[];
+  faqs: { q: string; a: string }[];
+  ctaTitle: string;
+  ctaBody: string;
+  ctaLabel: string;
+}
+
+export const pathContent: Record<PathId, PathPage> = {
+  grow: {
+    metaTitle: "Websites and local marketing for small business",
+    metaDescription:
+      "Websites, branding, Google Business Profile, Facebook and Instagram setup, QR marketing and hosting for local businesses around Chicagoland.",
+    heroTitle: "Get found. Get called.",
+    heroLede:
+      "A website is one piece. We build the whole path from someone hearing about you to someone hiring you — and then we keep it running.",
+    processTitle: "How it works",
+    process: [
+      {
+        title: "A twenty-minute call",
+        body: "What you do, who you want calling you, and what is currently getting in the way. No slide deck. If we are not a fit, you will hear that on this call rather than after an invoice.",
+      },
+      {
+        title: "Design and build",
+        body: "You see the design before anything is built, and the page before it goes live. Your words, your photos, your prices — written the way you would say them to a customer standing in their driveway.",
+      },
+      {
+        title: "Launch",
+        body: "Site goes live on your domain. Google Business Profile and Facebook page set up in your name. Signage and QR materials ordered if you want them.",
+      },
+      {
+        title: "Care",
+        body: "Hosting, updates, backups and monitoring. One person who answers, and who already knows your business. Cancel whenever — no annual lock-in.",
+      },
+    ],
+    featureEyebrow: "The part most people skip",
+    featureTitle: "A yard sign that actually does something",
+    featureBody:
+      "Most signage ends at a phone number nobody dials. We put a QR code on your signs, stickers and vehicle graphics that opens a page built for that one offer — so the person standing on the sidewalk becomes an enquiry in your inbox before they have walked away.",
+    featurePoints: [
+      "QR code on yard signs, stickers, flyers or vehicle graphics",
+      "Opens a page built for one offer, not your homepage",
+      "Short form — you are notified within seconds, by email or text",
+      "Your customer gets an instant confirmation, not silence",
+      "A reminder fires if nobody has called them back",
+      "You can tell which sign produced which call",
+    ],
+    faqs: [
+      {
+        q: "Do I own the website?",
+        a: "Yes. You own the site, the domain and the content. If you ever leave, it goes with you — no hostage situation and no export fee.",
+      },
+      {
+        q: "Who owns the Google and Facebook pages?",
+        a: "You do, always, and they are created in your name from the start. Good Looking Digital gets delegated access to do the work and nothing more. If we stop working together you keep the pages, the reviews and the history.",
+      },
+      {
+        q: "Can I edit my own text?",
+        a: "Yes, and you will never be charged monthly for the privilege. For bigger changes, send them over and they are usually done the same week.",
+      },
+      {
+        q: "How long does it take?",
+        a: "A straightforward business site is typically two to four weeks from the first call, and most of that is waiting on photos and copy rather than on build time.",
+      },
+      {
+        q: "What is lead capture, exactly?",
+        a: "Everything that happens once someone is interested: the form, the database behind it, the alert that reaches you in seconds, the confirmation that reaches your customer, and a reminder if nobody has called them back. It is not advertising — we do not make the enquiries appear, we make sure none of them are lost.",
+      },
+      {
+        q: "Do you run Facebook or Google ads?",
+        a: "Not today. We set up your pages and profiles properly and build the pages ads would point at, but managing ad spend is not a service we take on yet. If that is what you need now, we will tell you rather than learn on your budget.",
+      },
+    ],
+    ctaTitle: "Tell us what your business needs to do.",
+    ctaBody:
+      "Describe the work and who you want calling you. You will get a plan and a price, not a brochure.",
+    ctaLabel: "Start a project",
+  },
+  platform: {
+    metaTitle: "Custom applications, integrations and test automation",
+    metaDescription:
+      "Customer portals, custom web applications, workflow automation, API integrations and Playwright end-to-end test automation for companies that outgrew their website.",
+    heroTitle: "Ship it. Then keep it working.",
+    heroLede:
+      "Portals, dashboards, integrations and the automated coverage that lets you deploy on a Friday. Available on applications we did not build.",
+    processTitle: "How we engage",
+    process: [
+      {
+        title: "Assessment",
+        body: "A paid, fixed-price review of what you already have — architecture, critical workflows, performance, accessibility, test coverage and technical debt — ending in a prioritised list. Low risk, and it credits toward the build if you go ahead.",
+      },
+      {
+        title: "Scope and price",
+        body: "Fixed scope and fixed price wherever the work allows it. Where it genuinely cannot be fixed up front, you get a rate and an agreed ceiling rather than an open meter.",
+      },
+      {
+        title: "Build in increments",
+        body: "Working software you can click through, not status reports. Deployed to a preview environment from the first week, so nobody is guessing what is being built.",
+      },
+      {
+        title: "Support",
+        body: "A retainer for changes, monitoring and test maintenance — or a clean handover to your own team with documentation. Both are fine, and the second is not treated as a failure.",
+      },
+    ],
+    featureEyebrow: "Why it keeps working",
+    featureTitle: "Tested like software, because it is software",
+    featureBody:
+      "Most agencies hand over an application and hope. We write automated tests over the flows that lose you money when they break, then run them on every change — so a broken checkout is caught by CI rather than reported by your customer.",
+    featurePoints: [
+      "Playwright suites over login, checkout, booking and permissions",
+      "Cross-browser: Chromium, Firefox and WebKit",
+      "Wired into CI so it runs on every push",
+      "Flaky-test cleanup and Cypress-to-Playwright migration",
+      "Available on applications we did not build",
+    ],
+    faqs: [
+      {
+        q: "Can you work on an application you did not build?",
+        a: "Yes, and it is one of the more common engagements. Test automation in particular does not require having written the application — often the opposite, since a fresh reader finds the assumptions the original team stopped seeing.",
+      },
+      {
+        q: "What stack do you work in?",
+        a: "TypeScript and JavaScript across React, Next.js and Node, with MongoDB or Postgres behind it, and Playwright for end-to-end coverage. Nine years of full-stack engineering, not a design studio subcontracting the hard part.",
+      },
+      {
+        q: "Will you work alongside our developers?",
+        a: "Yes. Working inside an existing team, in your repository and your process, is a normal arrangement — including building the test suite your team then owns.",
+      },
+      {
+        q: "What does automation actually cover?",
+        a: "Workflow automation and API integrations between systems you already run: moving data between them, triggering notifications, and removing repeated manual steps. It does not cover desktop or robotic process automation of legacy software, which we do not take on.",
+      },
+      {
+        q: "Fixed price or hourly?",
+        a: "Fixed price wherever the scope can be pinned down, which covers most defined projects. Discovery-heavy or open-ended work is quoted at a rate with an agreed ceiling.",
+      },
+    ],
+    ctaTitle: "Start with an assessment.",
+    ctaBody:
+      "A fixed-price review of what you have, with a prioritised list of what to do about it. It credits toward the build if you go ahead.",
+    ctaLabel: "Book an assessment",
+  },
+};

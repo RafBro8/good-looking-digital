@@ -17,7 +17,7 @@ export function TestRunPanel() {
           playwright — {testRun.browsers}
         </span>
         <span className="text-2xs text-muted tracking-wider">
-          {testRun.build}
+          {testRun.suite}
         </span>
       </div>
 
