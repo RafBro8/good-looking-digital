@@ -81,7 +81,7 @@ export const paths: ServicePath[] = [
 export const proofPoints = [
   {
     figure: "9 yrs",
-    note: "Full-stack software engineering, including for a Fortune 5 company",
+    note: "Full-stack software engineering — three of those years at CVS Health",
   },
   { figure: "100%", note: "Of critical flows covered by automated tests" },
   { figure: "< 1s", note: "Target load time on every page we ship" },
@@ -328,7 +328,7 @@ export const pathContent: Record<PathId, PathPage> = {
       },
       {
         q: "What stack do you work in?",
-        a: "TypeScript and JavaScript across React, Next.js and Angular on the front end; Node and Express or Java and Spring Boot on the back; SQL and MongoDB for data; Playwright for end-to-end coverage and Vitest, Jest and React Testing Library for unit tests. Nine years of it, including for a Fortune 5 company — not a design studio subcontracting the hard part.",
+        a: "TypeScript and JavaScript across React, Next.js and Angular on the front end; Node and Express or Java and Spring Boot on the back; SQL and MongoDB for data; Playwright for end-to-end coverage and Vitest, Jest and React Testing Library for unit tests. Nine years of it, three of them as a full-stack engineer at CVS Health — not a design studio subcontracting the hard part.",
       },
       {
         q: "Will you work alongside our developers?",
@@ -469,7 +469,7 @@ export const about = {
   photoCaption: "Rafal — Mokena, Illinois",
   story: [
     "Most agencies put a salesperson in front of you and a junior behind the scenes. The person who understood your business is not the person who builds the thing, and something is lost in between.",
-    "Here, the person you speak to on the first call is the person writing the code, and the person who answers when something breaks two years later. Nine years of full-stack software engineering sits behind that, including for a Fortune 5 company — React and Angular, TypeScript, Node, Java and Spring Boot, SQL and MongoDB, and automated testing at every level. The kind of work most local web shops send elsewhere.",
+    "Here, the person you speak to on the first call is the person writing the code, and the person who answers when something breaks two years later. Nine years of full-stack software engineering sits behind that, three of them as an engineer at CVS Health — React and Angular, TypeScript, Node, Java and Spring Boot, SQL and MongoDB, and automated testing at every level. The kind of work most local web shops send elsewhere.",
     "That means the range is unusual. A five-page site for a landscaper and a customer portal with logins and integrations are both genuinely in scope, and you are not handed to a different company when the second one comes up.",
   ],
   principles: [

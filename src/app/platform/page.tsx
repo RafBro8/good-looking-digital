@@ -58,8 +58,8 @@ export default function PlatformPage() {
         <Container>
           <Reveal>
             <Eyebrow tone="platform">What we work in</Eyebrow>
-            <h2 className="mt-3 max-w-[20ch] text-3xl">
-              Nine years of it, including for a Fortune 5 company
+            <h2 className="mt-3 max-w-[22ch] text-3xl">
+              Nine years of it, three of them at CVS Health
             </h2>
             <p className="text-ink-2 measure mt-4">
               Listed so you can check for a match before spending a call on it.
