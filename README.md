@@ -33,6 +33,42 @@ Then open http://localhost:3000.
 | `npm run format`       | Prettier, including class sorting   |
 | `npm run format:check` | Verify formatting without writing   |
 
+## Environment
+
+Lead capture needs two services. Copy `.env.example` to `.env.local` for local
+development and set the same names in the Vercel project settings for
+production.
+
+| Variable                  | Purpose                                                                                                     |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `MONGODB_URI`             | Atlas connection string. Required — without it the form returns a 503 and offers the email address instead. |
+| `MONGODB_DB`              | Database name. Optional, defaults to `good_looking_digital`.                                                |
+| `RESEND_API_KEY`          | Email provider key. Without it leads are still stored, but no notification is sent.                         |
+| `LEAD_NOTIFICATION_EMAIL` | Where enquiries go. Falls back to the site address.                                                         |
+| `LEAD_FROM_EMAIL`         | Sender. Must be on a domain verified with the provider.                                                     |
+
+**Secrets never enter the repository.** `.env.local` is gitignored;
+`.env.example` holds names and comments only.
+
+### How a lead is handled
+
+Store first, notify second. A lead safely in the database is a lead that is
+not lost, so email failures are logged and swallowed rather than shown to
+someone who did nothing wrong. The only failure a visitor sees is one where
+the message genuinely was not kept — and then they are given the email
+address.
+
+Spam protection is a honeypot field plus a rate limit of five submissions per
+IP per hour. The limiter counts through Mongo rather than memory, because
+serverless invocations do not share memory and an in-process counter would
+enforce nothing. If the limiter itself fails it allows the request through: a
+broken limiter must not become a closed door.
+
+The lead API runs on Vercel rather than the Render service, deliberately. A
+free Render instance sleeps and takes about a minute to wake, which is a
+minute a prospect spends looking at a form that has not submitted. Render
+remains available for client platform work that needs a persistent service.
+
 ## Design system
 
 The visual language combines three explored directions:

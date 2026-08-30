@@ -4,6 +4,7 @@ import { Container, Eyebrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { LeadForm } from "@/components/LeadForm";
 import { serviceArea, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -12,11 +13,6 @@ export const metadata: Metadata = {
     "Tell us what your business needs to do. Websites and local marketing for small businesses, custom applications and test automation for companies that outgrew theirs.",
 };
 
-/**
- * Interim contact page. The quote form, Atlas storage and notifications land in
- * Stage 06 — until then this is a real destination with a real address rather
- * than a call to action that 404s.
- */
 const helpful = [
   "What your business does, and where",
   "What you want to happen that is not happening now",
@@ -69,6 +65,30 @@ export default function ContactPage() {
           </Container>
         </section>
 
+        {/* The form. Source is tagged so a QR code or campaign can be told
+            apart from someone who simply found the page. */}
+        <section className="border-rule border-t py-[clamp(2.75rem,2rem+3vw,4.5rem)]">
+          <Container>
+            <div className="grid gap-[clamp(2rem,1rem+4vw,4.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+              <Reveal>
+                <Eyebrow tone="grow">Tell us about it</Eyebrow>
+                <h2 className="mt-3 max-w-[16ch] text-3xl">
+                  Two minutes, and you get a real answer
+                </h2>
+                <p className="text-ink-2 mt-5 max-w-[40ch]">
+                  Everything except your name, email and a description is
+                  optional. Budget helps, but leaving it blank has never stopped
+                  anyone getting a reply.
+                </p>
+              </Reveal>
+
+              <Reveal delay={110}>
+                <LeadForm source="contact-page" />
+              </Reveal>
+            </div>
+          </Container>
+        </section>
+
         <section className="border-rule border-t py-[clamp(2.75rem,2rem+3vw,4.5rem)]">
           <Container>
             <div className="grid gap-[clamp(2rem,1rem+4vw,4.5rem)] lg:grid-cols-2">
@@ -78,9 +98,13 @@ export default function ContactPage() {
                   Five lines is plenty
                 </h2>
                 <p className="text-ink-2 mt-5 max-w-[42ch]">
-                  No form to fill in and no discovery questionnaire. Whatever
-                  you can tell us in a short email is enough to work out whether
-                  there is a project here.
+                  No discovery questionnaire and nothing you have to prepare.
+                  Whatever you can tell us in a few lines is enough to work out
+                  whether there is a project here.
+                </p>
+                <p className="text-muted mt-4 max-w-[42ch] text-sm">
+                  Prefer email? The address above reaches exactly the same
+                  place.
                 </p>
               </Reveal>
 
