@@ -29,14 +29,14 @@ export default function AboutPage() {
             </p>
 
             <h1
-              className="rise mt-7 max-w-[16ch] text-5xl"
+              className="rise mt-7 max-w-[15ch] text-5xl"
               style={{ "--delay": "90ms" } as React.CSSProperties}
             >
               {about.heroTitle}
             </h1>
 
             <p
-              className="text-ink-2 rise mt-8 max-w-[48ch] text-xl"
+              className="text-ink-2 rise mt-8 max-w-[50ch] text-xl"
               style={{ "--delay": "170ms" } as React.CSSProperties}
             >
               {about.heroLede}
@@ -44,30 +44,23 @@ export default function AboutPage() {
           </Container>
         </section>
 
-        {/* ---------- story + portrait ----------
-            The portrait slot is a typographic plate while empty, so it reads as
-            a deliberate element rather than a missing image. A real photograph
-            drops in here without the layout changing. */}
+        {/* ---------- the bio ----------
+            No portrait by choice. The experience carries the page, so the copy
+            gets a proper reading measure rather than being squeezed beside an
+            image slot that is not there. */}
         <section className="border-rule border-t py-[clamp(2.75rem,2rem+3vw,4.5rem)]">
           <Container>
-            <div className="grid gap-[clamp(2rem,1rem+4vw,4.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
+            <div className="grid gap-[clamp(1.5rem,1rem+3vw,4rem)] lg:grid-cols-[14rem_minmax(0,1fr)]">
               <Reveal>
-                <figure className="m-0">
-                  <div className="canvas flex aspect-[4/5] w-full items-end">
-                    <figcaption className="label p-5 text-white/80">
-                      {about.photoCaption}
-                    </figcaption>
-                  </div>
-                </figure>
+                <Eyebrow tone="grow">Who you are hiring</Eyebrow>
               </Reveal>
 
-              <Reveal delay={110}>
-                <Eyebrow tone="grow">Who you are hiring</Eyebrow>
-                <div className="mt-5 flex flex-col gap-5">
+              <Reveal delay={90}>
+                <div className="flex flex-col gap-5">
                   {about.story.map((para) => (
                     <p
                       key={para.slice(0, 24)}
-                      className="text-ink-2 max-w-[52ch]"
+                      className="text-ink-2 max-w-[62ch] text-lg leading-relaxed"
                     >
                       {para}
                     </p>
@@ -78,8 +71,57 @@ export default function AboutPage() {
           </Container>
         </section>
 
-        {/* ---------- proof ---------- */}
+        {/* ---------- highlights ---------- */}
         <section className="border-rule border-t py-[clamp(2.75rem,2rem+3vw,4.5rem)]">
+          <Container>
+            <div className="grid gap-[clamp(1.5rem,1rem+3vw,4rem)] lg:grid-cols-[14rem_minmax(0,1fr)]">
+              <Reveal>
+                <Eyebrow tone="platform">Not typical for a solo shop</Eyebrow>
+              </Reveal>
+
+              <Reveal delay={90}>
+                <ul className="border-ink border-t-2 pt-4">
+                  {about.highlights.map((item) => (
+                    <li
+                      key={item}
+                      className="border-rule text-ink-2 grid grid-cols-[1.5rem_minmax(0,1fr)] gap-3 border-b py-3.5"
+                    >
+                      <span aria-hidden="true" className="text-platform">
+                        →
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            </div>
+          </Container>
+        </section>
+
+        {/* ---------- the signature project ---------- */}
+        <section className="canvas py-[clamp(3rem,2rem+4vw,5.5rem)]">
+          <Container>
+            <Reveal>
+              <p className="label text-white/70">{about.signature.eyebrow}</p>
+              <h2 className="mt-4 max-w-[18ch] text-4xl text-white">
+                {about.signature.title}
+              </h2>
+              <div className="mt-7 flex flex-col gap-4">
+                {about.signature.body.map((para) => (
+                  <p
+                    key={para.slice(0, 24)}
+                    className="max-w-[58ch] text-lg leading-relaxed text-white/80"
+                  >
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </Reveal>
+          </Container>
+        </section>
+
+        {/* ---------- proof ---------- */}
+        <section className="py-[clamp(2.75rem,2rem+3vw,4.5rem)]">
           <Container>
             <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
               {proofPoints.map((point, i) => (
@@ -87,7 +129,7 @@ export default function AboutPage() {
                   <p className="font-display text-ink text-4xl leading-none font-semibold tracking-tight">
                     {point.figure}
                   </p>
-                  <p className="text-muted mt-3 max-w-[22ch] text-sm">
+                  <p className="text-muted mt-3 max-w-[24ch] text-sm">
                     {point.note}
                   </p>
                 </Reveal>
@@ -160,15 +202,15 @@ export default function AboutPage() {
         </section>
 
         {/* ---------- closing ---------- */}
-        <section className="canvas py-[clamp(3rem,2rem+5vw,6rem)]">
+        <section className="border-rule border-t py-[clamp(2.75rem,2rem+4vw,5rem)]">
           <Container>
             <Reveal>
               <div className="flex flex-wrap items-end justify-between gap-8">
                 <div>
-                  <h2 className="max-w-[18ch] text-4xl text-white">
+                  <h2 className="max-w-[18ch] text-3xl">
                     Based in {site.base}. Working wherever there is a browser.
                   </h2>
-                  <p className="mt-5 max-w-[46ch] text-white/80">
+                  <p className="text-muted mt-4 max-w-[46ch] text-sm">
                     {serviceArea.join(" · ")} — and remotely for everyone else.
                   </p>
                 </div>

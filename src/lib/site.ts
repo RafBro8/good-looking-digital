@@ -80,8 +80,8 @@ export const paths: ServicePath[] = [
 /** Headline numbers. Each has to be defensible if a prospect asks. */
 export const proofPoints = [
   {
-    figure: "9 yrs",
-    note: "Full-stack software engineering, including for a Fortune 5 company",
+    figure: "20 yrs",
+    note: "In technology — the last nine building software, including for a Fortune 5 company",
   },
   { figure: "100%", note: "Of critical flows covered by automated tests" },
   { figure: "< 1s", note: "Target load time on every page we ship" },
@@ -453,24 +453,44 @@ export const pricingFaqs = [
   },
 ];
 
-/** About page copy. Written for a one-person studio that says so. */
+/**
+ * About page copy. No portrait by choice — the experience carries the page,
+ * and a photograph can be added later without the layout changing.
+ */
 export const about = {
   metaTitle: "About",
   metaDescription:
-    "Good Looking Digital is one engineer with nine years of full-stack experience, building websites and software for businesses around Chicagoland.",
-  heroTitle: "One person. Nine years. No account managers.",
+    "Close to twenty years in technology, the last nine building full-stack software for enterprise clients including a Fortune 5 company. Now building websites and applications for businesses around Chicagoland.",
+  heroTitle: "An engineer who cares what it looks like.",
   heroLede:
-    "Good Looking Digital is a one-person studio, and that is the point rather than an apology for it.",
-  /**
-   * The photo slot is designed to look deliberate while empty — a typographic
-   * plate rather than an obvious gap — so a real photograph can drop in later
-   * without touching the layout.
-   */
-  photoCaption: "Rafal — Mokena, Illinois",
+    "Close to twenty years in technology. The last nine building full-stack software for large American companies, including a Fortune 5. Now doing that for businesses around Chicagoland.",
   story: [
-    "Most agencies put a salesperson in front of you and a junior behind the scenes. The person who understood your business is not the person who builds the thing, and something is lost in between.",
-    "Here, the person you speak to on the first call is the person writing the code, and the person who answers when something breaks two years later. Nine years of full-stack software engineering sits behind that, including for a Fortune 5 company — React and Angular, TypeScript, Node, Java and Spring Boot, SQL and MongoDB, and automated testing at every level. The kind of work most local web shops send elsewhere.",
-    "That means the range is unusual. A five-page site for a landscaper and a customer portal with logins and integrations are both genuinely in scope, and you are not handed to a different company when the second one comes up.",
+    "Most of that time has been spent on enterprise applications — internal tools and customer-facing products used by thousands of people, at a Fortune 5 company and other large, well-known American names. Front end in JavaScript and TypeScript with React and Angular; back end in Java and Spring Boot or Node and Express, with some Python along the way; SQL and MongoDB behind it; AWS, Google Cloud and Pivotal Cloud Foundry underneath; and testing at every level from unit to end-to-end.",
+    "That range is deliberate. Plenty of engineers go deep on one layer and hand the rest to someone else. Working across all of them means a project does not get passed between three companies before it is finished, and nothing falls into the gap between them.",
+    "But the part I have always come back to is the front end — the interface, and the person on the other side of it. I have run user interviews and user-experience sessions, worked alongside UI/UX teams for years and picked up a great deal from them, and sat across from senior business stakeholders to work out what a system actually needed to do rather than what someone assumed it did.",
+    "That is what the name means. Plenty of people can make something look good, and plenty can make something work. Doing both, on the same project, without a handoff in the middle — that is the whole idea.",
+  ],
+  /**
+   * One real project, told plainly. No client named and no confidential
+   * detail — the outcome is the point.
+   */
+  signature: {
+    eyebrow: "The one I am most pleased with",
+    title: "We took a team out of spreadsheets",
+    body: [
+      "A group of business analysts spent their days entering large volumes of data into shared spreadsheets. Worse than the typing was the waiting — a file checked out by one person was locked to everyone else, so work queued up behind whoever had it open.",
+      "The team I was on built them a real application instead: an interface they could actually navigate, a backend and database behind it, and validation that caught mistakes as they typed rather than a week later. Their data entry time dropped substantially and the bottleneck disappeared.",
+      "The thanks kept arriving for months afterwards. Not for the architecture — for giving them their afternoons back. That was at a Fortune 5 company, and it is still the work I am most pleased with.",
+    ],
+  },
+  /** Things that are unusual for a solo developer, and worth saying plainly. */
+  highlights: [
+    "Enterprise applications used by thousands, internal and customer-facing",
+    "User interviews and user-experience research, run first-hand",
+    "Years working alongside dedicated UI/UX teams",
+    "Senior business stakeholder management",
+    "Full ownership from database schema to the last pixel",
+    "Automated testing at unit, integration and end-to-end level",
   ],
   principles: [
     {
