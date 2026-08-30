@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 80" width="128" height="80" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Good Looking Digital">
+  <title>Good Looking Digital</title>
+  <!-- G, broken where the L stem passes in front -->
+  <path d="M53.6 25.2 A23 23 0 1 0 50 58.2"/>
+  <path d="M53.6 54.8 L53.6 40 L42 40"/>
+  <!-- L stem, broken where the G ring passes in front -->
+  <path d="M50 16 L50 17.5"/>
+  <path d="M50 27 L50 64"/>
+  <!-- L foot, broken where the D stem passes in front -->
+  <path d="M50 64 L74 64"/>
+  <path d="M88 64 L94 64"/>
+  <!-- D -->
+  <path d="M81 64 L81 16 A23 23 0 0 1 81 64"/>
+</svg>
