@@ -50,6 +50,25 @@ production.
 **Secrets never enter the repository.** `.env.local` is gitignored;
 `.env.example` holds names and comments only.
 
+### A database for local development
+
+Atlas is for production. Locally, a disposable container is quicker and cannot
+damage anything:
+
+```bash
+docker run -d --name gld-mongo-test -p 27019:27017 mongo:7
+```
+
+Then set `MONGODB_URI=mongodb://localhost:27019` in `.env.local`. Remove it
+with `docker rm -f gld-mongo-test` when it is no longer wanted. Port 27019 is
+deliberate — 27017 and 27018 are often already taken by other projects.
+
+Inspect what landed:
+
+```bash
+docker exec gld-mongo-test mongosh good_looking_digital --eval "db.leads.find().pretty()"
+```
+
 ### How a lead is handled
 
 Store first, notify second. A lead safely in the database is a lead that is
