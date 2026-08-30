@@ -33,12 +33,12 @@ const OUT_DIR = process.argv[3];
  * site: teal dominant, amber on the highlights.
  */
 const HUE_STOPS = [
-  [205, 180], // cyan edge     -> light teal
-  [228, 173], // the blue peak -> sits on --platform (172-175)
-  [248, 165], // violet-blue   -> still teal
-  [266, 140], // violet        -> green, deliberately a narrow passage
-  [282, 60], //  magenta       -> through gold quickly
-  [300, 18], //  hot magenta   -> sits on --grow (17-20)
+  [205, 178], // cyan edge     -> light teal
+  [222, 172], // deep blue     -> sits on --platform (172-175)
+  [236, 152], // blue-violet   -> teal-green
+  [247, 78], //  violet        -> green, kept to a narrow passage
+  [258, 32], //  violet-magenta-> amber starts here. Moving this stop down the
+  [300, 12], //  hot magenta      source range is what buys the extra warmth.
 ];
 
 // The source averages 0.89 saturation. Nothing else on this site is that loud.
@@ -48,6 +48,12 @@ const SAT_SCALE = 0.72;
 const VALUE_KNEE = 0.8;
 
 const BG_MAX_CHANNEL = 10;
+
+// Matte erosion. The threshold above 0.5 pulls the edge inward past the
+// black-contaminated ring; the softness is the width of the remaining ramp.
+const EDGE_RADIUS = 2;
+const EDGE_THRESHOLD = 0.66;
+const EDGE_SOFTNESS = 0.3;
 
 function rgbToHsv(r, g, b) {
   r /= 255;
@@ -107,6 +113,37 @@ function tameValue(v) {
   return v <= VALUE_KNEE ? v : VALUE_KNEE + (v - VALUE_KNEE) * 0.6;
 }
 
+/**
+ * Separable box blur over a float array. Used to turn a hard mask into a soft
+ * one so the matte can be eroded and feathered in a single remap.
+ */
+function boxBlur(src, w, h, r) {
+  const tmp = new Float32Array(src.length);
+  const out = new Float32Array(src.length);
+  const span = r * 2 + 1;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      let sum = 0;
+      for (let k = -r; k <= r; k++) {
+        const xx = Math.min(w - 1, Math.max(0, x + k));
+        sum += src[y * w + xx];
+      }
+      tmp[y * w + x] = sum / span;
+    }
+  }
+  for (let x = 0; x < w; x++) {
+    for (let y = 0; y < h; y++) {
+      let sum = 0;
+      for (let k = -r; k <= r; k++) {
+        const yy = Math.min(h - 1, Math.max(0, y + k));
+        sum += tmp[yy * w + x];
+      }
+      out[y * w + x] = sum / span;
+    }
+  }
+  return out;
+}
+
 /** Border-connected flood fill. Returns a Uint8Array mask, 1 = background. */
 function backgroundMask(data, w, h, ch) {
   const mask = new Uint8Array(w * h);
@@ -148,6 +185,28 @@ function backgroundMask(data, w, h, ch) {
   let bgCount = 0;
   for (let i = 0; i < mask.length; i++) bgCount += mask[i];
 
+  /*
+   * Edge decontamination.
+   *
+   * The source was rendered on black, so its antialiased edge pixels are the
+   * mark blended with black — genuinely dark. A binary cutout keeps them, and
+   * on a light page that ring reads as an outline drawn around the logo.
+   *
+   * The two-background trick that would recover alpha exactly needs the black
+   * and white renders to be pixel-aligned, and they are separate generations,
+   * so instead the matte is eroded past the contaminated ring and feathered.
+   * Blurring the binary mask and remapping above 0.5 does both at once: the
+   * threshold pulls the edge inward, the ramp softens what is left.
+   */
+  const subject = new Float32Array(w * h);
+  for (let p = 0; p < w * h; p++) {
+    const i = p * ch;
+    const enclosedBg =
+      !mask[p] && Math.max(data[i], data[i + 1], data[i + 2]) < 4;
+    subject[p] = mask[p] || enclosedBg ? 0 : 1;
+  }
+  const soft = boxBlur(subject, w, h, EDGE_RADIUS);
+
   const out = Buffer.from(data);
   let enclosed = 0;
   for (let p = 0; p < w * h; p++) {
@@ -170,6 +229,17 @@ function backgroundMask(data, w, h, ch) {
       enclosed++;
       continue;
     }
+
+    // Erode past the dark ring, then feather what remains.
+    const a = Math.max(
+      0,
+      Math.min(1, (soft[p] - EDGE_THRESHOLD) / EDGE_SOFTNESS),
+    );
+    if (a <= 0) {
+      out[i + 3] = 0;
+      continue;
+    }
+    out[i + 3] = Math.round(a * 255);
     const [hue, s, v] = rgbToHsv(data[i], data[i + 1], data[i + 2]);
     // Leave near-greys alone; recolouring them only muddies the highlights.
     if (s < 0.08) continue;
