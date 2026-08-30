@@ -33,6 +33,36 @@ Then open http://localhost:3000.
 | `npm run format`       | Prettier, including class sorting   |
 | `npm run format:check` | Verify formatting without writing   |
 
+## Brand assets
+
+Originals from the designer live in `brand-source/` and are **not** in
+`public/` — anything in `public` is served, and each original is over a
+megabyte. Web assets are generated from them:
+
+```bash
+node scripts/recolour-mark.js brand-source/mark-black.png public/brand
+```
+
+That script does two things the originals needed:
+
+**Recolours** the mark from its original blue-to-magenta into the site
+palette. A rigid hue rotation cannot do this — the source spans about 80
+degrees while teal-to-amber spans 145, so the range has to be stretched. The
+map is also piecewise, because 59% of the mark sits in one narrow blue band
+and a linear map dumps all of it into green. Stops are aligned to the real
+token hues: 173 for `--platform`, 18 for `--grow`.
+
+**Cuts out the background**, which was baked in with no alpha channel. A
+brightness threshold alone would punch holes in the mark, since its own shadow
+faces are nearly as dark as the background, so the fill runs inward from the
+borders and only removes what is actually connected to the outside. A second
+pass removes enclosed background — the counter inside the D — which is safe
+at a threshold of 4 because the histogram is empty between there and the
+shadows at 20.
+
+Re-run it after changing any stop and check the result on both themes before
+committing.
+
 ## Environment
 
 Lead capture needs two services. Copy `.env.example` to `.env.local` for local
