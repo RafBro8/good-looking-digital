@@ -108,8 +108,12 @@ export default function ContactPage() {
             <Reveal>
               <Eyebrow tone="platform">Service area</Eyebrow>
               <p className="text-ink-2 measure mt-4">
-                Based in {site.base}, working across {serviceArea.join(", ")}{" "}
-                and the surrounding suburbs — and remotely for everyone else.
+                Based in {site.base}. Working across{" "}
+                {serviceArea
+                  .filter((town) => !site.base.startsWith(town))
+                  .join(", ")}{" "}
+                and the surrounding suburbs — {site.reach}. Distance has never
+                been the thing that decides whether a project works.
               </p>
             </Reveal>
           </Container>

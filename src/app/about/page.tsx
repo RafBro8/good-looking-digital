@@ -5,7 +5,7 @@ import { Container, Eyebrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { about, proofPoints, serviceArea, site } from "@/lib/site";
+import { about, proofPoints, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: about.metaTitle,
@@ -211,7 +211,8 @@ export default function AboutPage() {
                     Based in {site.base}. Working wherever there is a browser.
                   </h2>
                   <p className="text-muted mt-4 max-w-[46ch] text-sm">
-                    {serviceArea.join(" · ")} — and remotely for everyone else.
+                    Local enough to meet you. Remote enough that it has never
+                    mattered.
                   </p>
                 </div>
                 <Link

@@ -13,7 +13,12 @@ export const site = {
   url: "https://goodlookingdigital.com",
   email: "hello@goodlookingdigital.com",
   base: "Mokena, Illinois",
-  reach: "Chicagoland and remote",
+  /**
+   * Stated the same way everywhere: local first, because that is where trust
+   * comes from — but explicitly unbounded, so a prospect in California or
+   * abroad does not read the town names and count themselves out.
+   */
+  reach: "across Chicagoland, and anywhere else with a browser",
 } as const;
 
 /** Towns that get their own landing page in Stage 07. */
@@ -460,13 +465,14 @@ export const pricingFaqs = [
 export const about = {
   metaTitle: "About",
   metaDescription:
-    "Close to twenty years in technology, the last nine building full-stack software for enterprise clients including a Fortune 5 company. Now building websites and applications for businesses around Chicagoland.",
+    "Close to twenty years in technology, the last nine building full-stack software for enterprise clients including a Fortune 5 company. Now building websites and applications for businesses in Mokena, across Chicagoland, and anywhere else with a browser.",
   heroTitle: "An engineer who cares what it looks like.",
   heroLede:
-    "Close to twenty years in technology. The last nine building full-stack software for large American companies, including a Fortune 5. Now doing that for businesses around Chicagoland.",
+    "Close to twenty years in technology. The last nine building full-stack software for large American companies, including a Fortune 5. Based in Mokena, working across Chicagoland — and anywhere else with a browser.",
   story: [
     "Most of that time has been spent on enterprise applications — internal tools and customer-facing products used by thousands of people, at a Fortune 5 company and other large, well-known American names. Front end in JavaScript and TypeScript with React and Angular; back end in Java and Spring Boot or Node and Express, with some Python along the way; SQL and MongoDB behind it; AWS, Google Cloud and Pivotal Cloud Foundry underneath; and testing at every level from unit to end-to-end.",
     "That range is deliberate. Plenty of engineers go deep on one layer and hand the rest to someone else. Working across all of them means a project does not get passed between three companies before it is finished, and nothing falls into the gap between them.",
+    "It also means the person you speak to on the first call is the person writing the code, and the person who answers when something breaks two years later. Always the same one. Most agencies put a salesperson in front of you and someone junior behind the scenes, and what you explained in the first meeting rarely survives the trip.",
     "But the part I have always come back to is the front end — the interface, and the person on the other side of it. I have run user interviews and user-experience sessions, worked alongside UI/UX teams for years and picked up a great deal from them, and sat across from senior business stakeholders to work out what a system actually needed to do rather than what someone assumed it did.",
     "That is what the name means. Plenty of people can make something look good, and plenty can make something work. Doing both, on the same project, without a handoff in the middle — that is the whole idea.",
   ],

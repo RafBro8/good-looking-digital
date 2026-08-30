@@ -59,7 +59,7 @@ export function SiteFooter() {
           <div>
             <p className="label text-muted">Serving</p>
             <p className="text-ink-2 mt-3 text-sm leading-relaxed">
-              {serviceArea.join(" · ")} — and {site.reach.toLowerCase()}.
+              {serviceArea.join(" · ")} — {site.reach}.
             </p>
             <a
               href={`mailto:${site.email}`}
