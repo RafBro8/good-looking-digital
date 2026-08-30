@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { BrandMark } from "@/components/BrandMark";
 import { Container, Eyebrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -50,13 +51,17 @@ export default function AboutPage() {
             image slot that is not there. */}
         <section className="border-rule border-t py-[clamp(2.75rem,2rem+3vw,4.5rem)]">
           <Container>
-            <div className="grid gap-[clamp(1.5rem,1rem+3vw,4rem)] lg:grid-cols-[14rem_minmax(0,1fr)]">
+            <div className="grid gap-[clamp(1.75rem,1rem+3vw,4rem)] lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)]">
               <Reveal>
-                <Eyebrow tone="grow">Who you are hiring</Eyebrow>
+                <BrandMark priority />
+                <p className="label text-muted mt-4">
+                  Good Looking Digital &mdash; {site.base}
+                </p>
               </Reveal>
 
               <Reveal delay={90}>
-                <div className="flex flex-col gap-5">
+                <Eyebrow tone="grow">Who you are hiring</Eyebrow>
+                <div className="mt-5 flex flex-col gap-5">
                   {about.story.map((para) => (
                     <p
                       key={para.slice(0, 24)}
