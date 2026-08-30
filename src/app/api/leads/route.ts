@@ -9,7 +9,7 @@ import {
   type LeadInput,
   type StoredLead,
 } from "@/lib/leads";
-import { confirmToSender, notifyOwner } from "@/lib/notify";
+import { confirmToSender, notifyOwner, notifyOwnerBySms } from "@/lib/notify";
 
 /**
  * Lead intake.
@@ -134,12 +134,15 @@ export async function POST(request: Request) {
   }
 
   // Stored safely. From here nothing may turn into an error for the visitor.
-  const [ownerNotified, senderConfirmed] = await Promise.all([
+  // SMS runs alongside email rather than instead of it: the text is the nudge,
+  // the email carries the detail and is what gets replied to.
+  const [ownerEmailed, ownerTexted, senderConfirmed] = await Promise.all([
     notifyOwner(lead).catch(() => false),
+    notifyOwnerBySms(lead).catch(() => false),
     confirmToSender(lead).catch(() => false),
   ]);
 
-  if (!ownerNotified) {
+  if (!ownerEmailed && !ownerTexted) {
     console.error(
       "[leads] STORED BUT NOT NOTIFIED — check the leads collection",
       lead.email,

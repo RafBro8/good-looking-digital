@@ -80,6 +80,22 @@ production.
 **Secrets never enter the repository.** `.env.local` is gitignored;
 `.env.example` holds names and comments only.
 
+### Texting yourself when a lead arrives
+
+Email carries the detail; the text exists so a phone buzzes. A contractor on a
+roof reads a text and does not read email, and the competitor who replies in
+five minutes wins the job.
+
+Set the four `TWILIO_*` and `LEAD_SMS_TO` variables and it starts working.
+Leave them unset and nothing breaks — SMS is treated exactly like email, as a
+best effort after the lead is already safely stored.
+
+**Never text the person who enquired.** The SMS goes only to your own number.
+In the US, texting a consumer without a recorded opt-in is a TCPA problem, and
+submitting a form is not consent to be texted. Adding customer SMS later means
+an explicit opt-in checkbox, a record of that consent, and A2P 10DLC
+registration — not just another recipient in `notify.ts`.
+
 ### A database for local development
 
 Atlas is for production. Locally, a disposable container is quicker and cannot
