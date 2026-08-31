@@ -26,7 +26,7 @@ export default function AboutPage() {
               className="label text-muted rise flex items-center gap-3 before:block before:h-px before:w-7 before:bg-[var(--grow)] before:content-['']"
               style={{ "--delay": "0ms" } as React.CSSProperties}
             >
-              {site.base}
+              {site.region}, United States
             </p>
 
             <h1
@@ -54,9 +54,7 @@ export default function AboutPage() {
             <div className="grid gap-[clamp(1.75rem,1rem+3vw,4rem)] lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)]">
               <Reveal>
                 <BrandMark priority />
-                <p className="label text-muted mt-4">
-                  Good Looking Digital &mdash; {site.base}
-                </p>
+                <p className="label text-muted mt-4">Good Looking Digital</p>
               </Reveal>
 
               <Reveal delay={90}>
@@ -213,7 +211,7 @@ export default function AboutPage() {
               <div className="flex flex-wrap items-end justify-between gap-8">
                 <div>
                   <h2 className="max-w-[18ch] text-3xl">
-                    Based in {site.base}. Working wherever there is a browser.
+                    Based in {site.state}. Working wherever there is a browser.
                   </h2>
                   <p className="text-muted mt-4 max-w-[46ch] text-sm">
                     Local enough to meet you. Remote enough that it has never

@@ -13,6 +13,8 @@ export const site = {
   url: "https://goodlookingdigital.com",
   email: "hello@goodlookingdigital.com",
   base: "Mokena, Illinois",
+  region: "Chicagoland",
+  state: "Illinois",
   /** Display form and tel: form. A visible phone number is the trust signal
    *  for a contractor deciding whether to call in the next ten seconds. */
   phone: "630-400-8748",
@@ -472,7 +474,7 @@ export const about = {
     "Close to twenty years in technology, the last nine building full-stack software for enterprise clients including a Fortune 5 company. Now building websites and applications for businesses in Mokena, across Chicagoland, and anywhere else with a browser.",
   heroTitle: "An engineer who cares what it looks like.",
   heroLede:
-    "Close to twenty years in technology. The last nine building full-stack software for large American companies, including a Fortune 5. Based in Mokena, working across Chicagoland — and anywhere else with a browser.",
+    "Close to twenty years in technology. The last nine building full-stack software for large American companies, including a Fortune 5. Based in Illinois, working across Chicagoland — and anywhere else with a browser.",
   story: [
     "Most of that time has been spent on enterprise applications — internal tools and customer-facing products used by thousands of people, at a Fortune 5 company and other large, well-known American names. Front end in JavaScript and TypeScript with React and Angular; back end in Java and Spring Boot or Node and Express, with some Python along the way; SQL and MongoDB behind it; AWS, Google Cloud and Pivotal Cloud Foundry underneath; and testing at every level from unit to end-to-end.",
     "That range is deliberate. Plenty of engineers go deep on one layer and hand the rest to someone else. Working across all of them means a project does not get passed between three companies before it is finished, and nothing falls into the gap between them.",

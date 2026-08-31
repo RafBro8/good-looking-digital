@@ -26,7 +26,7 @@ export default function HomePage() {
                   className="label text-muted rise flex items-center gap-3 before:block before:h-px before:w-7 before:bg-[var(--grow)] before:content-['']"
                   style={{ "--delay": "0ms" } as React.CSSProperties}
                 >
-                  {site.base} — and anywhere with a browser
+                  {site.region} — and anywhere with a browser
                 </p>
 
                 <h1
