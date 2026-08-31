@@ -4,7 +4,7 @@ import { Container, Eyebrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { pathContent, paths, type PathId } from "@/lib/site";
+import { pathContent, paths, site, type PathId } from "@/lib/site";
 
 /**
  * Shared skeleton for /grow and /platform. Both buyers get the same structure —
@@ -71,9 +71,15 @@ export function PathPageLayout({
               >
                 {content.ctaLabel} →
               </Link>
+              <a
+                href={site.phoneHref}
+                className="border-rule-strong text-ink hover:border-ink border px-6 py-3.5 text-sm font-semibold whitespace-nowrap transition-colors duration-200"
+              >
+                Call {site.phone}
+              </a>
               <Link
                 href={isGrow ? "/platform" : "/grow"}
-                className="border-rule-strong text-ink hover:border-ink border px-6 py-3.5 text-sm font-semibold transition-colors duration-200"
+                className="text-muted hover:text-ink self-center text-sm transition-colors duration-200"
               >
                 {isGrow
                   ? "I need software instead"

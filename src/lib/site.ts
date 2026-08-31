@@ -13,6 +13,10 @@ export const site = {
   url: "https://goodlookingdigital.com",
   email: "hello@goodlookingdigital.com",
   base: "Mokena, Illinois",
+  /** Display form and tel: form. A visible phone number is the trust signal
+   *  for a contractor deciding whether to call in the next ten seconds. */
+  phone: "630-400-8748",
+  phoneHref: "tel:+16304008748",
   /**
    * Stated the same way everywhere: local first, because that is where trust
    * comes from — but explicitly unbounded, so a prospect in California or
@@ -52,8 +56,8 @@ export const paths: ServicePath[] = [
     blurb:
       "You need customers to find you, trust you, and call you. We build the whole chain, not just the website.",
     services: [
-      { name: "Website design and build", price: "from $2,000" },
-      { name: "Logo and brand identity", price: "from $600" },
+      { name: "Website design and build", price: "from $2,500" },
+      { name: "Logo and brand identity", price: "included" },
       { name: "Google Business Profile setup", price: "from $350" },
       { name: "Facebook & Instagram page setup", price: "from $350" },
       { name: "Lead capture & follow-up", price: "from $900" },
@@ -226,30 +230,30 @@ export const pathContent: Record<PathId, PathPage> = {
       "Websites, branding, Google Business Profile, Facebook and Instagram setup, QR marketing and hosting for local businesses around Chicagoland.",
     heroTitle: "Get found. Get called.",
     heroLede:
-      "A website is one piece. We build the whole path from someone hearing about you to someone hiring you — and then we keep it running.",
+      "You need the phone to ring. We build everything that makes that happen — the website, the Google listing, the signs on the lawn, and the system that catches every enquiry.",
     processTitle: "How it works",
     process: [
       {
         title: "A twenty-minute call",
-        body: "What you do, who you want calling you, and what is currently getting in the way. No slide deck. If we are not a fit, you will hear that on this call rather than after an invoice.",
+        body: "What you do, and who you want calling you. If we are not a fit you hear it on this call, not after an invoice.",
       },
       {
         title: "Design and build",
-        body: "You see the design before anything is built, and the page before it goes live. Your words, your photos, your prices — written the way you would say them to a customer standing in their driveway.",
+        body: "You see it before it is built, and again before it goes live. Your words and your prices, written the way you would say them in someone’s driveway.",
       },
       {
         title: "Launch",
-        body: "Site goes live on your domain. Google Business Profile and Facebook page set up in your name. Signage and QR materials ordered if you want them.",
+        body: "Live on your domain, and showing up when someone nearby searches for what you do. Signs and QR materials ordered if you want them.",
       },
       {
         title: "Care",
-        body: "Hosting, updates, backups and monitoring. One person who answers, and who already knows your business. Cancel whenever — no annual lock-in.",
+        body: "It keeps working, and one person answers when it does not — the same person who built it. Cancel whenever.",
       },
     ],
     featureEyebrow: "The part most people skip",
     featureTitle: "A yard sign that actually does something",
     featureBody:
-      "Most signage ends at a phone number nobody dials. We put a QR code on your signs, stickers and vehicle graphics that opens a page built for that one offer — so the person standing on the sidewalk becomes an enquiry in your inbox before they have walked away.",
+      "Most signs end at a phone number nobody dials. Put a QR code on yours and the neighbour standing on the sidewalk becomes an enquiry in your pocket before they have walked away.",
     featurePoints: [
       "QR code on yard signs, stickers, flyers or vehicle graphics",
       "Opens a page built for one offer, not your homepage",

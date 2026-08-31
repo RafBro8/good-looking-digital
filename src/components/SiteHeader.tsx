@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { site } from "@/lib/site";
 
 /**
  * Only routes that exist. Work joins when Stage 07 lands — a nav link that
@@ -28,7 +29,7 @@ export function SiteHeader() {
         <div className="flex items-center justify-between gap-4 py-3.5">
           <Link
             href="/"
-            className="font-display text-ink text-lg font-semibold tracking-tight"
+            className="font-display text-ink text-base font-semibold tracking-tight whitespace-nowrap sm:text-lg"
           >
             Good Looking <span className="text-grow">Digital</span>
           </Link>
@@ -46,7 +47,18 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2.5">
-            <ThemeToggle />
+            <a
+              href={site.phoneHref}
+              className="text-ink hover:text-grow -mx-1 px-1 py-3 text-sm font-semibold whitespace-nowrap transition-colors duration-200"
+            >
+              {site.phone}
+            </a>
+            {/* Wrapped rather than given a hidden class directly: Tailwind
+                resolves competing display utilities by stylesheet order, not
+                by class order, so hidden on the component itself loses. */}
+            <span className="hidden sm:inline-flex">
+              <ThemeToggle />
+            </span>
             <Link
               href="/contact"
               className="bg-ink text-paper hover:bg-ink-2 hidden px-4 py-2 text-sm font-semibold transition-colors duration-200 sm:inline-block"

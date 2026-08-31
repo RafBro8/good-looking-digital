@@ -62,8 +62,14 @@ export function SiteFooter() {
               {serviceArea.join(" · ")} — {site.reach}.
             </p>
             <a
+              href={site.phoneHref}
+              className="text-ink hover:text-grow mt-4 block text-lg font-semibold transition-colors duration-200"
+            >
+              {site.phone}
+            </a>
+            <a
               href={`mailto:${site.email}`}
-              className="text-ink hover:text-grow mt-4 inline-block text-sm font-semibold [overflow-wrap:anywhere] transition-colors duration-200"
+              className="text-ink-2 hover:text-grow mt-1.5 inline-block text-sm font-semibold [overflow-wrap:anywhere] transition-colors duration-200"
             >
               {site.email}
             </a>
