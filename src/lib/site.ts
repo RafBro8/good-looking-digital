@@ -90,16 +90,18 @@ export const paths: ServicePath[] = [
 
 /** Headline numbers. Each has to be defensible if a prospect asks. */
 export const proofPoints = [
+  // Deliberately first. "1" is the smallest number here and the strongest
+  // claim on the page — it is the one an agency structurally cannot match.
+  {
+    figure: "1",
+    note: "Person who answers when you call. Always the same one",
+  },
   {
     figure: "20 yrs",
     note: "In technology — the last nine building software, including for a Fortune 5 company",
   },
   { figure: "100%", note: "Of critical flows covered by automated tests" },
   { figure: "< 1s", note: "Target load time on every page we ship" },
-  {
-    figure: "1",
-    note: "Person who answers when you call. Always the same one",
-  },
 ];
 
 export interface Capability {
@@ -318,7 +320,7 @@ export const pathContent: Record<PathId, PathPage> = {
       },
       {
         title: "Support",
-        body: "A retainer for changes, monitoring and test maintenance — or a clean handover to your own team with documentation. Both are fine, and the second is not treated as a failure.",
+        body: "A retainer for changes, monitoring and test maintenance — handled by the person who wrote it, not whoever is free that week. Or a clean handover to your team with documentation, which is equally fine and not treated as a failure.",
       },
     ],
     featureEyebrow: "Why it keeps working",
