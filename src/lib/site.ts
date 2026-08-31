@@ -71,7 +71,7 @@ export const paths: ServicePath[] = [
       "Your customers need to log in, do something real, and come back. That is software, and it is built differently.",
     services: [
       { name: "Custom web applications", price: "after discovery" },
-      { name: "Customer and staff portals", price: "from $8,000" },
+      { name: "Customer and staff portals", price: "after discovery" },
       { name: "Automation & integrations", price: "from $1,500" },
       { name: "Playwright test automation", price: "from $2,500" },
       { name: "Platform assessment", price: "$750–$1,500" },
