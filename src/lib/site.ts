@@ -80,7 +80,7 @@ export const paths: ServicePath[] = [
       { name: "Customer and staff portals", price: "after discovery" },
       { name: "Automation & integrations", price: "from $1,500" },
       { name: "Playwright test automation", price: "from $2,500" },
-      { name: "Platform assessment", price: "$750–$1,500" },
+      { name: "Platform assessment", price: "$1,000 flat" },
       { name: "Ongoing engineering", price: "retainer" },
     ],
     cta: "Book a technical call",

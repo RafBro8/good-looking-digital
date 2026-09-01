@@ -123,7 +123,7 @@ export default function PlatformPage() {
 
           <Reveal delay={160}>
             <p className="label text-muted mt-8">
-              $750–$1,500 · roughly one week · credited toward the build
+              $1,000 flat · roughly one week · credited toward the build
             </p>
           </Reveal>
         </Container>
