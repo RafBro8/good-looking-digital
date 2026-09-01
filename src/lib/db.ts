@@ -34,6 +34,11 @@ function client(): Promise<MongoClient> {
       serverSelectionTimeoutMS: 5000,
       connectTimeoutMS: 5000,
       maxPoolSize: 10,
+      // Optional fields arrive as undefined, and the driver would otherwise
+      // store them as null. An absent field is the honest representation of
+      // "they did not leave a phone number", and it is what makes the query
+      // { phone: { $exists: false } } mean what it reads like.
+      ignoreUndefined: true,
     }).connect();
   }
 

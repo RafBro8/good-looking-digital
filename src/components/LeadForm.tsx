@@ -31,6 +31,10 @@ const field =
  */
 export function LeadForm({ source }: { source?: string }) {
   const [status, setStatus] = useState<Status>("idle");
+  // Whether the confirmation email actually sent. The panel used to promise
+  // one unconditionally, which is a lie on any day the mail provider is down
+  // or the sending domain is not verified yet.
+  const [confirmed, setConfirmed] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [message, setMessage] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -76,6 +80,7 @@ export function LeadForm({ source }: { source?: string }) {
       const payload = await res.json().catch(() => ({}));
 
       if (res.ok && payload.ok) {
+        setConfirmed(Boolean(payload.confirmationSent));
         setStatus("sent");
         return;
       }
@@ -103,11 +108,15 @@ export function LeadForm({ source }: { source?: string }) {
       >
         <h3 className="text-2xl">That reached us.</h3>
         <p className="text-ink-2 mt-3 max-w-[46ch]">
-          A confirmation is on its way to your inbox. You will get a real reply
-          from a person, usually within one business day.
+          {confirmed
+            ? "A confirmation is on its way to your inbox. You will get a real reply from a person, usually within one business day."
+            : "Your message is saved and we have it. You will get a real reply from a person, usually within one business day."}
         </p>
         <p className="text-muted mt-4 text-sm">
-          Nothing arrived? Email{" "}
+          {confirmed
+            ? "Nothing arrived?"
+            : "Want it in writing at your end too?"}{" "}
+          Email{" "}
           <a href={`mailto:${site.email}`} className="text-grow font-semibold">
             {site.email}
           </a>{" "}
