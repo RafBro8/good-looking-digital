@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="Good Looking Digital">
+  <title>Good Looking Digital</title>
+  <!--
+    TILE — the square sibling. Favicon, app icon, social avatar, sticker,
+    embroidered patch. Anywhere the space is square and often small.
+
+    The ground is split down the middle in the two path colours, the same
+    split carried by the rule at the top of every page on the site. At 16 px
+    the letters stop being readable and the split is what does the
+    recognising — which is how every favicon actually works at that size.
+
+    Colours are literal, not variables: this file gets handed to printers,
+    embroiderers and platform upload forms that will not resolve a token.
+      amber #b55028   teal #0f5b55
+
+    The mark is 127.5 x 48 units, placed 78 wide and centred: scale 0.6118,
+    which leaves 9 units of clear space each side and 33.3 above and below.
+  -->
+  <defs>
+    <clipPath id="gld-tile-clip"><rect width="96" height="96" rx="21" ry="21"/></clipPath>
+  </defs>
+  <g clip-path="url(#gld-tile-clip)">
+    <rect width="48" height="96" fill="#b55028"/>
+    <rect x="48" width="48" height="96" fill="#0f5b55"/>
+  </g>
+  <g transform="translate(9 33.31) scale(0.6118)" fill="none" stroke="#ffffff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M37.75 11.62 A18.5 18.5 0 1 0 37.75 36.38 L37.75 24 L28 24"/>
+    <path d="M62 6 L62 42 L80 42"/>
+    <path d="M98 42.5 L98 5.5 A24 18.5 0 0 1 98 42.5"/>
+  </g>
+</svg>
