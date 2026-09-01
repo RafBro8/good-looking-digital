@@ -53,7 +53,7 @@ export default function AboutPage() {
           <Container>
             <div className="grid gap-[clamp(1.75rem,1rem+3vw,4rem)] lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)]">
               <Reveal>
-                <BrandMark priority />
+                <BrandMark tone="two" className="w-full max-w-[15rem]" />
                 <p className="label text-muted mt-4">Good Looking Digital</p>
               </Reveal>
 

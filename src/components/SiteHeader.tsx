@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { BrandMark } from "@/components/BrandMark";
 import { Container } from "@/components/ui";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { site } from "@/lib/site";
@@ -27,11 +28,16 @@ export function SiteHeader() {
 
       <Container>
         <div className="flex items-center justify-between gap-4 py-3.5">
+          {/* Mark plus wordmark. The mark is aria-hidden because the words
+              right beside it already say the name. */}
           <Link
             href="/"
-            className="font-display text-ink text-base font-semibold tracking-tight whitespace-nowrap sm:text-lg"
+            className="text-ink flex items-center gap-2 sm:gap-2.5"
           >
-            Good Looking <span className="text-grow">Digital</span>
+            <BrandMark className="w-[3.1rem] shrink-0 sm:w-[3.6rem]" />
+            <span className="font-display text-base font-semibold tracking-tight whitespace-nowrap sm:text-lg">
+              Good Looking <span className="text-grow">Digital</span>
+            </span>
           </Link>
 
           <nav className="hidden items-center gap-7 md:flex">

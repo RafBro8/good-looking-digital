@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.5 48" width="127.5" height="48" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Good Looking Digital">
+  <title>Good Looking Digital</title>
+  <!--
+    PRIMARY MARK.
+
+    The viewBox hugs the ink exactly, so whoever places the mark controls its
+    spacing and it aligns predictably in any container.
+
+    Grid, written down so it can be rebuilt or corrected without guessing:
+      cap height   48 units; stroke 11 = 23% of cap
+      G            circle, centre (24,24), r 18.5
+      L            stem x 62, foot y 42 running 18 units right
+      D            stem x 98, bowl is an ELLIPSE, rx 24 ry 18.5
+      overshoot    G and D span y 0-48; the L, being flat-topped and
+                   flat-footed, spans 0.5-47.5. Measuring them all the same
+                   would make the round letters look smaller than the flat one.
+      gaps         7.25 units after the G, 7 units after the L's foot.
+
+    Why the D's bowl is an ellipse and not a circle. The D's counter is walled
+    in by its own stem on the left, so a bowl at the G's radius leaves only 7.5
+    units of white inside it against the G's 26. It reads noticeably heavier
+    than the G, and it is the first part of the mark to fill in when the thing
+    is printed small or cut in thick vinyl. Widening the bowl horizontally to
+    rx 24 opens the counter to 13 and costs 4.5% total width. Height is
+    untouched, so the D still matches the G exactly top and bottom.
+
+    This is ordinary practice rather than a special case: geometric typefaces
+    draw the D wider than the O for the same reason.
+
+    Nothing touches. That is deliberate and it cost something: joining the L
+    to the D saves width and looks more "designed" at poster size, but every
+    joined version tested read as G + LD rather than G + L + D. Legibility won.
+  -->
+  <path class="pg" d="M37.75 11.62 A18.5 18.5 0 1 0 37.75 36.38 L37.75 24 L28 24"/>
+  <path class="pl" d="M62 6 L62 42 L80 42"/>
+  <path class="pd" d="M98 42.5 L98 5.5 A24 18.5 0 0 1 98 42.5"/>
+</svg>

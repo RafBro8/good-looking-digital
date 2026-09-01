@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="Good Looking Digital">
+  <title>Good Looking Digital</title>
+  <!--
+    TILE, SINGLE COLOUR. Same geometry as gld-tile.svg with the split
+    removed. This is the one for embroidery, a rubber stamp, an etched plate,
+    a one colour screen print, or any vinyl job priced per colour.
+
+    Swap the two fills to reverse it: ground #ffffff, mark #14191a.
+
+    The mark is 127.5 x 48 units, placed 78 wide and centred: scale 0.6118,
+    which leaves 9 units of clear space each side and 33.3 above and below.
+  -->
+  <rect width="96" height="96" rx="21" ry="21" fill="#14191a"/>
+  <g transform="translate(9 33.31) scale(0.6118)" fill="none" stroke="#f5f6f4" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M37.75 11.62 A18.5 18.5 0 1 0 37.75 36.38 L37.75 24 L28 24"/>
+    <path d="M62 6 L62 42 L80 42"/>
+    <path d="M98 42.5 L98 5.5 A24 18.5 0 0 1 98 42.5"/>
+  </g>
+</svg>
