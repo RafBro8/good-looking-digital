@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "db:check": "node scripts/check-db.js"
   },
   "dependencies": {
     "mongodb": "^7.6.0",
