@@ -9,7 +9,13 @@ import {
   type LeadInput,
   type StoredLead,
 } from "@/lib/leads";
-import { confirmToSender, notifyOwner, notifyOwnerBySms } from "@/lib/notify";
+import {
+  confirmToSender,
+  isNotificationConfigured,
+  isSmsConfigured,
+  notifyOwner,
+  notifyOwnerBySms,
+} from "@/lib/notify";
 
 /**
  * Lead intake.
@@ -143,9 +149,20 @@ export async function POST(request: Request) {
   ]);
 
   if (!ownerEmailed && !ownerTexted) {
+    // Say why, not just that. When this fires on a real lead the difference
+    // between "no key in this build" and "the provider rejected us" is the
+    // difference between a one-minute fix and an hour of guessing — and the
+    // provider's own dashboard shows nothing at all in the first case.
     console.error(
       "[leads] STORED BUT NOT NOTIFIED — check the leads collection",
       lead.email,
+      {
+        emailConfigured: isNotificationConfigured(),
+        smsConfigured: isSmsConfigured(),
+        ownerEmailed,
+        ownerTexted,
+        senderConfirmed,
+      },
     );
   }
 
