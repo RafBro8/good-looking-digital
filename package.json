@@ -9,7 +9,8 @@
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "db:check": "node scripts/check-db.js"
+    "db:check": "node scripts/check-db.js",
+    "mail:check": "node scripts/check-mail.js"
   },
   "dependencies": {
     "mongodb": "^7.6.0",
