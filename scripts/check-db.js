@@ -14,6 +14,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const dns = require("node:dns");
 const { MongoClient } = require("mongodb");
 
 /** Minimal .env.local reader. Next loads this file; a plain node script does not. */
@@ -73,13 +74,28 @@ async function main() {
   );
   console.log("");
 
-  const client = new MongoClient(uri, {
-    serverSelectionTimeoutMS: 8000,
-    connectTimeoutMS: 8000,
-  });
+  const options = { serverSelectionTimeoutMS: 8000, connectTimeoutMS: 8000 };
+  let client = new MongoClient(uri, options);
 
   try {
-    await client.connect();
+    try {
+      await client.connect();
+    } catch (error) {
+      // A mongodb+srv:// URI needs a DNS SRV lookup, and some machines hand
+      // Node a resolver that refuses them — a VPN or virtual adapter is the
+      // usual culprit, and it shows up as querySrv ECONNREFUSED while
+      // nslookup resolves the very same record without complaint. Falling
+      // back to public resolvers turns a dead end into a one-line notice.
+      if (!/querySrv|ENOTFOUND|EREFUSED|ECONNREFUSED/.test(error.message))
+        throw error;
+      console.log("note      default DNS resolver refused the SRV lookup;");
+      console.log("          retrying via 8.8.8.8 / 1.1.1.1");
+      dns.setServers(["8.8.8.8", "1.1.1.1"]);
+      await client.close().catch(() => {});
+      client = new MongoClient(uri, options);
+      await client.connect();
+    }
+
     const db = client.db(dbName);
 
     await db.command({ ping: 1 });
