@@ -40,7 +40,7 @@ export function SiteHeader() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-7 md:flex">
+          <nav className="hidden items-center gap-7 lg:flex">
             {nav.map((item) => (
               <Link
                 key={item.href}
@@ -61,8 +61,10 @@ export function SiteHeader() {
             </a>
             {/* Wrapped rather than given a hidden class directly: Tailwind
                 resolves competing display utilities by stylesheet order, not
-                by class order, so hidden on the component itself loses. */}
-            <span className="hidden sm:inline-flex">
+                by class order, so hidden on the component itself loses.
+                Below lg the toggle lives in the compact row instead, so
+                exactly one is on screen at any width. */}
+            <span className="hidden lg:inline-flex">
               <ThemeToggle />
             </span>
             <Link
@@ -72,6 +74,34 @@ export function SiteHeader() {
               Book a call
             </Link>
           </div>
+        </div>
+
+        {/* Phones and tablets get their own row. Without it the only way off
+            the current page is to scroll to the footer of it. Four links fit
+            across a 375px screen, which is why this is a row rather than a
+            hamburger — a menu you must open to reveal four words is a tap
+            nobody needs to make.
+
+            The handover is at lg, not md. The single-row desktop header needs
+            799px for its three groups and md turns it on at 768, so it wrapped
+            and pushed the page sideways at exactly iPad-portrait width. This
+            layout is comfortable there. */}
+        <div className="border-rule/60 flex items-center justify-between gap-3 border-t py-0.5 lg:hidden">
+          {/* py-3 on the links rather than the row: it buys a 44px tap target
+              on a control a contractor uses one-handed, and costs nothing in
+              header height because the row's own padding shrinks to match. */}
+          <nav className="flex items-center gap-4">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-ink-2 hover:text-ink py-3 text-sm transition-colors duration-200"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <ThemeToggle className="py-3" />
         </div>
       </Container>
     </header>
