@@ -44,7 +44,17 @@ export default defineConfig({
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 2 : undefined,
-  reporter: process.env.CI ? [["github"], ["list"]] : [["list"]],
+  // CI also writes a report and a machine-readable result file. The github
+  // reporter alone collapses per-test timings into annotations, and the
+  // numbers published in src/lib/site.ts have to come from somewhere real.
+  reporter: process.env.CI
+    ? ([
+        ["github"],
+        ["list"],
+        ["html", { open: "never" }],
+        ["json", { outputFile: "playwright-report/results.json" }],
+      ] as const)
+    : [["list"] as const],
 
   use: {
     baseURL: BASE_URL,
