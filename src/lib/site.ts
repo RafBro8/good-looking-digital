@@ -189,17 +189,33 @@ export const work: WorkItem[] = [
  * land. Until Stage 08 wires this to actual CI output, the counts and timings
  * are placeholders and the panel deliberately claims no build number.
  */
+/**
+ * The test run shown on the homepage.
+ *
+ * These are real. Every spec named here lives in e2e/, runs against a
+ * production build on every push, and the figures come from an actual CI run
+ * across all three engines — not from a mockup. If a spec is renamed or
+ * removed, change it here too: a panel describing tests that do not exist is
+ * worse than no panel, and this file has been wrong about that once already.
+ *
+ * Refresh with: gh run download <id>, then read results.json out of any of
+ * the downloaded playwright-report directories.
+ */
 export const testRun = {
   suite: "goodlookingdigital.com",
   browsers: "chromium, firefox, webkit",
-  duration: "2.94s",
+  // Slowest of the three engines for each spec, and the slowest engine's total
+  // run. Worst case rather than best, because quoting the fastest number would
+  // be the same kind of flattery the invented figures were.
+  duration: "19.08s",
   specs: [
-    { name: "visitor reaches the quote form", ms: "318ms" },
-    { name: "a bad email address is caught", ms: "204ms" },
-    { name: "the quote form submits", ms: "612ms" },
-    { name: "the lead reaches the inbox", ms: "1.1s" },
-    { name: "spam is turned away", ms: "187ms" },
-    { name: "it works on a five-year-old phone", ms: "521ms" },
+    { name: "visitor reaches the quote form", ms: "4.42s" },
+    { name: "a bad email address is caught", ms: "2.65s" },
+    { name: "the quote form submits", ms: "2.96s" },
+    { name: "the lead is stored, not lost", ms: "1.67s" },
+    { name: "spam is turned away", ms: "79ms" },
+    { name: "a lead is never falsely reported as emailed", ms: "50ms" },
+    { name: "it works on a five-year-old phone", ms: "892ms" },
   ],
 } as const;
 
