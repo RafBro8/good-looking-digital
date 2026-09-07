@@ -10,7 +10,10 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "db:check": "node scripts/check-db.js",
-    "mail:check": "node scripts/check-mail.js"
+    "mail:check": "node scripts/check-mail.js",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
     "mongodb": "^7.6.0",
@@ -19,6 +22,7 @@
     "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

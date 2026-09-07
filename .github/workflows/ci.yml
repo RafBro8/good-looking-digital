@@ -1,0 +1,81 @@
+name: CI
+
+# The homepage tells visitors that every site we ship gets tested on every
+# change. This workflow is what makes that sentence true for our own site.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Format, lint, types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx prettier --check .
+      - run: npx eslint .
+      - run: npx tsc --noEmit
+
+  e2e:
+    name: End-to-end (${{ matrix.project }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [chromium, firefox, webkit]
+
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand({ping:1}).ok'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      # A throwaway Mongo in the runner. No Atlas credentials in CI, and no
+      # chance of a test writing into the collection that holds real enquiries.
+      TEST_MONGODB_URI: mongodb://127.0.0.1:27017
+      MONGODB_DB: good_looking_digital_test
+      # RESEND_API_KEY is deliberately unset. One spec asserts that a lead
+      # which could not be emailed is never reported to the visitor as emailed.
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Cache browser engines
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: playwright-${{ runner.os }}-
+
+      - run: npx playwright install --with-deps ${{ matrix.project }}
+
+      - run: npx playwright test --project=${{ matrix.project }}
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-${{ matrix.project }}
+          path: playwright-report/
+          retention-days: 14

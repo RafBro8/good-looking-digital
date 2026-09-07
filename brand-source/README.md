@@ -9,14 +9,14 @@ The dimensional loop mark supplied at the start of the project, kept at full
 resolution in every colourway. **These are deliberately retained, not
 deprecated.**
 
-| File | Notes |
-| --- | --- |
-| `mark-blue.png` | 1254², the original colourway |
-| `mark-purple.png` | 1254² |
-| `mark-navy.png` | 1254² |
-| `mark-black.png` | 1254² |
-| `mark-white.png` | 1254² |
-| `mark-light.png` | 1254² |
+| File              | Notes                                            |
+| ----------------- | ------------------------------------------------ |
+| `mark-blue.png`   | 1254², the original colourway                    |
+| `mark-purple.png` | 1254²                                            |
+| `mark-navy.png`   | 1254²                                            |
+| `mark-black.png`  | 1254²                                            |
+| `mark-white.png`  | 1254²                                            |
+| `mark-light.png`  | 1254²                                            |
 | `brand-sheet.png` | the supplied sheet showing all variants together |
 
 It was set aside for the site for two reasons, neither of them a judgement on
@@ -37,11 +37,11 @@ by border flood-fill and matte erosion. Re-runnable if the palette changes.
 Hand-authored, single-stroke, no fills — which is what makes all three
 cuttable in vinyl, embroiderable, and scalable with no raster fallback.
 
-| File | Bytes | Idea |
-| --- | --- | --- |
-| `vector/gld-woven.svg` | 708 | letters pass over and under each other; the L is drawn by the gaps |
-| `vector/gld-overlap.svg` | 421 | three letters tightened until the L's foot runs under the D's stem |
-| `vector/gld-row.svg` | 424 | three letters in a row, touching nothing |
+| File                     | Bytes | Idea                                                               |
+| ------------------------ | ----- | ------------------------------------------------------------------ |
+| `vector/gld-woven.svg`   | 708   | letters pass over and under each other; the L is drawn by the gaps |
+| `vector/gld-overlap.svg` | 421   | three letters tightened until the L's foot runs under the D's stem |
+| `vector/gld-row.svg`     | 424   | three letters in a row, touching nothing                           |
 
 **Not yet chosen.** None is wired into the site — `src/components/BrandMark.tsx`
 still renders the recoloured raster from `public/brand/`.

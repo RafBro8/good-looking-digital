@@ -43,3 +43,9 @@ next-env.d.ts
 
 # local design scratch page, never ships
 public/logo-lab.html
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
