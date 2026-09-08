@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "What Good Looking Digital collects when you use this site, why, who processes it, and what we never do with it. No cookies, no analytics, no third-party tracking.",
+    "What Good Looking Digital collects when you use this site, why, who processes it, and what we never do with it. No cookies, no tracking scripts, and nothing loaded from a third party.",
 };
 
 /**
@@ -113,7 +113,7 @@ export default function PrivacyPage() {
                   "We collect what you type into the contact form. Nothing else about you.",
                   "We use it to reply to you. That is the whole purpose.",
                   "We never sell it, rent it, or share it for anyone else's marketing.",
-                  "There are no cookies, no analytics, and no third-party tracking on this site.",
+                  "There are no cookies and no tracking scripts on this site.",
                   "Ask us what we hold and we will tell you. Ask us to delete it and we will.",
                 ].map((line) => (
                   <li
@@ -138,10 +138,9 @@ export default function PrivacyPage() {
               <Eyebrow>Who we are</Eyebrow>
               <div className="grid max-w-[62ch] gap-4">
                 <p className="text-ink-2">
-                  {site.name} is a web design and software business operated by
-                  Rafal Brodowicz from {site.base}. When this notice says
-                  &ldquo;we&rdquo;, that is who is responsible for your
-                  information.
+                  {site.name} is a web design and software business based in{" "}
+                  {site.base}, and is responsible for the information described
+                  on this page.
                 </p>
                 <p className="text-ink-2">
                   If you want anything on this page explained, or you want to
@@ -212,6 +211,14 @@ export default function PrivacyPage() {
               </strong>{" "}
               and are never connected to your enquiry.
             </p>
+            <p className="text-ink-2 measure mt-4">
+              And like every website, this one runs on a host, and the host
+              keeps an ordinary record of requests — which page, when, from
+              which network address, and which browser. We can see those
+              records, and they tell us roughly how busy the site is. We do not
+              use them to work out who you are, we do not connect them to your
+              enquiry, and we do not run any analytics service on top of them.
+            </p>
           </Container>
         </section>
 
@@ -225,17 +232,16 @@ export default function PrivacyPage() {
                   The list most sites cannot write
                 </h2>
                 <p className="text-ink-2 mt-5 max-w-[42ch]">
-                  This is checkable. Open the developer tools on any page here
-                  and watch the network tab — the only thing this site loads is
-                  this site. The fonts are served from our own domain, so not
-                  even the font provider learns that you visited.
+                  Nothing on these pages is loaded from anywhere else. Even the
+                  fonts are served from our own domain, so no other company
+                  learns that you visited.
                 </p>
               </div>
 
               <ul className="border-rule-strong border-t-2 pt-4">
                 {[
                   "We set no cookies. Not one, of any kind.",
-                  "We run no analytics. We do not know how many people read this page.",
+                  "We run no analytics service, and no tracking scripts of any kind.",
                   "There are no advertising pixels, and no social network buttons that report back.",
                   "We load no third-party scripts, fonts, or images.",
                   "We do not sell, rent, or trade your information.",
@@ -266,11 +272,10 @@ export default function PrivacyPage() {
               Five companies, each doing one job
             </h2>
             <p className="text-ink-2 measure mt-4">
-              We are one person, so some of the machinery belongs to somebody
-              else. These are the only companies your enquiry passes through,
-              and each is named so you can read their terms if you want to. None
-              of them is permitted to use your information for their own
-              purposes.
+              Some of the machinery behind the site belongs to other companies.
+              These are the only ones your enquiry passes through, and each is
+              named so you can read their terms if you want to. None of them is
+              permitted to use your information for their own purposes.
             </p>
 
             <div className="mt-9 max-w-[52rem]">
