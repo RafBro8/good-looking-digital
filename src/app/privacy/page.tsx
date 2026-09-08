@@ -138,9 +138,8 @@ export default function PrivacyPage() {
               <Eyebrow>Who we are</Eyebrow>
               <div className="grid max-w-[62ch] gap-4">
                 <p className="text-ink-2">
-                  {site.name} is a web design and software business based in{" "}
-                  {site.base}, and is responsible for the information described
-                  on this page.
+                  {site.name} is a web design and software business, and is
+                  responsible for the information described on this page.
                 </p>
                 <p className="text-ink-2">
                   If you want anything on this page explained, or you want to
