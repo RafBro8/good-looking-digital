@@ -110,7 +110,7 @@ export default function PrivacyPage() {
               <Eyebrow tone="grow">The short version</Eyebrow>
               <ul className="mt-5 grid gap-3">
                 {[
-                  "We collect what you type into the contact form. Nothing else about you.",
+                  "We collect what you type into the contact form, plus the ordinary technical details every website receives.",
                   "We use it to reply to you. That is the whole purpose.",
                   "We never sell it, rent it, or share it for anyone else's marketing.",
                   "There are no cookies and no tracking scripts on this site.",
@@ -372,10 +372,15 @@ export default function PrivacyPage() {
               <div className="grid gap-4">
                 <Eyebrow tone="platform">How it is protected</Eyebrow>
                 <p className="text-ink-2 max-w-[44ch]">
-                  Everything travels over an encrypted connection and is stored
-                  encrypted. The account our website uses to reach the database
-                  can read and write enquiries and nothing else — it cannot
-                  reach any other data, even if the credentials leaked.
+                  Everything travels over an encrypted connection. This site
+                  refuses unencrypted requests outright, and the database
+                  connection cannot be made in the clear. Our database provider
+                  encrypts what it stores.
+                </p>
+                <p className="text-ink-2 max-w-[44ch]">
+                  The account our website uses to reach the database can read
+                  and write enquiries and nothing else — it cannot reach any
+                  other data, even if the credentials leaked.
                 </p>
                 <p className="text-ink-2 max-w-[44ch]">
                   No system is perfect. If something goes wrong that affects
