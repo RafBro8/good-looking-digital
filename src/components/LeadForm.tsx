@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 
 import {
@@ -233,7 +234,11 @@ export function LeadForm({ source }: { source?: string }) {
           {status === "sending" ? "Sending…" : "Send it →"}
         </button>
         <p className="text-muted text-sm">
-          No newsletter, no CRM sequence. Just a reply.
+          No newsletter, no CRM sequence. Just a reply. See{" "}
+          <Link href="/privacy" className="hover:text-ink underline">
+            what we do with it
+          </Link>
+          .
         </p>
       </div>
     </form>

@@ -87,6 +87,12 @@ export function SiteFooter() {
               >
                 About
               </Link>
+              <Link
+                href="/privacy"
+                className="text-ink-2 hover:text-ink text-sm transition-colors duration-200"
+              >
+                Privacy
+              </Link>
             </div>
           </div>
         </div>
