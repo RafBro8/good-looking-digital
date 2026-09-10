@@ -17,13 +17,19 @@ export const metadata: Metadata = {
  *
  * Written against the code rather than from a template, and every claim here
  * is checkable: the form fields are in src/lib/leads.ts, the storage is in
- * src/app/api/leads/route.ts, and the only outbound calls are the two in
- * src/lib/notify.ts. If any of that changes, this page changes with it —
- * a policy describing behaviour the software does not have is the same
+ * src/app/api/leads/route.ts, and the only live outbound call is the Resend
+ * one in src/lib/notify.ts. If any of that changes, this page changes with it
+ * — a policy describing behaviour the software does not have is the same
  * failure as a test panel describing tests that do not exist.
+ *
+ * notify.ts also contains a Twilio path that texts the owner. It is dormant:
+ * it returns before any network call unless all four TWILIO_ and LEAD_SMS_
+ * variables are set, and none are in production. It was listed here as a
+ * processor once, which described something that was not happening. If those
+ * variables are ever set, add Twilio back to the processors below first.
  */
 
-const UPDATED = "7 September 2026";
+const UPDATED = "10 September 2026";
 
 const collected = [
   {
@@ -74,10 +80,6 @@ const processors = [
   {
     name: "Google Workspace",
     role: "Our email. Your message ends up in an inbox there once we are notified.",
-  },
-  {
-    name: "Twilio",
-    role: "Texts a short alert to our own phone when an enquiry arrives. It never receives your message, and we never text you.",
   },
 ];
 
@@ -246,7 +248,7 @@ export default function PrivacyPage() {
                   "We do not sell, rent, or trade your information.",
                   "We do not add you to a newsletter or a marketing sequence.",
                   "We do not build a profile of you, or track you between visits.",
-                  "We never text you. SMS alerts go to our own phone only.",
+                  "We never text you.",
                 ].map((line) => (
                   <li
                     key={line}
@@ -268,7 +270,7 @@ export default function PrivacyPage() {
           <Container>
             <Eyebrow>Who else handles it</Eyebrow>
             <h2 className="mt-3 max-w-[24ch] text-3xl">
-              Five companies, each doing one job
+              Four companies, each doing one job
             </h2>
             <p className="text-ink-2 measure mt-4">
               Some of the machinery behind the site belongs to other companies.
