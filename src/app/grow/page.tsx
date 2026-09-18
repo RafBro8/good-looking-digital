@@ -24,9 +24,9 @@ export default function GrowPage() {
             </h2>
             <p className="text-ink-2 measure mt-4">
               Being local matters for this kind of work. We can meet at your
-              shop, photograph the job, and drop signage off ourselves. Plenty
-              of clients are further afield and that works fine too — but if you
-              are nearby, you get a person rather than a ticket queue.
+              shop, photograph the job, and walk your signage through with you.
+              Plenty of clients are further afield and that works fine too — but
+              if you are nearby, you get a person rather than a ticket queue.
             </p>
           </Reveal>
 

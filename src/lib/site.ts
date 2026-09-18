@@ -63,7 +63,7 @@ export const paths: ServicePath[] = [
       { name: "Google Business Profile setup", price: "from $350" },
       { name: "Facebook & Instagram page setup", price: "from $350" },
       { name: "Lead capture & follow-up", price: "from $900" },
-      { name: "QR signage and print", price: "at cost + 20%" },
+      { name: "QR signage artwork", price: "from $250" },
       { name: "Hosting and care", price: "$95–$250/mo" },
     ],
     cta: "See what this costs",
@@ -263,7 +263,7 @@ export const pathContent: Record<PathId, PathPage> = {
       },
       {
         title: "Launch",
-        body: "Live on your domain, and showing up when someone nearby searches for what you do. Signs and QR materials ordered if you want them.",
+        body: "Live on your domain, and showing up when someone nearby searches for what you do. Print-ready sign artwork in your hands, to take to whichever printer you like.",
       },
       {
         title: "Care",
@@ -273,13 +273,12 @@ export const pathContent: Record<PathId, PathPage> = {
     featureEyebrow: "The part most people skip",
     featureTitle: "A yard sign that actually does something",
     featureBody:
-      "Most signs end at a phone number nobody dials. Put a QR code on yours and the neighbour standing on the sidewalk becomes an enquiry in your pocket before they have walked away.",
+      "Most signs end at a phone number nobody dials. We design the code and the page it opens, you print the sign wherever you like, and the neighbour standing on the sidewalk becomes an enquiry in your pocket before they have walked away.",
     featurePoints: [
-      "QR code on yard signs, stickers, flyers or vehicle graphics",
+      "Print-ready QR artwork for yard signs, stickers, flyers or vehicle graphics",
       "Opens a page built for one offer, not your homepage",
-      "Short form — you are notified within seconds, by email or text",
+      "Short form — you are notified within seconds, by email",
       "Your customer gets an instant confirmation, not silence",
-      "A reminder fires if nobody has called them back",
       "You can tell which sign produced which call",
     ],
     faqs: [
@@ -301,7 +300,7 @@ export const pathContent: Record<PathId, PathPage> = {
       },
       {
         q: "What is lead capture, exactly?",
-        a: "Everything that happens once someone is interested: the form, the database behind it, the alert that reaches you in seconds, the confirmation that reaches your customer, and a reminder if nobody has called them back. It is not advertising — we do not make the enquiries appear, we make sure none of them are lost.",
+        a: "Everything that happens once someone is interested: the form, the database behind it, the alert that reaches you in seconds, and the confirmation that reaches your customer. It is not advertising — we do not make the enquiries appear, we make sure none of them are lost.",
       },
       {
         q: "Do you run Facebook or Google ads?",
@@ -470,7 +469,7 @@ export const pricingFaqs = [
   },
   {
     q: "What is not included?",
-    a: "Domain registration, third-party subscriptions, stock photography, print production and advertising spend are all billed at cost or paid by you directly. Nothing is marked up quietly.",
+    a: "Domain registration, third-party subscriptions, stock photography, sign printing and advertising spend are paid by you directly. Nothing is marked up quietly.",
   },
   {
     q: "Is the assessment fee wasted if I do not go ahead?",
