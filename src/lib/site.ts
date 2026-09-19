@@ -279,6 +279,7 @@ export const pathContent: Record<PathId, PathPage> = {
       "Opens a page built for one offer, not your homepage",
       "Short form — you are notified within seconds, by email",
       "Your customer gets an instant confirmation, not silence",
+      "A reminder fires if nobody has called them back",
       "You can tell which sign produced which call",
     ],
     faqs: [
@@ -300,7 +301,7 @@ export const pathContent: Record<PathId, PathPage> = {
       },
       {
         q: "What is lead capture, exactly?",
-        a: "Everything that happens once someone is interested: the form, the database behind it, the alert that reaches you in seconds, and the confirmation that reaches your customer. It is not advertising — we do not make the enquiries appear, we make sure none of them are lost.",
+        a: "Everything that happens once someone is interested: the form, the database behind it, the alert that reaches you in seconds, the confirmation that reaches your customer, and a reminder if nobody has called them back. It is not advertising — we do not make the enquiries appear, we make sure none of them are lost.",
       },
       {
         q: "Do you run Facebook or Google ads?",

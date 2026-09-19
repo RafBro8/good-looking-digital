@@ -29,7 +29,7 @@ export const metadata: Metadata = {
  * variables are ever set, add Twilio back to the processors below first.
  */
 
-const UPDATED = "10 September 2026";
+const UPDATED = "18 September 2026";
 
 const collected = [
   {
@@ -75,7 +75,7 @@ const processors = [
   },
   {
     name: "Resend",
-    role: "Delivers the notification to us and the confirmation to you.",
+    role: "Delivers the notification to us, the confirmation to you, and our own follow-up reminder to us.",
   },
   {
     name: "Google Workspace",
@@ -197,6 +197,15 @@ export default function PrivacyPage() {
             </div>
 
             <p className="text-ink-2 measure mt-8">
+              Once your enquiry is here, we add two notes of our own:{" "}
+              <strong>whether it has been answered</strong> and{" "}
+              <strong>whether we have reminded ourselves to answer it</strong>.
+              Nothing about you — they exist so an enquiry cannot quietly go
+              unanswered, which is the failure this whole form is meant to
+              prevent. The reminder goes to us. You are never emailed because we
+              were slow.
+            </p>
+            <p className="text-ink-2 measure mt-4">
               We also record <strong>when</strong> the enquiry arrived and the{" "}
               <strong>browser identification string</strong> your device sends
               with every request. That second one tells us whether the form is

@@ -161,6 +161,21 @@ export async function notifyOwner(lead: StoredLead): Promise<boolean> {
 }
 
 /**
+ * The follow-up nudge for an enquiry nobody answered.
+ *
+ * Subject deliberately says "still" — in an inbox it has to read as a second
+ * mention of something already seen, not as a new enquiry, or it gets replied
+ * to twice.
+ */
+export async function remindOwner(
+  subject: string,
+  text: string,
+): Promise<boolean> {
+  const { to } = config();
+  return send({ to: process.env.LEAD_REMINDER_EMAIL ?? to, subject, text });
+}
+
+/**
  * Goes to the person who enquired. Silence after submitting a form is the
  * single most common reason someone assumes it did not work and calls a
  * competitor instead.

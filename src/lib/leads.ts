@@ -105,6 +105,15 @@ export function looksLikeSpam(input: Partial<LeadInput>): boolean {
 export interface StoredLead extends Omit<LeadInput, "website"> {
   receivedAt: Date;
   userAgent?: string;
+  /**
+   * Set when someone has actually dealt with this enquiry. Absent means
+   * nobody has, which is the whole basis of the follow-up reminder: the
+   * question "has this gone cold" has to be answerable without a human
+   * remembering to record anything they did not already have to do.
+   */
+  respondedAt?: Date;
+  /** Set when the reminder went out, so it goes out once and not every hour. */
+  remindedAt?: Date;
 }
 
 /** Trim and clamp before anything reaches the database or an inbox. */

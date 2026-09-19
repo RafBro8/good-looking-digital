@@ -94,6 +94,16 @@ export default defineConfig({
       // the route returns before any network call — which is the condition
       // the "never falsely reported as emailed" spec is actually asserting on.
       RESEND_API_KEY: "",
+      // The reminder sweep is useless to test if it can only ask about the
+      // present, and nobody can wait eight hours. This flag is the only thing
+      // that lets ?now= move the clock, and it is set here and nowhere else.
+      ALLOW_TEST_CLOCK: "1",
+      LEAD_REMINDER_AFTER_HOURS: "8",
+      LEAD_REMINDER_TIMEZONE: "America/Chicago",
+      // Fixed so the specs can sign their own links and call the sweep. Both
+      // are test values; the real ones live in Vercel and are never here.
+      CRON_SECRET: "e2e-cron-secret",
+      LEAD_ACTION_SECRET: "e2e-action-secret",
     },
   },
 });

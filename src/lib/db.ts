@@ -63,6 +63,12 @@ export async function ensureIndexes(): Promise<void> {
 
   await db.collection("leads").createIndex({ receivedAt: -1 });
 
+  // The reminder sweep asks for unanswered, un-reminded leads older than a
+  // threshold. Without this it is a collection scan every half hour, forever.
+  await db
+    .collection("leads")
+    .createIndex({ respondedAt: 1, remindedAt: 1, receivedAt: 1 });
+
   // Rate-limit records expire on their own, so nothing has to sweep them.
   await db
     .collection("rate_limits")
