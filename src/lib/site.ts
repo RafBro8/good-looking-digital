@@ -207,15 +207,33 @@ export const testRun = {
   // Slowest of the three engines for each spec, and the slowest engine's total
   // run. Worst case rather than best, because quoting the fastest number would
   // be the same kind of flattery the invented figures were.
-  duration: "19.08s",
+  duration: "26.47s",
   specs: [
-    { name: "visitor reaches the quote form", ms: "4.42s" },
-    { name: "a bad email address is caught", ms: "2.65s" },
-    { name: "the quote form submits", ms: "2.96s" },
-    { name: "the lead is stored, not lost", ms: "1.67s" },
-    { name: "spam is turned away", ms: "79ms" },
-    { name: "a lead is never falsely reported as emailed", ms: "50ms" },
-    { name: "it works on a five-year-old phone", ms: "892ms" },
+    { name: "visitor reaches the quote form", ms: "10.67s" },
+    { name: "a bad email address is caught", ms: "8.55s" },
+    { name: "the quote form submits", ms: "2.27s" },
+    { name: "the lead is stored, not lost", ms: "1.95s" },
+    { name: "spam is turned away", ms: "96ms" },
+    { name: "a lead is never falsely reported as emailed", ms: "79ms" },
+    {
+      name: "an unanswered lead past the threshold is picked up by the sweep",
+      ms: "88ms",
+    },
+    { name: "a lead inside the threshold is left alone", ms: "43ms" },
+    { name: "a lead already marked handled is never chased", ms: "34ms" },
+    { name: "a lead already reminded is not reminded again", ms: "38ms" },
+    { name: "nothing is sent outside the sending window", ms: "31ms" },
+    { name: "the sweep refuses a caller without the secret", ms: "50ms" },
+    {
+      name: "a valid token marks the lead, and a second click is still fine",
+      ms: "52ms",
+    },
+    { name: "a forged or missing token is refused", ms: "45ms" },
+    {
+      name: "fetching the link does not mark anything — only the button does",
+      ms: "804ms",
+    },
+    { name: "it works on a five-year-old phone", ms: "878ms" },
   ],
 } as const;
 
