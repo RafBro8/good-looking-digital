@@ -21,7 +21,20 @@ export function TestRunPanel() {
         </span>
       </div>
 
-      <ul className="py-2">
+      {/*
+        Every spec is listed, not a flattering selection — but twenty-seven
+        rows is 868px, which turns a credibility detail into most of a screen.
+        So the list keeps its full contents and gets a ceiling instead, and
+        the footer count below always describes what is actually in here.
+      */}
+      <ul
+        // A region that scrolls has to be reachable by keyboard, or the rows
+        // below the fold exist for mouse users only. tabIndex makes it focusable
+        // so arrow keys work; the label says what has just been focused.
+        tabIndex={0}
+        aria-label={`${testRun.specs.length} passing specs`}
+        className="max-h-[22rem] overflow-y-auto overscroll-contain py-2"
+      >
         {testRun.specs.map((spec) => (
           <li
             key={spec.name}

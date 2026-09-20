@@ -261,33 +261,62 @@ export const testRun = {
   // Slowest of the three engines for each spec, and the slowest engine's total
   // run. Worst case rather than best, because quoting the fastest number would
   // be the same kind of flattery the invented figures were.
-  duration: "26.47s",
+  duration: "30.34s",
   specs: [
-    { name: "visitor reaches the quote form", ms: "10.67s" },
-    { name: "a bad email address is caught", ms: "8.55s" },
-    { name: "the quote form submits", ms: "2.27s" },
-    { name: "the lead is stored, not lost", ms: "1.95s" },
-    { name: "spam is turned away", ms: "96ms" },
-    { name: "a lead is never falsely reported as emailed", ms: "79ms" },
+    {
+      name: "every footer service link points at a row that exists",
+      ms: "3.44s",
+    },
+    { name: "clicking one service after another moves each time", ms: "7.17s" },
+    { name: "a linked row is not hidden under the sticky header", ms: "811ms" },
+    {
+      name: "a footer link from one path reaches the other path's row",
+      ms: "1.85s",
+    },
+    {
+      name: "robots.txt disallows the pages that are not for searchers",
+      ms: "67ms",
+    },
+    {
+      name: "the sitemap lists every public page and no private one",
+      ms: "47ms",
+    },
+    { name: "the private pages also carry noindex", ms: "1.13s" },
+    { name: "the public pages are left indexable", ms: "713ms" },
+    {
+      name: "an invalid field is marked, and its message is tied to it",
+      ms: "1.61s",
+    },
+    { name: "optional fields are not marked invalid or required", ms: "1.93s" },
+    {
+      name: "the required fields say so in the accessibility tree",
+      ms: "654ms",
+    },
+    { name: "visitor reaches the quote form", ms: "2.10s" },
+    { name: "a bad email address is caught", ms: "2.16s" },
+    { name: "the quote form submits", ms: "3.16s" },
+    { name: "the lead is stored, not lost", ms: "2.64s" },
+    { name: "spam is turned away", ms: "52ms" },
+    { name: "a lead is never falsely reported as emailed", ms: "49ms" },
     {
       name: "an unanswered lead past the threshold is picked up by the sweep",
-      ms: "88ms",
+      ms: "66ms",
     },
-    { name: "a lead inside the threshold is left alone", ms: "43ms" },
-    { name: "a lead already marked handled is never chased", ms: "34ms" },
-    { name: "a lead already reminded is not reminded again", ms: "38ms" },
-    { name: "nothing is sent outside the sending window", ms: "31ms" },
-    { name: "the sweep refuses a caller without the secret", ms: "50ms" },
+    { name: "a lead inside the threshold is left alone", ms: "18ms" },
+    { name: "a lead already marked handled is never chased", ms: "18ms" },
+    { name: "a lead already reminded is not reminded again", ms: "18ms" },
+    { name: "nothing is sent outside the sending window", ms: "18ms" },
+    { name: "the sweep refuses a caller without the secret", ms: "16ms" },
     {
       name: "a valid token marks the lead, and a second click is still fine",
-      ms: "52ms",
+      ms: "50ms",
     },
-    { name: "a forged or missing token is refused", ms: "45ms" },
+    { name: "a forged or missing token is refused", ms: "54ms" },
     {
       name: "fetching the link does not mark anything — only the button does",
-      ms: "804ms",
+      ms: "696ms",
     },
-    { name: "it works on a five-year-old phone", ms: "878ms" },
+    { name: "it works on a five-year-old phone", ms: "940ms" },
   ],
 } as const;
 
