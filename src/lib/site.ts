@@ -45,9 +45,27 @@ export interface ServicePath {
   eyebrow: string;
   title: string;
   blurb: string;
-  services: { name: string; price: string }[];
+  /**
+   * A footerLabel opts the service into the footer, under a shorter name.
+   * The footer links to the row itself, so the label and the anchor cannot
+   * drift apart — both come from this one list.
+   */
+  services: { name: string; price: string; footerLabel?: string }[];
   cta: string;
   href: string;
+}
+
+/**
+ * The id of a service row, derived from its name so the footer link and the
+ * row it points at are generated from the same string. Rename a service and
+ * both move together; there is no second list to forget.
+ */
+export function serviceAnchor(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 export const paths: ServicePath[] = [
@@ -58,12 +76,32 @@ export const paths: ServicePath[] = [
     blurb:
       "You need customers to find you, trust you, and call you. We build the whole chain, not just the website.",
     services: [
-      { name: "Website design and build", price: "from $2,500" },
-      { name: "Logo and brand identity", price: "included" },
-      { name: "Google Business Profile setup", price: "from $350" },
+      {
+        name: "Website design and build",
+        price: "from $2,500",
+        footerLabel: "Websites",
+      },
+      {
+        name: "Logo and brand identity",
+        price: "included",
+        footerLabel: "Branding",
+      },
+      {
+        name: "Google Business Profile setup",
+        price: "from $350",
+        footerLabel: "Google presence",
+      },
       { name: "Facebook & Instagram page setup", price: "from $350" },
-      { name: "Lead capture & follow-up", price: "from $900" },
-      { name: "QR signage artwork", price: "from $250" },
+      {
+        name: "Lead capture & follow-up",
+        price: "from $900",
+        footerLabel: "Lead capture",
+      },
+      {
+        name: "QR signage artwork",
+        price: "from $250",
+        footerLabel: "QR marketing",
+      },
       { name: "Hosting and care", price: "$95–$250/mo" },
     ],
     cta: "See what this costs",
@@ -76,11 +114,27 @@ export const paths: ServicePath[] = [
     blurb:
       "Your customers need to log in, do something real, and come back. That is software, and it is built differently.",
     services: [
-      { name: "Custom web applications", price: "after discovery" },
-      { name: "Customer and staff portals", price: "after discovery" },
+      {
+        name: "Custom web applications",
+        price: "after discovery",
+        footerLabel: "Web applications",
+      },
+      {
+        name: "Customer and staff portals",
+        price: "after discovery",
+        footerLabel: "Customer portals",
+      },
       { name: "Automation & integrations", price: "from $1,500" },
-      { name: "Playwright test automation", price: "from $2,500" },
-      { name: "Platform assessment", price: "$1,000 flat" },
+      {
+        name: "Playwright test automation",
+        price: "from $2,500",
+        footerLabel: "Playwright testing",
+      },
+      {
+        name: "Platform assessment",
+        price: "$1,000 flat",
+        footerLabel: "Assessments",
+      },
       { name: "Ongoing engineering", price: "retainer" },
     ],
     cta: "Book a technical call",

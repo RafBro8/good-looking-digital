@@ -4,7 +4,13 @@ import { Container, Eyebrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { pathContent, paths, site, type PathId } from "@/lib/site";
+import {
+  pathContent,
+  paths,
+  serviceAnchor,
+  site,
+  type PathId,
+} from "@/lib/site";
 
 /**
  * Shared skeleton for /grow and /platform. Both buyers get the same structure —
@@ -109,7 +115,13 @@ export function PathPageLayout({
             <div className="mt-10">
               {path.services.map((service, i) => (
                 <Reveal key={service.name} delay={i * 60}>
-                  <div className="border-rule grid max-w-[46rem] grid-cols-[2.5rem_minmax(0,1fr)_auto] items-baseline gap-4 border-b py-4">
+                  {/* The footer links straight at these rows. scroll-mt
+                      clears the sticky header, which is two rows tall on a
+                      phone — without it the row lands underneath it. */}
+                  <div
+                    id={serviceAnchor(service.name)}
+                    className="border-rule grid max-w-[46rem] scroll-mt-36 grid-cols-[2.5rem_minmax(0,1fr)_auto] items-baseline gap-4 border-b py-4 lg:scroll-mt-24"
+                  >
                     <span className="label tnum text-muted">
                       {String(i + 1).padStart(2, "0")}
                     </span>

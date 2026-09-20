@@ -1,7 +1,42 @@
 import Link from "next/link";
 
 import { Container } from "@/components/ui";
-import { serviceArea, site } from "@/lib/site";
+import { paths, serviceAnchor, serviceArea, site } from "@/lib/site";
+
+/**
+ * Both service columns come from paths[] rather than from a hand-written list
+ * here. The old list was four labels pointing at /grow and four at /platform,
+ * with no fragment on any of them — so the first click navigated and every
+ * click after it was a no-op, because the router was already on that URL.
+ * Generating the links from the same data as the rows they point at means a
+ * renamed service moves its own link with it.
+ */
+function ServiceColumn({ pathId }: { pathId: "grow" | "platform" }) {
+  const path = paths.find((p) => p.id === pathId)!;
+  const hover = pathId === "grow" ? "hover:text-grow" : "hover:text-platform";
+
+  return (
+    <div>
+      <p className="label text-muted">
+        {pathId === "grow" ? "Grow" : "Platform"}
+      </p>
+      <ul className="mt-3 flex flex-col gap-2 text-sm">
+        {path.services
+          .filter((service) => service.footerLabel)
+          .map((service) => (
+            <li key={service.name}>
+              <Link
+                href={`${path.href}#${serviceAnchor(service.name)}`}
+                className={`text-ink-2 ${hover} transition-colors duration-200`}
+              >
+                {service.footerLabel}
+              </Link>
+            </li>
+          ))}
+      </ul>
+    </div>
+  );
+}
 
 export function SiteFooter() {
   return (
@@ -17,44 +52,9 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <div>
-            <p className="label text-muted">Grow</p>
-            <ul className="mt-3 flex flex-col gap-2 text-sm">
-              {["Websites", "Branding", "Google presence", "QR marketing"].map(
-                (item) => (
-                  <li key={item}>
-                    <Link
-                      href="/grow"
-                      className="text-ink-2 hover:text-grow transition-colors duration-200"
-                    >
-                      {item}
-                    </Link>
-                  </li>
-                ),
-              )}
-            </ul>
-          </div>
+          <ServiceColumn pathId="grow" />
 
-          <div>
-            <p className="label text-muted">Platform</p>
-            <ul className="mt-3 flex flex-col gap-2 text-sm">
-              {[
-                "Web applications",
-                "Customer portals",
-                "Playwright testing",
-                "Assessments",
-              ].map((item) => (
-                <li key={item}>
-                  <Link
-                    href="/platform"
-                    className="text-ink-2 hover:text-platform transition-colors duration-200"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ServiceColumn pathId="platform" />
 
           <div>
             <p className="label text-muted">Serving</p>
