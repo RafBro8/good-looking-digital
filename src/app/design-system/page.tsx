@@ -7,6 +7,10 @@ export const metadata = {
   title: "Design system",
   description:
     "Stage 02 — the palette, type scale and components the Good Looking Digital site is built from.",
+  // An internal reference, reachable by anyone who knows the path but not
+  // something a prospect searching for a web designer should be shown. Also
+  // disallowed in robots.ts; noindex is the half that keeps it out of results.
+  robots: { index: false, follow: false },
 };
 
 const swatches = [
