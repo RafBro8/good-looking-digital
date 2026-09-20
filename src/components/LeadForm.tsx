@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { cloneElement, isValidElement, useRef, useState } from "react";
 
 import {
   BUDGET_OPTIONS,
@@ -245,6 +245,25 @@ export function LeadForm({ source }: { source?: string }) {
   );
 }
 
+/**
+ * Wraps one control with its label and error.
+ *
+ * The control is cloned so the accessibility wiring lives here rather than
+ * being repeated, and forgotten, at every call site. Three attributes matter:
+ *
+ *   aria-invalid      marks the control itself as wrong. role="alert" on the
+ *                     message announces it once when it appears, but someone
+ *                     tabbing back to the field afterwards gets nothing from
+ *                     it — this is what tells them they are on a bad field.
+ *   aria-describedby  ties the message to the control, so the field reads out
+ *                     as "Email, invalid, that does not look like an email
+ *                     address" rather than as an error floating nearby.
+ *   aria-required     the visible "required" is a coloured word next to the
+ *                     label and carries no meaning for a screen reader. The
+ *                     native required attribute is deliberately not used:
+ *                     it would hand validation to the browser and lose the
+ *                     wording, which is the same wording the server returns.
+ */
 function Field({
   label,
   name,
@@ -260,6 +279,16 @@ function Field({
   optional?: boolean;
   children: React.ReactNode;
 }) {
+  const errorId = `${name}-error`;
+
+  const control = isValidElement(children)
+    ? cloneElement(children as React.ReactElement<Record<string, unknown>>, {
+        "aria-invalid": error ? true : undefined,
+        "aria-describedby": error ? errorId : undefined,
+        "aria-required": required ? true : undefined,
+      })
+    : children;
+
   return (
     <div className="grid gap-1.5">
       <label htmlFor={name} className="label text-muted flex gap-2">
@@ -267,9 +296,9 @@ function Field({
         {required && <span className="text-grow">required</span>}
         {optional && <span className="text-rule-strong">optional</span>}
       </label>
-      {children}
+      {control}
       {error && (
-        <p className="text-fail text-sm" role="alert">
+        <p id={errorId} className="text-fail text-sm" role="alert">
           {error}
         </p>
       )}
