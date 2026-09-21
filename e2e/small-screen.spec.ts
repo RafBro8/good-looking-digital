@@ -46,6 +46,19 @@ test("it works on a five-year-old phone", async ({ page }) => {
     "phone link is too small to tap",
   ).toBeGreaterThanOrEqual(44);
 
+  // The brand may give way at 320, and must not at a normal phone width.
+  // Making the wordmark shrinkable is what stops the phone number being
+  // clipped; the cost of getting it wrong is an ellipsis in the company
+  // name on every page, which is its own kind of broken.
+  const wordmark = header.locator("a span").first();
+  const clipped = await wordmark.evaluate(
+    (el) => el.scrollWidth - el.clientWidth,
+  );
+  expect(
+    clipped,
+    "the company name is ellipsized at 375px",
+  ).toBeLessThanOrEqual(1);
+
   // The quote form must be usable, not merely present.
   await page.goto("/contact");
   const formOverflow = await page.evaluate(

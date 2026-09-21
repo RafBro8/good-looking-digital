@@ -27,20 +27,26 @@ export function SiteHeader() {
       </div>
 
       <Container>
-        <div className="flex items-center justify-between gap-2 py-3.5 min-[360px]:gap-4">
+        <div className="flex items-center justify-between gap-2 py-3.5 min-[360px]:gap-3 lg:gap-4">
           {/* Mark plus wordmark. The mark is aria-hidden because the words
               right beside it already say the name. */}
+          {/* Below 360px the brand and the phone number cannot both sit on
+              this row at full size, so the brand is the one that gives way:
+              it may shrink and, in the last resort, ellipsize. The phone
+              number never does, because it is the reason a contractor opened
+              the header, and a number cut off mid-digits still looks like a
+              number and dials nothing.
+
+              Sizing it by hand is not enough on its own — tuned on one
+              machine it had seven pixels to spare and still clipped on CI,
+              where the font renders wider. min-w-0 plus truncate is the part
+              that holds whatever the metrics turn out to be. */}
           <Link
             href="/"
-            className="text-ink flex items-center gap-2 sm:gap-2.5"
+            className="text-ink flex min-w-0 items-center gap-2 sm:gap-2.5"
           >
-            {/* Below 360px the brand and the phone number cannot both sit on
-                this row at full size: the wordmark will not wrap and the
-                number must not be clipped, because the number is the reason
-                a contractor is looking at the header at all. So the brand
-                gives up a few pixels there and nowhere else. */}
             <BrandMark className="w-[2.5rem] shrink-0 min-[360px]:w-[3.1rem] sm:w-[3.6rem]" />
-            <span className="font-display text-sm font-semibold tracking-tight whitespace-nowrap min-[360px]:text-base sm:text-lg">
+            <span className="font-display truncate text-sm font-semibold tracking-tight min-[360px]:text-base sm:text-lg">
               Good Looking <span className="text-grow">Digital</span>
             </span>
           </Link>
@@ -57,7 +63,7 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex shrink-0 items-center gap-2.5">
             <a
               href={site.phoneHref}
               className="text-ink hover:text-grow -mx-1 px-1 py-3 text-sm font-semibold whitespace-nowrap transition-colors duration-200"
