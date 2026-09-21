@@ -41,7 +41,7 @@ export default function HomePage() {
                   className="text-ink-2 rise mt-8 max-w-[40ch] text-xl"
                   style={{ "--delay": "170ms" } as React.CSSProperties}
                 >
-                  Websites and branding for local businesses. Applications,
+                  Websites and branding for small businesses. Applications,
                   portals and automated testing for companies that outgrew their
                   website.
                 </p>

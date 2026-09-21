@@ -27,45 +27,41 @@ export function AnchorHighlight() {
       }
     };
 
-    const applySoon = () => requestAnimationFrame(apply);
-
     /**
-     * The router updates location.hash at a moment it does not announce, and
-     * measurably later than the next animation frame — a single rAF after the
-     * click left the highlight a navigation behind. So watch for the change
-     * rather than guessing when it lands: re-apply each frame until the hash
-     * moves, and give up shortly after in the case where it never does,
-     * because clicking the link for the row you are already on is legitimate
-     * and applying twice is harmless.
+     * The router moves the hash through history.pushState, which fires no
+     * event of its own — not hashchange, not popstate. Two timing guesses
+     * failed here before this: one animation frame after the click was too
+     * early, and a 700ms watch window passed alone and flaked in a loaded
+     * parallel run, because the budget expired before the router got there.
+     *
+     * So take the signal rather than estimate it. Wrapping pushState and
+     * replaceState means the highlight updates on the exact call that changes
+     * the URL, with no polling and nothing to outrun. location.hash is already
+     * current by the time these return.
      */
-    const WATCH_MS = 700;
-
-    const onClick = (event: MouseEvent) => {
-      const link = (event.target as Element | null)?.closest?.("a[href*='#']");
-      if (!link) return;
-
-      const startedAt = performance.now();
-      const hashBefore = window.location.hash;
-
-      const watch = () => {
+    const patched = (["pushState", "replaceState"] as const).map((name) => {
+      const original = history[name];
+      history[name] = function (
+        this: History,
+        ...args: Parameters<History["pushState"]>
+      ) {
+        const result = original.apply(this, args);
         apply();
-        const changed = window.location.hash !== hashBefore;
-        if (changed || performance.now() - startedAt > WATCH_MS) return;
-        requestAnimationFrame(watch);
+        return result;
       };
-
-      requestAnimationFrame(watch);
-    };
+      return [name, original] as const;
+    });
 
     apply();
-    window.addEventListener("hashchange", applySoon);
-    window.addEventListener("popstate", applySoon);
-    document.addEventListener("click", onClick);
+    // Still needed: back and forward, and any plain anchor that does not go
+    // through the router at all.
+    window.addEventListener("hashchange", apply);
+    window.addEventListener("popstate", apply);
 
     return () => {
-      window.removeEventListener("hashchange", applySoon);
-      window.removeEventListener("popstate", applySoon);
-      document.removeEventListener("click", onClick);
+      window.removeEventListener("hashchange", apply);
+      window.removeEventListener("popstate", apply);
+      for (const [name, original] of patched) history[name] = original;
     };
   }, []);
 

@@ -10,7 +10,7 @@ import { serviceArea, site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Start a project",
   description:
-    "Tell us what your business needs to do. Websites and local marketing for small businesses, custom applications and test automation for companies that outgrew theirs.",
+    "Tell us what your business needs to do. Websites and marketing for small businesses, custom applications and test automation for companies that outgrew theirs.",
 };
 
 const helpful = [

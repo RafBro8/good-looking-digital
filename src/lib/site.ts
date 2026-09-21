@@ -9,7 +9,7 @@ export const site = {
   name: "Good Looking Digital",
   tagline: "Looks good. Works even better.",
   description:
-    "Websites, branding and marketing for local businesses. Custom applications, portals and automated testing for companies that outgrew their website.",
+    "Websites, branding and marketing for small businesses. Custom applications, portals and automated testing for companies that outgrew their website.",
   url: "https://goodlookingdigital.com",
   email: "hello@goodlookingdigital.com",
   base: "Mokena, Illinois",
@@ -32,6 +32,7 @@ export const serviceArea = [
   "Mokena",
   "Frankfort",
   "New Lenox",
+  "Lemont",
   "Orland Park",
   "Tinley Park",
   "Homer Glen",
@@ -71,7 +72,7 @@ export function serviceAnchor(name: string): string {
 export const paths: ServicePath[] = [
   {
     id: "grow",
-    eyebrow: "Path 01 — local business",
+    eyebrow: "Path 01 — small business",
     title: "Grow my business",
     blurb:
       "You need customers to find you, trust you, and call you. We build the whole chain, not just the website.",
@@ -224,7 +225,7 @@ export interface WorkItem {
 export const work: WorkItem[] = [
   {
     title: "Front Yard Famous",
-    tag: "Local business",
+    tag: "Small business",
     summary:
       "Booking site and showcase for a yard greeting company. Built to take orders while the owner sleeps.",
     path: "grow",
@@ -353,9 +354,9 @@ export interface PathPage {
 
 export const pathContent: Record<PathId, PathPage> = {
   grow: {
-    metaTitle: "Websites and local marketing for small business",
+    metaTitle: "Websites and marketing for small business",
     metaDescription:
-      "Websites, branding, Google Business Profile, Facebook and Instagram setup, QR marketing and hosting for local businesses around Chicagoland.",
+      "Websites, branding, Google Business Profile, Facebook and Instagram setup, QR marketing and hosting for small businesses across Chicagoland and beyond.",
     heroTitle: "Get found. Get called.",
     heroLede:
       "You need the phone to ring. We build everything that makes that happen — the website, the Google listing, the signs on the lawn, and the system that catches every enquiry.",
