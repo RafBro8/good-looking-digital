@@ -67,3 +67,58 @@ test("it works on a five-year-old phone", async ({ page }) => {
     "submit button is too small to tap",
   ).toBeGreaterThanOrEqual(44);
 });
+
+/**
+ * 320px is the narrowest width anything real uses — the original iPhone SE,
+ * some older Androids, and the width WCAG measures reflow at. It is also the
+ * width a desktop page reaches when someone zooms to 400%.
+ *
+ * It was broken here for a while, and quietly: the header ran 29px past the
+ * viewport, the page does not scroll sideways, so the overflow was simply
+ * clipped — and what fell off the edge was the last digits of the phone
+ * number. A header that silently truncates the number is worse than one that
+ * looks cramped, because nothing about it appears wrong.
+ */
+test.describe("the narrowest phone anybody still uses", () => {
+  test.use({ viewport: { width: 320, height: 568 }, isMobile: true });
+
+  test("nothing is clipped at 320px, least of all the phone number", async ({
+    page,
+  }) => {
+    for (const path of ["/", "/grow", "/platform", "/contact"]) {
+      await page.goto(path);
+
+      const overflow = await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth -
+          document.documentElement.clientWidth,
+      );
+      expect(overflow, `${path} overflows at 320px`).toBeLessThanOrEqual(0);
+    }
+
+    await page.goto("/");
+
+    // The number has to be whole. Clipped, it is worse than absent: it looks
+    // like a phone number and dials nothing.
+    const phone = page
+      .locator("header")
+      .getByRole("link", { name: /630-400-8748/ });
+    await expect(phone).toBeVisible();
+
+    const clipped = await phone.evaluate(
+      (el) =>
+        el.getBoundingClientRect().right - document.documentElement.clientWidth,
+    );
+    expect(clipped, "the phone number is cut off at 320px").toBeLessThanOrEqual(
+      0,
+    );
+
+    // The header stays two rows. An earlier attempt at this fixed 320 by
+    // wrapping the row and made the header 168px tall on a 360px phone,
+    // which ate a quarter of the screen before any content appeared.
+    const headerHeight = await page
+      .locator("header")
+      .evaluate((el) => el.getBoundingClientRect().height);
+    expect(headerHeight, "the header grew a row").toBeLessThan(150);
+  });
+});

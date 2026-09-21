@@ -96,6 +96,37 @@ test.describe("lead capture", () => {
     expect(stored).not.toHaveProperty("budget");
   });
 
+  /**
+   * /grow tells a visitor "you can tell which sign produced which call", and
+   * until now nothing checked it. The source field was captured and /start
+   * passed it, but no spec asserted it survived to the database — the same
+   * shape as the follow-up reminder that was described on the page for weeks
+   * before any code existed. A claim about attribution is worth exactly as
+   * much as the record it leaves behind.
+   */
+  test("a lead from the QR page records where it came from", async ({
+    page,
+  }) => {
+    const email = uniqueEmail("qr-source");
+    await page.goto("/start");
+
+    await page.locator("#name").fill("Priya Raman");
+    await page.locator("#email").fill(email);
+    await page
+      .getByRole("textbox", { name: /about the project/i })
+      .fill("Scanned the code on a yard sign in Frankfort. Need a quote.");
+
+    await page.getByRole("button", { name: /send it/i }).click();
+    await expect(page.getByRole("status")).toContainText(/that reached us/i);
+
+    const stored = await withDb((db) =>
+      db.collection("leads").findOne({ email }),
+    );
+
+    expect(stored, `no lead stored for ${email} in ${TEST_DB}`).not.toBeNull();
+    expect(stored?.source).toBe("qr");
+  });
+
   test("spam is turned away", async ({ request }) => {
     const email = uniqueEmail("spam");
 
