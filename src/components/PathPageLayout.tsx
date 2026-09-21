@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { AnchorHighlight } from "@/components/AnchorHighlight";
 import { Container, Eyebrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -34,9 +35,27 @@ export function PathPageLayout({
     : "bg-platform text-platform-ink";
   const accentBorder = isGrow ? "border-grow" : "border-platform";
 
+  /**
+   * What a row looks like when the address bar is pointing at it.
+   *
+   * Four footer links landing 50px apart in one price list all look like the
+   * same place, so arriving somewhere is not the same as noticing you have.
+   * :target marks the row the fragment names, which is also what a shared
+   * link needs — someone sent "#logo-and-brand-identity" should see which
+   * line the sender meant.
+   *
+   * The bar is an inset shadow rather than a border so nothing shifts
+   * sideways when it appears, and the tint uses the soft accent token, which
+   * is defined in both themes.
+   */
+  const accentTarget = isGrow
+    ? "target:bg-grow-soft target:shadow-[inset_3px_0_0_var(--grow)] data-current:bg-grow-soft data-current:shadow-[inset_3px_0_0_var(--grow)]"
+    : "target:bg-platform-soft target:shadow-[inset_3px_0_0_var(--platform)] data-current:bg-platform-soft data-current:shadow-[inset_3px_0_0_var(--platform)]";
+
   return (
     <>
       <SiteHeader />
+      <AnchorHighlight />
 
       <main>
         {/* ---------- hero ---------- */}
@@ -120,7 +139,8 @@ export function PathPageLayout({
                       phone — without it the row lands underneath it. */}
                   <div
                     id={serviceAnchor(service.name)}
-                    className="border-rule grid max-w-[46rem] scroll-mt-36 grid-cols-[2.5rem_minmax(0,1fr)_auto] items-baseline gap-4 border-b py-4 lg:scroll-mt-24"
+                    data-anchor-row=""
+                    className={`border-rule grid max-w-[46rem] scroll-mt-36 grid-cols-[2.5rem_minmax(0,1fr)_auto] items-baseline gap-4 border-b py-4 transition-colors duration-500 target:px-3 data-current:px-3 lg:scroll-mt-24 ${accentTarget}`}
                   >
                     <span className="label tnum text-muted">
                       {String(i + 1).padStart(2, "0")}

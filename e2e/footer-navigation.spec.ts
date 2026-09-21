@@ -96,6 +96,43 @@ test.describe("footer service links", () => {
     expect(top).toBeGreaterThanOrEqual(header - HEADER_CLEARANCE_SLACK);
   });
 
+  /**
+   * The highlight has to name the row you asked for, not the one before it.
+   *
+   * CSS :target alone did exactly that: the footer links are client-side
+   * navigations, which update location.hash without firing hashchange, and
+   * :target was measured a full navigation behind. A highlight that is right
+   * on a cold load and wrong afterwards points confidently at the wrong line,
+   * so this walks several rows in a row and checks each one.
+   */
+  test("the row you clicked is the row that gets marked", async ({ page }) => {
+    await page.goto("/grow");
+
+    const rows = [
+      ["Branding", "logo-and-brand-identity"],
+      ["QR marketing", "qr-signage-artwork"],
+      ["Websites", "website-design-and-build"],
+      // Back to one already visited, and then the same one twice: clicking
+      // the row you are already on must leave it marked, not toggle it off.
+      ["Branding", "logo-and-brand-identity"],
+      ["Branding", "logo-and-brand-identity"],
+    ] as const;
+
+    for (const [label, id] of rows) {
+      await (await footerLink(page, label)).click();
+      await expect(page.locator("[data-current]")).toHaveCount(1);
+      await expect(page.locator("[data-current]")).toHaveAttribute("id", id);
+    }
+  });
+
+  test("arriving cold on a fragment marks the row too", async ({ page }) => {
+    await page.goto("/platform#playwright-test-automation");
+    await expect(page.locator("[data-current]")).toHaveAttribute(
+      "id",
+      "playwright-test-automation",
+    );
+  });
+
   test("a footer link from one path reaches the other path's row", async ({
     page,
   }) => {
