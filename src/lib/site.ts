@@ -504,7 +504,7 @@ export const carePlans = [
     period: "/mo",
     forWho: "A business site that needs to stay up and stay current",
     includes: [
-      "Hosting, SSL and daily backups",
+      "Hosting, SSL, and instant rollback if an update goes wrong",
       "Uptime monitoring",
       "Security and dependency updates",
       "Small text and photo changes",
