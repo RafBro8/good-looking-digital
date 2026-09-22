@@ -24,7 +24,7 @@ import {
  * database is a lead that is not lost, so email failures are logged and
  * swallowed rather than surfaced as an error to someone who did nothing wrong.
  * The only failure a visitor is told about is one where we genuinely did not
- * keep their message — and then they get the email address instead.
+ * keep their message - and then they get the email address instead.
  *
  * Runs on Vercel rather than the Render service on purpose: a free Render
  * instance sleeps and takes about a minute to wake, which is a minute a
@@ -96,7 +96,7 @@ export async function POST(request: Request) {
   }
 
   if (!isDatabaseConfigured()) {
-    console.error("[leads] MONGODB_URI is not set — cannot accept the lead");
+    console.error("[leads] MONGODB_URI is not set - cannot accept the lead");
     return NextResponse.json(
       {
         ok: false,
@@ -151,10 +151,10 @@ export async function POST(request: Request) {
   if (!ownerEmailed && !ownerTexted) {
     // Say why, not just that. When this fires on a real lead the difference
     // between "no key in this build" and "the provider rejected us" is the
-    // difference between a one-minute fix and an hour of guessing — and the
+    // difference between a one-minute fix and an hour of guessing - and the
     // provider's own dashboard shows nothing at all in the first case.
     console.error(
-      "[leads] STORED BUT NOT NOTIFIED — check the leads collection",
+      "[leads] STORED BUT NOT NOTIFIED - check the leads collection",
       lead.email,
       {
         emailConfigured: isNotificationConfigured(),

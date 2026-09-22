@@ -6,7 +6,7 @@ import { paths, serviceAnchor, serviceArea, site } from "@/lib/site";
 /**
  * Both service columns come from paths[] rather than from a hand-written list
  * here. The old list was four labels pointing at /grow and four at /platform,
- * with no fragment on any of them — so the first click navigated and every
+ * with no fragment on any of them - so the first click navigated and every
  * click after it was a no-op, because the router was already on that URL.
  * Generating the links from the same data as the rows they point at means a
  * renamed service moves its own link with it.
@@ -59,7 +59,7 @@ export function SiteFooter() {
           <div>
             <p className="label text-muted">Serving</p>
             <p className="text-ink-2 mt-3 text-sm leading-relaxed">
-              {serviceArea.join(" · ")} — {site.reach}.
+              {serviceArea.join(" · ")} - {site.reach}.
             </p>
             <a
               href={site.phoneHref}
@@ -99,7 +99,7 @@ export function SiteFooter() {
 
         <div className="border-rule flex flex-wrap justify-between gap-3 border-t py-6">
           <p className="label text-muted">
-            © {new Date().getFullYear()} {site.name} — {site.base}
+            © {new Date().getFullYear()} {site.name} - {site.base}
           </p>
           <p className="label text-muted">Built and tested in-house</p>
         </div>

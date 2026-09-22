@@ -14,7 +14,7 @@ export function TestRunPanel() {
             aria-hidden="true"
             className="bg-pass inline-block size-1.5 rounded-full"
           />
-          playwright — {testRun.browsers}
+          playwright - {testRun.browsers}
         </span>
         <span className="text-2xs text-muted tracking-wider">
           {testRun.suite}
@@ -22,7 +22,7 @@ export function TestRunPanel() {
       </div>
 
       {/*
-        Every spec is listed, not a flattering selection — but twenty-seven
+        Every spec is listed, not a flattering selection - but twenty-seven
         rows is 868px, which turns a credibility detail into most of a screen.
         So the list keeps its full contents and gets a ceiling instead, and
         the footer count below always describes what is actually in here.

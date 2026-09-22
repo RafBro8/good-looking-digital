@@ -7,7 +7,7 @@ import { TEST_DB, uniqueEmail, withDb } from "./support/db";
  *
  * These five specs plus the small-screen one are exactly what the test run
  * panel on the homepage names. If a spec here is renamed, renamed it in
- * src/lib/site.ts too — a panel describing tests that do not exist is worse
+ * src/lib/site.ts too - a panel describing tests that do not exist is worse
  * than no panel.
  */
 
@@ -99,7 +99,7 @@ test.describe("lead capture", () => {
   /**
    * /grow tells a visitor "you can tell which sign produced which call", and
    * until now nothing checked it. The source field was captured and /start
-   * passed it, but no spec asserted it survived to the database — the same
+   * passed it, but no spec asserted it survived to the database - the same
    * shape as the follow-up reminder that was described on the page for weeks
    * before any code existed. A claim about attribution is worth exactly as
    * much as the record it leaves behind.

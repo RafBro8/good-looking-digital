@@ -28,7 +28,7 @@ const field =
  *
  * Validates on the client for instant feedback and again on the server, which
  * is the copy that actually enforces anything. On failure it always offers the
- * email address — a form that cannot submit must never be a dead end.
+ * email address - a form that cannot submit must never be a dead end.
  */
 export function LeadForm({ source }: { source?: string }) {
   const [status, setStatus] = useState<Status>("idle");
@@ -254,7 +254,7 @@ export function LeadForm({ source }: { source?: string }) {
  *   aria-invalid      marks the control itself as wrong. role="alert" on the
  *                     message announces it once when it appears, but someone
  *                     tabbing back to the field afterwards gets nothing from
- *                     it — this is what tells them they are on a bad field.
+ *                     it - this is what tells them they are on a bad field.
  *   aria-describedby  ties the message to the control, so the field reads out
  *                     as "Email, invalid, that does not look like an email
  *                     address" rather than as an error floating nearby.

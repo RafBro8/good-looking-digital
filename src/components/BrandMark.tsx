@@ -24,7 +24,7 @@ export function BrandMark({
   /** "current" inherits colour from the container. "two" says both paths. */
   tone?: "current" | "two";
   /**
-   * Accessible name. Leave it off wherever the wordmark is already adjacent —
+   * Accessible name. Leave it off wherever the wordmark is already adjacent -
    * a mark and a name that both announce "Good Looking Digital" is one too many.
    */
   label?: string;

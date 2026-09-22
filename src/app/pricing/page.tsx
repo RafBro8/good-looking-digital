@@ -16,7 +16,7 @@ import {
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "What things cost at Good Looking Digital — websites, branding, local presence, lead capture, custom applications, test automation and monthly care plans. Starting points, not menu prices.",
+    "What things cost at Good Looking Digital - websites, branding, local presence, lead capture, custom applications, test automation and monthly care plans. Starting points, not menu prices.",
 };
 
 export default function PricingPage() {
@@ -138,7 +138,7 @@ export default function PricingPage() {
               </h2>
               <p className="text-ink-2 measure mt-4">
                 Month to month, cancel whenever. A site nobody maintains is a
-                liability within a year — this is the difference between a site
+                liability within a year - this is the difference between a site
                 you own and a site you inherit problems from.
               </p>
             </Reveal>

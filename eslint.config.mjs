@@ -12,7 +12,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Node build utilities, not part of the app bundle — CommonJS on purpose
+    // Node build utilities, not part of the app bundle - CommonJS on purpose
     // so they run with plain node and no transpile step.
     "scripts/**",
   ]),

@@ -53,7 +53,7 @@ export function MarkHandled({ id, token }: { id: string; token: string }) {
 
       {state === "failed" && (
         <p className="text-ink-2 mt-4" role="alert">
-          That did not work. The link may have been altered in transit — try
+          That did not work. The link may have been altered in transit - try
           opening it again from the original email.
         </p>
       )}

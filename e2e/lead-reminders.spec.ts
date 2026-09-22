@@ -7,7 +7,7 @@ import { withDb, uniqueEmail } from "./support/db";
  * The follow-up reminder.
  *
  * Nobody can wait eight hours inside a test, so the sweep endpoint accepts the
- * moment it should evaluate against — gated behind ALLOW_TEST_CLOCK, which
+ * moment it should evaluate against - gated behind ALLOW_TEST_CLOCK, which
  * only the Playwright web server sets. The lead is inserted with a real
  * timestamp and the clock is moved forward instead, which exercises the actual
  * query rather than a fake one.
@@ -201,7 +201,7 @@ test.describe("marking a lead handled", () => {
    * message before a human opens it, so if a GET marked leads handled the
    * feature would silence itself on every enquiry nobody had read.
    */
-  test("fetching the link does not mark anything — only the button does", async ({
+  test("fetching the link does not mark anything - only the button does", async ({
     request,
     page,
   }) => {

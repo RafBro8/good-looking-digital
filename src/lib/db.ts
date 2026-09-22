@@ -4,7 +4,7 @@ import { MongoClient, type Db } from "mongodb";
  * MongoDB connection for a serverless runtime.
  *
  * Each invocation may reuse a warm container, so the client is cached on
- * globalThis rather than module scope — module scope is re-evaluated on every
+ * globalThis rather than module scope - module scope is re-evaluated on every
  * cold start and in development on every hot reload, which would otherwise
  * open a new connection pool each time and exhaust the Atlas connection limit.
  */
@@ -24,7 +24,7 @@ export function isDatabaseConfigured(): boolean {
 function client(): Promise<MongoClient> {
   if (!uri) {
     throw new Error(
-      "MONGODB_URI is not set. Add it as an environment variable — never commit it.",
+      "MONGODB_URI is not set. Add it as an environment variable - never commit it.",
     );
   }
 
@@ -50,7 +50,7 @@ export async function getDb(): Promise<Db> {
 }
 
 /**
- * Indexes this app relies on. Safe to call repeatedly — createIndex is
+ * Indexes this app relies on. Safe to call repeatedly - createIndex is
  * idempotent. Called from the lead route rather than at import time so a
  * build never needs a live database.
  */

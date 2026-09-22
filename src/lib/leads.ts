@@ -12,8 +12,8 @@ export type LeadPath = (typeof PATH_OPTIONS)[number];
 export const BUDGET_OPTIONS = [
   "Not sure yet",
   "Under $2,000",
-  "$2,000 – $5,000",
-  "$5,000 – $15,000",
+  "$2,000 - $5,000",
+  "$5,000 - $15,000",
   "$15,000+",
 ] as const;
 export type LeadBudget = (typeof BUDGET_OPTIONS)[number];
@@ -28,7 +28,7 @@ export interface LeadInput {
   message: string;
   /** Honeypot. Real people never see it, so anything here is a bot. */
   website?: string;
-  /** Where the visitor came from — a QR code, a page, a campaign. */
+  /** Where the visitor came from - a QR code, a page, a campaign. */
   source?: string;
 }
 
@@ -83,7 +83,7 @@ export function validateLead(input: Partial<LeadInput>): FieldErrors {
   const message = (input.message ?? "").trim();
   if (!message) errors.message = "Tell us a little about the project.";
   else if (message.length < 10)
-    errors.message = "A sentence or two would help — what needs doing?";
+    errors.message = "A sentence or two would help - what needs doing?";
   else if (message.length > MAX.message)
     errors.message = "That is longer than we can accept. Trim it a little.";
 

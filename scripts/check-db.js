@@ -62,7 +62,7 @@ async function main() {
 
   if (!uri) {
     console.error("MONGODB_URI is not set.");
-    console.error("Add it to .env.local — that file is gitignored.");
+    console.error("Add it to .env.local - that file is gitignored.");
     process.exit(1);
   }
 
@@ -82,7 +82,7 @@ async function main() {
       await client.connect();
     } catch (error) {
       // A mongodb+srv:// URI needs a DNS SRV lookup, and some machines hand
-      // Node a resolver that refuses them — a VPN or virtual adapter is the
+      // Node a resolver that refuses them - a VPN or virtual adapter is the
       // usual culprit, and it shows up as querySrv ECONNREFUSED while
       // nslookup resolves the very same record without complaint. Falling
       // back to public resolvers turns a dead end into a one-line notice.

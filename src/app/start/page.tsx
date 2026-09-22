@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Start a project",
   description:
     "Scanned a code or picked up a card? Tell us what you need and you will get a real reply from a person.",
-  // A QR destination has no business in search results — it exists for the
+  // A QR destination has no business in search results - it exists for the
   // person holding the card, not for a crawler.
   robots: { index: false, follow: true },
 };
@@ -41,7 +41,7 @@ export default function StartPage() {
           <h1 className="mt-8 max-w-[15ch] text-4xl">Tell us what you need.</h1>
 
           <p className="text-ink-2 mt-5 max-w-[42ch] text-lg">
-            A few lines is plenty. You will get a real reply from a person —
+            A few lines is plenty. You will get a real reply from a person -
             usually within one business day, and never an automated sequence.
           </p>
 
@@ -60,7 +60,7 @@ export default function StartPage() {
           </p>
 
           <p className="label text-muted mt-8">
-            {site.name} — {site.base}
+            {site.name} - {site.base}
           </p>
         </div>
       </Container>

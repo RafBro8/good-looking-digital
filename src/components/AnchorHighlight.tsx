@@ -5,7 +5,7 @@ import { useEffect } from "react";
 /**
  * Marks the row the address bar is pointing at.
  *
- * CSS :target should do this on its own, and on a full page load it does —
+ * CSS :target should do this on its own, and on a full page load it does -
  * which is why the rows keep their target: classes as well. But the footer
  * links are client-side navigations, and those update location.hash through
  * the history API without firing hashchange. Measured on this site: after
@@ -15,7 +15,7 @@ import { useEffect } from "react";
  * confidently at the wrong line.
  *
  * So the attribute is set here instead, from location.hash, on every event
- * that can change it — including a delegated click, which is the one the
+ * that can change it - including a delegated click, which is the one the
  * router does not announce.
  */
 export function AnchorHighlight() {
@@ -29,7 +29,7 @@ export function AnchorHighlight() {
 
     /**
      * The router moves the hash through history.pushState, which fires no
-     * event of its own — not hashchange, not popstate. Two timing guesses
+     * event of its own - not hashchange, not popstate. Two timing guesses
      * failed here before this: one animation frame after the click was too
      * early, and a 700ms watch window passed alone and flaked in a loaded
      * parallel run, because the budget expired before the router got there.

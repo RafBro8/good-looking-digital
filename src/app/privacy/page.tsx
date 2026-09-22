@@ -19,7 +19,7 @@ export const metadata: Metadata = {
  * is checkable: the form fields are in src/lib/leads.ts, the storage is in
  * src/app/api/leads/route.ts, and the only live outbound call is the Resend
  * one in src/lib/notify.ts. If any of that changes, this page changes with it
- * — a policy describing behaviour the software does not have is the same
+ * - a policy describing behaviour the software does not have is the same
  * failure as a test panel describing tests that do not exist.
  *
  * notify.ts also contains a Twilio path that texts the owner. It is dormant:
@@ -99,7 +99,7 @@ export default function PrivacyPage() {
             </h1>
             <p className="text-ink-2 mt-8 max-w-[52ch] text-xl">
               Short, specific, and true. Everything below describes what this
-              site actually does — you can check it against the source, which is
+              site actually does - you can check it against the source, which is
               public.
             </p>
           </Container>
@@ -200,7 +200,7 @@ export default function PrivacyPage() {
               Once your enquiry is here, we add two notes of our own:{" "}
               <strong>whether it has been answered</strong> and{" "}
               <strong>whether we have reminded ourselves to answer it</strong>.
-              Nothing about you — they exist so an enquiry cannot quietly go
+              Nothing about you - they exist so an enquiry cannot quietly go
               unanswered, which is the failure this whole form is meant to
               prevent. The reminder goes to us. You are never emailed because we
               were slow.
@@ -223,7 +223,7 @@ export default function PrivacyPage() {
             </p>
             <p className="text-ink-2 measure mt-4">
               And like every website, this one runs on a host, and the host
-              keeps an ordinary record of requests — which page, when, from
+              keeps an ordinary record of requests - which page, when, from
               which network address, and which browser. We can see those
               records, and they tell us roughly how busy the site is. We do not
               use them to work out who you are, we do not connect them to your
@@ -264,7 +264,7 @@ export default function PrivacyPage() {
                     className="border-rule text-ink-2 grid grid-cols-[1.25rem_minmax(0,1fr)] gap-3 border-b py-3 text-sm"
                   >
                     <span aria-hidden="true" className="text-platform">
-                      —
+                      -
                     </span>
                     <span>{line}</span>
                   </li>
@@ -313,7 +313,7 @@ export default function PrivacyPage() {
               <Eyebrow>How long we keep it</Eyebrow>
               <div className="grid max-w-[62ch] gap-4">
                 <p className="text-ink-2">
-                  Enquiries are kept for as long as they are useful — a
+                  Enquiries are kept for as long as they are useful - a
                   conversation that goes quiet in March can matter in October,
                   and we would rather remember who you are than ask you to
                   explain yourself twice.
@@ -390,7 +390,7 @@ export default function PrivacyPage() {
                 </p>
                 <p className="text-ink-2 max-w-[44ch]">
                   The account our website uses to reach the database can read
-                  and write enquiries and nothing else — it cannot reach any
+                  and write enquiries and nothing else - it cannot reach any
                   other data, even if the credentials leaked.
                 </p>
                 <p className="text-ink-2 max-w-[44ch]">

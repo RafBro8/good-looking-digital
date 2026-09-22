@@ -60,7 +60,7 @@ export default async function HandledPage({
             <>
               <h1 className="mt-8 text-3xl">That link is incomplete.</h1>
               <p className="text-ink-2 mt-5">
-                Open it again from the reminder email — the address carries a
+                Open it again from the reminder email - the address carries a
                 token that identifies the enquiry, and it may have been cut
                 short on the way here.
               </p>

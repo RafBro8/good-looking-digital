@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function GrowPage() {
   return (
     <PathPageLayout pathId="grow">
-      {/* Service area — the local-trust signal, and the seed for the
+      {/* Service area - the local-trust signal, and the seed for the
           per-town landing pages built in Stage 07. */}
       <section className="border-rule border-t py-[clamp(2.75rem,2rem+3vw,4.5rem)]">
         <Container>
@@ -25,7 +25,7 @@ export default function GrowPage() {
             <p className="text-ink-2 measure mt-4">
               Being local matters for this kind of work. We can meet at your
               shop, photograph the job, and walk your signage through with you.
-              Plenty of clients are further afield and that works fine too — but
+              Plenty of clients are further afield and that works fine too - but
               if you are nearby, you get a person rather than a ticket queue.
             </p>
           </Reveal>

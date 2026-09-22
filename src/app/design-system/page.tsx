@@ -6,7 +6,7 @@ import { paths, site } from "@/lib/site";
 export const metadata = {
   title: "Design system",
   description:
-    "Stage 02 — the palette, type scale and components the Good Looking Digital site is built from.",
+    "Stage 02 - the palette, type scale and components the Good Looking Digital site is built from.",
   // An internal reference, reachable by anyone who knows the path but not
   // something a prospect searching for a web designer should be shown. Also
   // disallowed in robots.ts; noindex is the half that keeps it out of results.
@@ -46,7 +46,7 @@ export default function DesignSystemPage() {
       {/* ---------- masthead ---------- */}
       <Container>
         <header className="border-rule-strong border-b py-[clamp(2.5rem,1.5rem+5vw,5rem)]">
-          <Eyebrow>Stage 02 — foundation</Eyebrow>
+          <Eyebrow>Stage 02 - foundation</Eyebrow>
           <h1 className="mt-5 max-w-[16ch] text-4xl">
             The design system, before the site
           </h1>
@@ -56,7 +56,7 @@ export default function DesignSystemPage() {
             colour stays information rather than decoration.
           </p>
           <p className="measure text-ink-2 mt-4">
-            Switch your system between light and dark — every token below is
+            Switch your system between light and dark - every token below is
             defined for both, and the accents were picked to hold contrast on
             either ground.
           </p>
@@ -114,7 +114,7 @@ export default function DesignSystemPage() {
             <div className="border-rule grid items-baseline gap-x-6 gap-y-1 border-b pb-5 sm:grid-cols-[5rem_minmax(0,1fr)]">
               <span className="label text-muted">base · body</span>
               <p className="measure text-ink-2">
-                We design and build websites for businesses around Chicagoland —
+                We design and build websites for businesses around Chicagoland -
                 and the software behind them when a website is no longer enough.
                 Every site we ship gets tested like software.
               </p>
@@ -122,7 +122,7 @@ export default function DesignSystemPage() {
             <div className="grid items-baseline gap-x-6 gap-y-1 sm:grid-cols-[5rem_minmax(0,1fr)]">
               <span className="label text-muted">label · mono</span>
               <p className="label text-ink">
-                Mokena, Illinois — and anywhere with a browser
+                Mokena, Illinois - and anywhere with a browser
               </p>
             </div>
           </div>
@@ -204,7 +204,7 @@ export default function DesignSystemPage() {
       <Container>
         <footer className="border-rule-strong flex flex-wrap justify-between gap-3 border-t py-8">
           <p className="label text-muted">
-            {site.name} — {site.base}
+            {site.name} - {site.base}
           </p>
           <p className="label text-muted">Stage 02 · design system</p>
         </footer>

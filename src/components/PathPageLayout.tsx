@@ -14,8 +14,8 @@ import {
 } from "@/lib/site";
 
 /**
- * Shared skeleton for /grow and /platform. Both buyers get the same structure —
- * offer, services, process, differentiator, questions, call to action — but the
+ * Shared skeleton for /grow and /platform. Both buyers get the same structure -
+ * offer, services, process, differentiator, questions, call to action - but the
  * accent colour, copy and voice differ, which is the whole point of the split.
  */
 export function PathPageLayout({
@@ -41,7 +41,7 @@ export function PathPageLayout({
    * Four footer links landing 50px apart in one price list all look like the
    * same place, so arriving somewhere is not the same as noticing you have.
    * :target marks the row the fragment names, which is also what a shared
-   * link needs — someone sent "#logo-and-brand-identity" should see which
+   * link needs - someone sent "#logo-and-brand-identity" should see which
    * line the sender meant.
    *
    * The bar is an inset shadow rather than a border so nothing shifts
@@ -125,7 +125,7 @@ export function PathPageLayout({
                   : "What we build, and what it costs"}
               </h2>
               <p className="text-ink-2 measure mt-4">
-                Prices are starting points, not menu items — the real number
+                Prices are starting points, not menu items - the real number
                 comes after we understand the work. Nothing here is a package
                 you have to take whole.
               </p>
@@ -136,7 +136,7 @@ export function PathPageLayout({
                 <Reveal key={service.name} delay={i * 60}>
                   {/* The footer links straight at these rows. scroll-mt
                       clears the sticky header, which is two rows tall on a
-                      phone — without it the row lands underneath it. */}
+                      phone - without it the row lands underneath it. */}
                   <div
                     id={serviceAnchor(service.name)}
                     data-anchor-row=""

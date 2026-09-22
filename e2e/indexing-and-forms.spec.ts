@@ -63,7 +63,7 @@ test.describe("what search engines are told", () => {
 
   /**
    * Disallow alone is not enough. A page that is only disallowed can still be
-   * listed in results if something links to it — the crawler simply never
+   * listed in results if something links to it - the crawler simply never
    * fetches it. noindex is the half that keeps it out.
    */
   test("the private pages also carry noindex", async ({ page }) => {

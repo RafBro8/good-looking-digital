@@ -26,7 +26,7 @@ export default function HomePage() {
                   className="label text-muted rise flex items-center gap-3 before:block before:h-px before:w-7 before:bg-[var(--grow)] before:content-['']"
                   style={{ "--delay": "0ms" } as React.CSSProperties}
                 >
-                  {site.region} — and anywhere with a browser
+                  {site.region} - and anywhere with a browser
                 </p>
 
                 <h1
@@ -65,7 +65,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* The index — typography doing the job an image would */}
+              {/* The index - typography doing the job an image would */}
               <ol
                 className="border-ink rise border-t-2 pt-3"
                 style={{ "--delay": "320ms" } as React.CSSProperties}
@@ -95,7 +95,7 @@ export default function HomePage() {
             </div>
           </Container>
 
-          {/* Ticker — the industries and systems we build for */}
+          {/* Ticker - the industries and systems we build for */}
           <div className="border-rule mt-[clamp(2rem,1.5rem+2.5vw,3.25rem)] overflow-hidden border-y py-3.5 whitespace-nowrap">
             <div className="ticker-track">
               {[0, 1].map((copy) => (
@@ -125,7 +125,7 @@ export default function HomePage() {
         </section>
 
         {/* ============= canvas + the split =============
-            The two doors overlap the canvas rather than sitting below it —
+            The two doors overlap the canvas rather than sitting below it -
             the layering is what stops this reading as a stack of boxes. */}
         <section id="paths" className="relative">
           <div
@@ -222,7 +222,7 @@ export default function HomePage() {
                 </h2>
                 <p className="text-ink-2 mt-5 max-w-[42ch]">
                   Most agencies hand over a website and hope. We write automated
-                  tests over the flows that lose you money when they break —
+                  tests over the flows that lose you money when they break -
                   then run them on every change, so a broken booking form is
                   caught by us rather than reported by your customer.
                 </p>

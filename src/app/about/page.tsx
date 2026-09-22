@@ -193,7 +193,7 @@ export default function AboutPage() {
                       className="border-rule text-ink-2 grid grid-cols-[1.25rem_minmax(0,1fr)] gap-3 border-b py-3 text-sm"
                     >
                       <span aria-hidden="true" className="text-muted">
-                        —
+                        -
                       </span>
                       <span>{limit}</span>
                     </li>

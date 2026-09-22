@@ -10,7 +10,7 @@ import type { StoredLead } from "@/lib/leads";
  *
  * Every function here is deliberately failure-tolerant. A lead that is safely
  * in the database must never be reported as failed because an email provider
- * had a bad minute — the visitor would fill the form in again or, more likely,
+ * had a bad minute - the visitor would fill the form in again or, more likely,
  * give up.
  */
 
@@ -83,7 +83,7 @@ export function isSmsConfigured(): boolean {
 /**
  * Texts you when a lead arrives.
  *
- * Only ever to your own number — never to the person who enquired. Texting a
+ * Only ever to your own number - never to the person who enquired. Texting a
  * consumer without a recorded opt-in is a TCPA problem in the US, and a lead
  * form submission is not consent to be texted. Adding customer SMS later means
  * an explicit opt-in checkbox and A2P 10DLC registration, not just a new
@@ -100,7 +100,7 @@ export async function notifyOwnerBySms(lead: StoredLead): Promise<boolean> {
   const gist = lead.message.replace(/\s+/g, " ").slice(0, 90);
 
   const body = [
-    `New enquiry — ${who}`,
+    `New enquiry - ${who}`,
     lead.phone ? lead.phone : lead.email,
     `"${gist}${lead.message.length > 90 ? "..." : ""}"`,
     lead.source ? `via ${lead.source}` : null,
@@ -154,7 +154,7 @@ export async function notifyOwner(lead: StoredLead): Promise<boolean> {
 
   return send({
     to,
-    subject: `New enquiry — ${lead.name}${lead.business ? ` (${lead.business})` : ""}`,
+    subject: `New enquiry - ${lead.name}${lead.business ? ` (${lead.business})` : ""}`,
     text: lines.join("\n"),
     replyTo: lead.email,
   });
@@ -163,7 +163,7 @@ export async function notifyOwner(lead: StoredLead): Promise<boolean> {
 /**
  * The follow-up nudge for an enquiry nobody answered.
  *
- * Subject deliberately says "still" — in an inbox it has to read as a second
+ * Subject deliberately says "still" - in an inbox it has to read as a second
  * mention of something already seen, not as a new enquiry, or it gets replied
  * to twice.
  */
@@ -184,7 +184,7 @@ export async function confirmToSender(lead: StoredLead): Promise<boolean> {
   const text = [
     `Hi ${lead.name.split(" ")[0]},`,
     "",
-    "Thanks for getting in touch — your message reached us and it is not sitting in a queue somewhere.",
+    "Thanks for getting in touch - your message reached us and it is not sitting in a queue somewhere.",
     "",
     "You will get a real reply from a person, usually within one business day. If it is urgent, just reply to this email and it comes straight back to us.",
     "",
@@ -192,13 +192,13 @@ export async function confirmToSender(lead: StoredLead): Promise<boolean> {
     "",
     lead.message,
     "",
-    "— Good Looking Digital",
+    "- Good Looking Digital",
     site.url,
   ].join("\n");
 
   return send({
     to: lead.email,
-    subject: "We got your message — Good Looking Digital",
+    subject: "We got your message - Good Looking Digital",
     text,
   });
 }

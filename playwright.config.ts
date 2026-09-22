@@ -80,7 +80,7 @@ export default defineConfig({
     url: BASE_URL,
     // Always a fresh server. Reusing one keeps the previous run's
     // environment, so a change to the env block below would silently not
-    // apply — which cost an hour of confusion once already.
+    // apply - which cost an hour of confusion once already.
     reuseExistingServer: false,
     timeout: 180_000,
     env: {
@@ -91,7 +91,7 @@ export default defineConfig({
       // Blanked, not merely absent. Next loads .env.local for `next start`,
       // so a real key would be picked up and the suite would send mail on
       // every run. An empty value makes isNotificationConfigured() false, so
-      // the route returns before any network call — which is the condition
+      // the route returns before any network call - which is the condition
       // the "never falsely reported as emailed" spec is actually asserting on.
       RESEND_API_KEY: "",
       // The reminder sweep is useless to test if it can only ask about the

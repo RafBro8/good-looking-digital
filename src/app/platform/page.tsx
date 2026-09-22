@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: pathContent.platform.metaDescription,
 };
 
-/** What a paid assessment actually inspects — the entry offer made concrete. */
+/** What a paid assessment actually inspects - the entry offer made concrete. */
 const assessmentScope = [
   "Architecture and data model",
   "Critical user workflows",
@@ -27,7 +27,7 @@ const assessmentScope = [
 export default function PlatformPage() {
   return (
     <PathPageLayout pathId="platform">
-      {/* The proof panel and the assessment scope — the two things that turn a
+      {/* The proof panel and the assessment scope - the two things that turn a
           technical browser into a technical enquiry. */}
       <section className="border-rule border-t py-[clamp(2.75rem,2rem+3vw,4.5rem)]">
         <Container>
@@ -38,7 +38,7 @@ export default function PlatformPage() {
                 This is what gets handed over
               </h2>
               <p className="text-ink-2 mt-5 max-w-[44ch]">
-                Not a coverage percentage in a report — a suite that runs on
+                Not a coverage percentage in a report - a suite that runs on
                 every push and names the workflows in language your business
                 actually uses. When one goes red, everyone knows what broke and
                 who it affects.
@@ -52,7 +52,7 @@ export default function PlatformPage() {
         </Container>
       </section>
 
-      {/* The stack, where a technical reader will look for it — not buried
+      {/* The stack, where a technical reader will look for it - not buried
           in an FAQ three screens further down. */}
       <section className="border-rule border-t py-[clamp(2.75rem,2rem+3vw,4.5rem)]">
         <Container>
@@ -63,7 +63,7 @@ export default function PlatformPage() {
             </h2>
             <p className="text-ink-2 measure mt-4">
               Listed so you can check for a match before spending a call on it.
-              If your stack is not here, say so — adjacent is often fine, and we
+              If your stack is not here, say so - adjacent is often fine, and we
               will tell you when it is not.
             </p>
           </Reveal>
@@ -100,7 +100,7 @@ export default function PlatformPage() {
             <p className="text-ink-2 measure mt-4">
               Handing a stranger a large build is a lot to ask. An assessment is
               fixed-price, takes about a week, and ends with a prioritised list
-              you own — whether or not you hire us to act on it. If you do, the
+              you own - whether or not you hire us to act on it. If you do, the
               fee credits toward the work.
             </p>
           </Reveal>

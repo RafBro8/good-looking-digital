@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
  * Follow-up reminders for enquiries nobody answered.
  *
  * The immediate notification is the real signal. This exists for the case
- * where that one was missed — read on a phone between jobs and forgotten, or
+ * where that one was missed - read on a phone between jobs and forgotten, or
  * buried under everything else that arrived that morning. A lead nobody
  * replies to is the most expensive kind, because the work was already paid
  * for in advertising, signage or someone's afternoon.
@@ -18,7 +18,7 @@ import { site } from "@/lib/site";
  *
  * On a client deployment this same sweep will copy Good Looking Digital, so a
  * lead going cold is noticed even when the business owner is on a roof. That
- * copy must name nobody and quote nothing — a client reference and a short id,
+ * copy must name nobody and quote nothing - a client reference and a short id,
  * no customer name, number or message. Knowing an enquiry is going cold is the
  * whole service; the customer's details are the client's business, and there
  * is no reason for them to accumulate in our inbox. Their own notification
@@ -42,7 +42,7 @@ export function reminderAfterHours(): number {
 
 /**
  * The hours a reminder may be sent, in local time. Serverless runs in UTC,
- * so the zone has to be stated rather than assumed — otherwise "nothing
+ * so the zone has to be stated rather than assumed - otherwise "nothing
  * overnight" silently means nothing between 8pm and 8am in Greenwich, which
  * is the middle of the afternoon here.
  */
@@ -70,7 +70,7 @@ export function withinSendingWindow(now: Date): boolean {
  * Signs the mark-as-handled link.
  *
  * A bare lead id in a URL would let anyone who guessed one silence a
- * reminder, and ids are not secret — they travel in emails. The token is an
+ * reminder, and ids are not secret - they travel in emails. The token is an
  * HMAC over the id with a server-side secret, so it can be verified without
  * being stored and cannot be produced by anyone who does not hold the secret.
  *

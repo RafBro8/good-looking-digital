@@ -5,7 +5,7 @@ import { test, expect, type Page } from "@playwright/test";
  *
  * These pointed at /grow and /platform with no fragment, four labels each. The
  * first click navigated and every click after it did nothing, because the
- * router was already on that URL — reported from the live site, not caught
+ * router was already on that URL - reported from the live site, not caught
  * here, which is why these specs exist now.
  */
 
@@ -54,7 +54,7 @@ test.describe("footer service links", () => {
 
   /**
    * The reported bug, as a test. Three clicks in a row from the footer, each
-   * landing somewhere different — the second and third are the ones that used
+   * landing somewhere different - the second and third are the ones that used
    * to do nothing at all.
    */
   test("clicking one service after another moves each time", async ({

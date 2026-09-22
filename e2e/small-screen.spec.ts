@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 /**
  * The small-screen guarantee.
  *
- * 375 x 667 is an iPhone SE — a phone from 2016 that plenty of tradespeople
+ * 375 x 667 is an iPhone SE - a phone from 2016 that plenty of tradespeople
  * still carry. It is also the width at which this site's header was broken
  * until recently: no navigation and no theme control below 768px, so the only
  * way off a page was to scroll to its footer. This spec exists so that cannot
@@ -82,13 +82,13 @@ test("it works on a five-year-old phone", async ({ page }) => {
 });
 
 /**
- * 320px is the narrowest width anything real uses — the original iPhone SE,
+ * 320px is the narrowest width anything real uses - the original iPhone SE,
  * some older Androids, and the width WCAG measures reflow at. It is also the
  * width a desktop page reaches when someone zooms to 400%.
  *
  * It was broken here for a while, and quietly: the header ran 29px past the
  * viewport, the page does not scroll sideways, so the overflow was simply
- * clipped — and what fell off the edge was the last digits of the phone
+ * clipped - and what fell off the edge was the last digits of the phone
  * number. A header that silently truncates the number is worse than one that
  * looks cramped, because nothing about it appears wrong.
  */

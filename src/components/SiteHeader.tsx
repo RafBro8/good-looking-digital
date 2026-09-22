@@ -6,7 +6,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { site } from "@/lib/site";
 
 /**
- * Only routes that exist. Work joins when Stage 07 lands — a nav link that
+ * Only routes that exist. Work joins when Stage 07 lands - a nav link that
  * 404s costs more trust than a shorter menu does.
  */
 const nav = [
@@ -37,7 +37,7 @@ export function SiteHeader() {
               the header, and a number cut off mid-digits still looks like a
               number and dials nothing.
 
-              Sizing it by hand is not enough on its own — tuned on one
+              Sizing it by hand is not enough on its own - tuned on one
               machine it had seven pixels to spare and still clipped on CI,
               where the font renders wider. min-w-0 plus truncate is the part
               that holds whatever the metrics turn out to be. */}
@@ -90,7 +90,7 @@ export function SiteHeader() {
         {/* Phones and tablets get their own row. Without it the only way off
             the current page is to scroll to the footer of it. Four links fit
             across a 375px screen, which is why this is a row rather than a
-            hamburger — a menu you must open to reveal four words is a tap
+            hamburger - a menu you must open to reveal four words is a tap
             nobody needs to make.
 
             The handover is at lg, not md. The single-row desktop header needs

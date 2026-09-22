@@ -33,7 +33,7 @@ export default function ContactPage() {
               className="label text-muted rise flex items-center gap-3 before:block before:h-px before:w-7 before:bg-[var(--grow)] before:content-['']"
               style={{ "--delay": "0ms" } as React.CSSProperties}
             >
-              {site.base} — and anywhere with a browser
+              {site.base} - and anywhere with a browser
             </p>
 
             <h1
@@ -136,7 +136,7 @@ export default function ContactPage() {
                 {serviceArea
                   .filter((town) => !site.base.startsWith(town))
                   .join(", ")}{" "}
-                and the surrounding suburbs — {site.reach}. Distance has never
+                and the surrounding suburbs - {site.reach}. Distance has never
                 been the thing that decides whether a project works.
               </p>
             </Reveal>

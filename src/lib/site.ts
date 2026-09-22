@@ -21,7 +21,7 @@ export const site = {
   phoneHref: "tel:+16304008748",
   /**
    * Stated the same way everywhere: local first, because that is where trust
-   * comes from — but explicitly unbounded, so a prospect in California or
+   * comes from - but explicitly unbounded, so a prospect in California or
    * abroad does not read the town names and count themselves out.
    */
   reach: "across Chicagoland, and anywhere else with a browser",
@@ -49,7 +49,7 @@ export interface ServicePath {
   /**
    * A footerLabel opts the service into the footer, under a shorter name.
    * The footer links to the row itself, so the label and the anchor cannot
-   * drift apart — both come from this one list.
+   * drift apart - both come from this one list.
    */
   services: { name: string; price: string; footerLabel?: string }[];
   cta: string;
@@ -72,7 +72,7 @@ export function serviceAnchor(name: string): string {
 export const paths: ServicePath[] = [
   {
     id: "grow",
-    eyebrow: "Path 01 — small business",
+    eyebrow: "Path 01 - small business",
     title: "Grow my business",
     blurb:
       "You need customers to find you, trust you, and call you. We build the whole chain, not just the website.",
@@ -103,14 +103,14 @@ export const paths: ServicePath[] = [
         price: "from $250",
         footerLabel: "QR marketing",
       },
-      { name: "Hosting and care", price: "$95–$250/mo" },
+      { name: "Hosting and care", price: "$95-$250/mo" },
     ],
     cta: "See what this costs",
     href: "/grow",
   },
   {
     id: "platform",
-    eyebrow: "Path 02 — platform work",
+    eyebrow: "Path 02 - platform work",
     title: "Build my platform",
     blurb:
       "Your customers need to log in, do something real, and come back. That is software, and it is built differently.",
@@ -146,14 +146,14 @@ export const paths: ServicePath[] = [
 /** Headline numbers. Each has to be defensible if a prospect asks. */
 export const proofPoints = [
   // Deliberately first. "1" is the smallest number here and the strongest
-  // claim on the page — it is the one an agency structurally cannot match.
+  // claim on the page - it is the one an agency structurally cannot match.
   {
     figure: "1",
     note: "Person who answers when you call. Always the same one",
   },
   {
     figure: "20 yrs",
-    note: "In technology — the last nine building software, including for a Fortune 5 company",
+    note: "In technology - the last nine building software, including for a Fortune 5 company",
   },
   { figure: "100%", note: "Of critical flows covered by automated tests" },
   { figure: "< 1s", note: "Target load time on every page we ship" },
@@ -187,7 +187,7 @@ export const capabilities: Capability[] = [
   {
     name: "Lead capture",
     description:
-      "The form, the database behind it, the notification that reaches you in seconds and the confirmation that reaches your customer. Not ad buying — the part that happens after someone is already interested.",
+      "The form, the database behind it, the notification that reaches you in seconds and the confirmation that reaches your customer. Not ad buying - the part that happens after someone is already interested.",
     path: "grow",
   },
   {
@@ -199,7 +199,7 @@ export const capabilities: Capability[] = [
   {
     name: "Test automation",
     description:
-      "Playwright suites over the flows that lose you money when they break. Wired into CI — on your application or ours.",
+      "Playwright suites over the flows that lose you money when they break. Wired into CI - on your application or ours.",
     path: "platform",
   },
   {
@@ -219,7 +219,7 @@ export interface WorkItem {
 
 /**
  * Real projects only. The homepage work section stays hidden until there are
- * two or three of these — one genuine project beside invented ones reads worse
+ * two or three of these - one genuine project beside invented ones reads worse
  * than showing none at all.
  */
 export const work: WorkItem[] = [
@@ -237,7 +237,7 @@ export const work: WorkItem[] = [
  *
  * Every spec named here must be one this site genuinely runs. An earlier
  * version listed sign-in, booking and portal-permission specs carried over
- * from a design mockup — none of which exist on a marketing site, on a public
+ * from a design mockup - none of which exist on a marketing site, on a public
  * repo, on a page whose whole argument is that we test what we ship.
  *
  * These six are real once Stage 06 (lead capture) and Stage 08 (Playwright)
@@ -249,7 +249,7 @@ export const work: WorkItem[] = [
  *
  * These are real. Every spec named here lives in e2e/, runs against a
  * production build on every push, and the figures come from an actual CI run
- * across all three engines — not from a mockup. If a spec is renamed or
+ * across all three engines - not from a mockup. If a spec is renamed or
  * removed, change it here too: a panel describing tests that do not exist is
  * worse than no panel, and this file has been wrong about that once already.
  *
@@ -317,7 +317,7 @@ export const testRun = {
     },
     { name: "a forged or missing token is refused", ms: "36ms" },
     {
-      name: "fetching the link does not mark anything — only the button does",
+      name: "fetching the link does not mark anything - only the button does",
       ms: "1.01s",
     },
     { name: "it works on a five-year-old phone", ms: "2.45s" },
@@ -332,7 +332,7 @@ export const testRun = {
  * Long-form content for the two path pages.
  *
  * Deliberately excludes ads management, CRM integration, RPA/desktop
- * automation and per-client dashboards — all considered and cut, because a
+ * automation and per-client dashboards - all considered and cut, because a
  * short list delivered well beats a long one that cannot be.
  */
 export interface PathPage {
@@ -359,7 +359,7 @@ export const pathContent: Record<PathId, PathPage> = {
       "Websites, branding, Google Business Profile, Facebook and Instagram setup, QR marketing and hosting for small businesses across Chicagoland and beyond.",
     heroTitle: "Get found. Get called.",
     heroLede:
-      "You need the phone to ring. We build everything that makes that happen — the website, the Google listing, the signs on the lawn, and the system that catches every enquiry.",
+      "You need the phone to ring. We build everything that makes that happen - the website, the Google listing, the signs on the lawn, and the system that catches every enquiry.",
     processTitle: "How it works",
     process: [
       {
@@ -376,7 +376,7 @@ export const pathContent: Record<PathId, PathPage> = {
       },
       {
         title: "Care",
-        body: "It keeps working, and one person answers when it does not — the same person who built it. Cancel whenever.",
+        body: "It keeps working, and one person answers when it does not - the same person who built it. Cancel whenever.",
       },
     ],
     featureEyebrow: "The part most people skip",
@@ -386,7 +386,7 @@ export const pathContent: Record<PathId, PathPage> = {
     featurePoints: [
       "Print-ready QR artwork for yard signs, stickers, flyers or vehicle graphics",
       "Opens a page built for one offer, not your homepage",
-      "Short form — you are notified within seconds, by email",
+      "Short form - you are notified within seconds, by email",
       "Your customer gets an instant confirmation, not silence",
       "A reminder fires if nobody has called them back",
       "You can tell which sign produced which call",
@@ -394,7 +394,7 @@ export const pathContent: Record<PathId, PathPage> = {
     faqs: [
       {
         q: "Do I own the website?",
-        a: "Yes. You own the site, the domain and the content. If you ever leave, it goes with you — no hostage situation and no export fee.",
+        a: "Yes. You own the site, the domain and the content. If you ever leave, it goes with you - no hostage situation and no export fee.",
       },
       {
         q: "Who owns the Google and Facebook pages?",
@@ -410,7 +410,7 @@ export const pathContent: Record<PathId, PathPage> = {
       },
       {
         q: "What is lead capture, exactly?",
-        a: "Everything that happens once someone is interested: the form, the database behind it, the alert that reaches you in seconds, the confirmation that reaches your customer, and a reminder if nobody has called them back. It is not advertising — we do not make the enquiries appear, we make sure none of them are lost.",
+        a: "Everything that happens once someone is interested: the form, the database behind it, the alert that reaches you in seconds, the confirmation that reaches your customer, and a reminder if nobody has called them back. It is not advertising - we do not make the enquiries appear, we make sure none of them are lost.",
       },
       {
         q: "Do you run Facebook or Google ads?",
@@ -433,7 +433,7 @@ export const pathContent: Record<PathId, PathPage> = {
     process: [
       {
         title: "Assessment",
-        body: "A paid, fixed-price review of what you already have — architecture, critical workflows, performance, accessibility, test coverage and technical debt — ending in a prioritised list. Low risk, and it credits toward the build if you go ahead.",
+        body: "A paid, fixed-price review of what you already have - architecture, critical workflows, performance, accessibility, test coverage and technical debt - ending in a prioritised list. Low risk, and it credits toward the build if you go ahead.",
       },
       {
         title: "Scope and price",
@@ -445,13 +445,13 @@ export const pathContent: Record<PathId, PathPage> = {
       },
       {
         title: "Support",
-        body: "A retainer for changes, monitoring and test maintenance — handled by the person who wrote it, not whoever is free that week. Or a clean handover to your team with documentation, which is equally fine and not treated as a failure.",
+        body: "A retainer for changes, monitoring and test maintenance - handled by the person who wrote it, not whoever is free that week. Or a clean handover to your team with documentation, which is equally fine and not treated as a failure.",
       },
     ],
     featureEyebrow: "Why it keeps working",
     featureTitle: "Tested like software, because it is software",
     featureBody:
-      "Most agencies hand over an application and hope. We write automated tests over the flows that lose you money when they break, then run them on every change — so a broken checkout is caught by CI rather than reported by your customer.",
+      "Most agencies hand over an application and hope. We write automated tests over the flows that lose you money when they break, then run them on every change - so a broken checkout is caught by CI rather than reported by your customer.",
     featurePoints: [
       "Playwright suites over login, checkout, booking and permissions",
       "Cross-browser: Chromium, Firefox and WebKit",
@@ -462,15 +462,15 @@ export const pathContent: Record<PathId, PathPage> = {
     faqs: [
       {
         q: "Can you work on an application you did not build?",
-        a: "Yes, and it is one of the more common engagements. Test automation in particular does not require having written the application — often the opposite, since a fresh reader finds the assumptions the original team stopped seeing.",
+        a: "Yes, and it is one of the more common engagements. Test automation in particular does not require having written the application - often the opposite, since a fresh reader finds the assumptions the original team stopped seeing.",
       },
       {
         q: "What stack do you work in?",
-        a: "TypeScript and JavaScript across React, Next.js and Angular on the front end; Node and Express or Java and Spring Boot on the back; SQL and MongoDB for data. Playwright and Cypress for end-to-end coverage, Vitest, Jest and React Testing Library for unit tests, JUnit and Rest Assured on the Java side. Deployed on AWS, Google Cloud or Pivotal Cloud Foundry, with Docker, Kubernetes and Jenkins or GitHub Actions behind it. Nine years of it, including for a Fortune 5 company — not a design studio subcontracting the hard part.",
+        a: "TypeScript and JavaScript across React, Next.js and Angular on the front end; Node and Express or Java and Spring Boot on the back; SQL and MongoDB for data. Playwright and Cypress for end-to-end coverage, Vitest, Jest and React Testing Library for unit tests, JUnit and Rest Assured on the Java side. Deployed on AWS, Google Cloud or Pivotal Cloud Foundry, with Docker, Kubernetes and Jenkins or GitHub Actions behind it. Nine years of it, including for a Fortune 5 company - not a design studio subcontracting the hard part.",
       },
       {
         q: "Will you work alongside our developers?",
-        a: "Yes. Working inside an existing team, in your repository and your process, is a normal arrangement — including building the test suite your team then owns.",
+        a: "Yes. Working inside an existing team, in your repository and your process, is a normal arrangement - including building the test suite your team then owns.",
       },
       {
         q: "What does automation actually cover?",
@@ -489,12 +489,12 @@ export const pathContent: Record<PathId, PathPage> = {
 };
 
 /* ------------------------------------------------------------------ */
-/* Stage 05 — pricing and about                                        */
+/* Stage 05 - pricing and about                                        */
 /* ------------------------------------------------------------------ */
 
 /**
- * Care plan tiers. The $95–$250/mo band on the path pages resolves here.
- * Contents are a proposal until signed off — the bands themselves were
+ * Care plan tiers. The $95-$250/mo band on the path pages resolves here.
+ * Contents are a proposal until signed off - the bands themselves were
  * already published, these tiers are what fills them.
  */
 export const carePlans = [
@@ -587,12 +587,12 @@ export const pricingFaqs = [
   },
   {
     q: "Do you work with tight budgets?",
-    a: "Sometimes, if the scope shrinks to match. What we will not do is quietly cut corners to hit a number — you will get told what a smaller budget buys and what it leaves out.",
+    a: "Sometimes, if the scope shrinks to match. What we will not do is quietly cut corners to hit a number - you will get told what a smaller budget buys and what it leaves out.",
   },
 ];
 
 /**
- * About page copy. No portrait by choice — the experience carries the page,
+ * About page copy. No portrait by choice - the experience carries the page,
  * and a photograph can be added later without the layout changing.
  */
 export const about = {
@@ -601,25 +601,25 @@ export const about = {
     "Close to twenty years in technology, the last nine building full-stack software for enterprise clients including a Fortune 5 company. Now building websites and applications for businesses in Mokena, across Chicagoland, and anywhere else with a browser.",
   heroTitle: "An engineer who cares what it looks like.",
   heroLede:
-    "Close to twenty years in technology. The last nine building full-stack software for large American companies, including a Fortune 5. Based in Illinois, working across Chicagoland — and anywhere else with a browser.",
+    "Close to twenty years in technology. The last nine building full-stack software for large American companies, including a Fortune 5. Based in Illinois, working across Chicagoland - and anywhere else with a browser.",
   story: [
-    "Most of that time has been spent on enterprise applications — internal tools and customer-facing products used by thousands of people, at a Fortune 5 company and other large, well-known American names. Front end in JavaScript and TypeScript with React and Angular; back end in Java and Spring Boot or Node and Express, with some Python along the way; SQL and MongoDB behind it; AWS, Google Cloud and Pivotal Cloud Foundry underneath; and testing at every level from unit to end-to-end.",
+    "Most of that time has been spent on enterprise applications - internal tools and customer-facing products used by thousands of people, at a Fortune 5 company and other large, well-known American names. Front end in JavaScript and TypeScript with React and Angular; back end in Java and Spring Boot or Node and Express, with some Python along the way; SQL and MongoDB behind it; AWS, Google Cloud and Pivotal Cloud Foundry underneath; and testing at every level from unit to end-to-end.",
     "That range is deliberate. Plenty of engineers go deep on one layer and hand the rest to someone else. Working across all of them means a project does not get passed between three companies before it is finished, and nothing falls into the gap between them.",
     "It also means the person you speak to on the first call is the person writing the code, and the person who answers when something breaks two years later. Always the same one. Most agencies put a salesperson in front of you and someone junior behind the scenes, and what you explained in the first meeting rarely survives the trip.",
-    "But the part I have always come back to is the front end — the interface, and the person on the other side of it. I have run user interviews and user-experience sessions, worked alongside UI/UX teams for years and picked up a great deal from them, and sat across from senior business stakeholders to work out what a system actually needed to do rather than what someone assumed it did.",
-    "That is what the name means. Plenty of people can make something look good, and plenty can make something work. Doing both, on the same project, without a handoff in the middle — that is the whole idea.",
+    "But the part I have always come back to is the front end - the interface, and the person on the other side of it. I have run user interviews and user-experience sessions, worked alongside UI/UX teams for years and picked up a great deal from them, and sat across from senior business stakeholders to work out what a system actually needed to do rather than what someone assumed it did.",
+    "That is what the name means. Plenty of people can make something look good, and plenty can make something work. Doing both, on the same project, without a handoff in the middle - that is the whole idea.",
   ],
   /**
    * One real project, told plainly. No client named and no confidential
-   * detail — the outcome is the point.
+   * detail - the outcome is the point.
    */
   signature: {
     eyebrow: "The one I am most pleased with",
     title: "We took a team out of spreadsheets",
     body: [
-      "A group of business analysts spent their days entering large volumes of data into shared spreadsheets. Worse than the typing was the waiting — a file checked out by one person was locked to everyone else, so work queued up behind whoever had it open.",
+      "A group of business analysts spent their days entering large volumes of data into shared spreadsheets. Worse than the typing was the waiting - a file checked out by one person was locked to everyone else, so work queued up behind whoever had it open.",
       "The team I was on built them a real application instead: an interface they could actually navigate, a backend and database behind it, and validation that caught mistakes as they typed rather than a week later. Their data entry time dropped substantially and the bottleneck disappeared.",
-      "The thanks kept arriving for months afterwards. Not for the architecture — for giving them their afternoons back. That was at a Fortune 5 company, and it is still the work I am most pleased with.",
+      "The thanks kept arriving for months afterwards. Not for the architecture - for giving them their afternoons back. That was at a Fortune 5 company, and it is still the work I am most pleased with.",
     ],
   },
   /** Things that are unusual for a solo developer, and worth saying plainly. */
@@ -651,7 +651,7 @@ export const about = {
   ],
   /** Saying what you do not do reads as confidence, not limitation. */
   limits: [
-    "Advertising spend is not managed here — pages and profiles are set up, but campaigns are not run",
+    "Advertising spend is not managed here - pages and profiles are set up, but campaigns are not run",
     "Desktop and robotic process automation of legacy software is out of scope",
     "This runs alongside a full-time job, so timelines are honest rather than optimistic",
     "Work that would be better served by a large agency gets said out loud",
@@ -660,7 +660,7 @@ export const about = {
 
 /**
  * The stack, grouped for a technical reader scanning for a match.
- * Only list what can actually be delivered — this is the section a technology
+ * Only list what can actually be delivered - this is the section a technology
  * director will check hardest.
  */
 export const stack = [

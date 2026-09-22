@@ -25,7 +25,7 @@ export function ThemeToggle({ className }: { className?: string }) {
     try {
       localStorage.setItem("gld-theme", next);
     } catch {
-      // storage blocked — the switch still works for this visit
+      // storage blocked - the switch still works for this visit
     }
   }
 
@@ -39,7 +39,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       {/*
         The word goes at the narrowest widths, the symbol stays. At 320px the
         header ran 29px past the viewport and the page does not scroll
-        sideways, so the overflow was clipped — and what got cut was the end
+        sideways, so the overflow was clipped - and what got cut was the end
         of the phone number, which is the one thing a contractor is looking
         for. Dropping the word recovers about forty. This is inside the
         button rather than in the layout on purpose: an earlier attempt to

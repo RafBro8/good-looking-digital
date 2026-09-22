@@ -9,7 +9,7 @@ import { markResponded, verifyHandledToken } from "@/lib/reminders";
  * POST only, and that is the whole point of the design. Mail clients and
  * security scanners fetch the links in a message before anyone reads it, so a
  * GET that marked a lead handled would silence reminders for enquiries nobody
- * had opened yet — the one failure this feature exists to prevent. The link in
+ * had opened yet - the one failure this feature exists to prevent. The link in
  * the email therefore points at a page with a button, and the button posts
  * here.
  */

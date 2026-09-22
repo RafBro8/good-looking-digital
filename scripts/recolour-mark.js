@@ -5,7 +5,7 @@
  *
  * Two problems, two techniques:
  *
- * 1. Hue. A rigid rotation cannot work — the source spans roughly 80 degrees
+ * 1. Hue. A rigid rotation cannot work - the source spans roughly 80 degrees
  *    (blue to magenta) while the target spans about 145 (teal to amber), so
  *    the range has to be stretched, not shifted.
  *
@@ -189,7 +189,7 @@ function backgroundMask(data, w, h, ch) {
    * Edge decontamination.
    *
    * The source was rendered on black, so its antialiased edge pixels are the
-   * mark blended with black — genuinely dark. A binary cutout keeps them, and
+   * mark blended with black - genuinely dark. A binary cutout keeps them, and
    * on a light page that ring reads as an outline drawn around the logo.
    *
    * The two-background trick that would recover alpha exactly needs the black
@@ -217,7 +217,7 @@ function backgroundMask(data, w, h, ch) {
     }
     /*
      * Background the flood fill could not reach, because the ribbon encloses
-     * it — the counter inside the D. Left alone it stays pure black, which is
+     * it - the counter inside the D. Left alone it stays pure black, which is
      * invisible on a dark page and obviously wrong on a light one.
      *
      * Safe to cut by brightness: 8% of surviving pixels sit at max channel 0-1
@@ -264,7 +264,7 @@ function backgroundMask(data, w, h, ch) {
     .toBuffer();
   await sharp(master).toFile(path.join(OUT_DIR, "mark-1024.png"));
 
-  // Page use — WebP, transparent, a fraction of the weight.
+  // Page use - WebP, transparent, a fraction of the weight.
   await sharp(master)
     .resize(800, 800)
     .webp({ quality: 90 })

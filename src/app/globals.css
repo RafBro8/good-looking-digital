@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Good Looking Digital — design system
+   Good Looking Digital - design system
    Structure from concept A, surface from B, proof from C.
    Two signal colours carry the two customer paths; everything else is neutral.
    ========================================================================== */
 
 :root {
-  /* neutrals — cool-biased, never pure grey */
+  /* neutrals - cool-biased, never pure grey */
   --paper: #f5f6f4;
   --surface: #ffffff;
   --surface-2: #eceeea;
@@ -18,7 +18,7 @@
   --rule: #dde2de;
   --rule-strong: #bcc5c0;
 
-  /* signals — grow (warm) and platform (cool) */
+  /* signals - grow (warm) and platform (cool) */
   --grow: #b55028;
   /* kept light enough that grow-coloured text stays legible on the hover tint */
   --grow-soft: #faf2ed;
@@ -27,7 +27,7 @@
   --platform-soft: #dceae7;
   --platform-ink: #ffffff;
 
-  /* semantic — status only, never decorative */
+  /* semantic - status only, never decorative */
   --pass: #1f7a4d;
   --fail: #b3341f;
 
@@ -109,7 +109,7 @@
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, Menlo, Consolas, monospace;
 
-  /* type scale — fluid, one ratio, used everywhere */
+  /* type scale - fluid, one ratio, used everywhere */
   --text-2xs: 0.6875rem;
   --text-xs: 0.78rem;
   --text-sm: 0.9rem;
@@ -120,7 +120,7 @@
   --text-3xl: clamp(1.95rem, 1.4rem + 2.4vw, 3.1rem);
   --text-4xl: clamp(2.4rem, 1.4rem + 4.2vw, 4.4rem);
   --text-5xl: clamp(2.9rem, 1.2rem + 6.8vw, 6rem);
-  /* hero only — the scale that carries the authority */
+  /* hero only - the scale that carries the authority */
   --text-6xl: clamp(3rem, 0.9rem + 8.6vw, 7.5rem);
 }
 
@@ -172,7 +172,7 @@
    */
   /*
    * Fixed values, not palette tokens. The canvas stands in for photography, and
-   * a photograph does not invert with the theme — if it followed --grow and
+   * a photograph does not invert with the theme - if it followed --grow and
    * --platform it would brighten in dark mode and strand the white text on it
    * below readable contrast.
    */
@@ -241,7 +241,7 @@
     display: inline-flex;
   }
 
-  /* uppercase mono labels — used for eyebrows and metadata */
+  /* uppercase mono labels - used for eyebrows and metadata */
   .label {
     font-family: var(--font-mono);
     font-size: var(--text-2xs);
@@ -260,7 +260,7 @@
 }
 
 /* ==========================================================================
-   Motion — kept unlayered.
+   Motion - kept unlayered.
    Unlayered rules win over anything in a cascade layer, so these motion
    primitives cannot be accidentally overridden by a Tailwind opacity or
    transform utility landing on the same element.
@@ -283,7 +283,7 @@ html[data-js="true"] .reveal[data-shown="true"] {
   transform: none;
 }
 
-/* Hero load sequence — staggered by an inline --delay */
+/* Hero load sequence - staggered by an inline --delay */
 html[data-js="true"] .rise {
   animation: rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: var(--delay, 0ms);

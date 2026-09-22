@@ -11,7 +11,7 @@ const FAILSAFE_MS = 1800;
  *
  * The hidden state lives in CSS behind html[data-js="true"], so this only has
  * to flip an attribute. Because the hidden state is opacity 0, the failure mode
- * is an invisible page — so there are three separate guarantees that content
+ * is an invisible page - so there are three separate guarantees that content
  * always ends up visible:
  *
  *   1. no JS at all      → html[data-js] is never set, CSS never hides anything

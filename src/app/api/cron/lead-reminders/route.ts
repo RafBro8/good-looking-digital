@@ -22,7 +22,7 @@ import {
  * than quietly under-running. A once-a-day sweep is a next-day summary, not a
  * follow-up. So a GitHub Actions schedule calls this endpoint every half hour
  * instead. Moving to Vercel Cron on Pro is a vercel.json entry and deleting
- * the workflow — the endpoint does not change.
+ * the workflow - the endpoint does not change.
  */
 
 /** Never prerendered or cached: it has side effects and a clock. */
@@ -42,7 +42,7 @@ function authorized(request: Request): boolean {
 /**
  * Tests cannot wait eight hours, so the sweep accepts the moment it should
  * evaluate against. Gated behind its own environment flag, which only the
- * Playwright web server sets — an authorized caller in production still
+ * Playwright web server sets - an authorized caller in production still
  * cannot move the clock, because being able to would mean being able to
  * reach back and re-send every reminder the system ever suppressed.
  */
@@ -62,7 +62,7 @@ export async function GET(request: Request) {
   }
 
   if (!isDatabaseConfigured()) {
-    console.error("[reminders] MONGODB_URI is not set — nothing to sweep");
+    console.error("[reminders] MONGODB_URI is not set - nothing to sweep");
     return NextResponse.json(
       { ok: false, reason: "database-not-configured" },
       { status: 503 },
@@ -108,7 +108,7 @@ export async function GET(request: Request) {
     // reminder each lead gets was spent on an email that never left, and
     // nothing would ever chase them again.
     console.error(
-      "[reminders] RESEND_API_KEY is not set — leads are going unchased",
+      "[reminders] RESEND_API_KEY is not set - leads are going unchased",
       { considered: candidates.length },
     );
     return NextResponse.json(
@@ -126,7 +126,7 @@ export async function GET(request: Request) {
 
   for (const lead of candidates) {
     const sent = await remindOwner(
-      `Still unanswered — ${lead.name}${lead.business ? ` (${lead.business})` : ""}`,
+      `Still unanswered - ${lead.name}${lead.business ? ` (${lead.business})` : ""}`,
       ownerReminderText(lead, now),
     ).catch(() => false);
 

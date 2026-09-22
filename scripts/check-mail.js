@@ -4,7 +4,7 @@
  * Takes Vercel out of the picture: reads the key from .env.local, calls Resend
  * directly, and prints the provider's own response. That separates "the key or
  * domain is wrong" from "the key never reached the deployed build", which the
- * provider dashboard cannot tell you — when no key is present the app returns
+ * provider dashboard cannot tell you - when no key is present the app returns
  * before making any network call, so the dashboard looks identical to never
  * having tried.
  *
@@ -57,7 +57,7 @@ async function main() {
     }
   }
   console.log("from        ", from);
-  console.log("to          ", to || "(not set — pass one as an argument)");
+  console.log("to          ", to || "(not set - pass one as an argument)");
   console.log("");
 
   if (!key) {
@@ -80,7 +80,7 @@ async function main() {
     body: JSON.stringify({
       from,
       to: [to],
-      subject: "Good Looking Digital — sending check",
+      subject: "Good Looking Digital - sending check",
       text: "If this arrived, the API key and the sending domain are both working. Sent by scripts/check-mail.js.",
     }),
   });
@@ -91,7 +91,7 @@ async function main() {
   console.log("");
 
   if (res.ok) {
-    console.log("Sent. Check the inbox, and check spam — a new sending domain");
+    console.log("Sent. Check the inbox, and check spam - a new sending domain");
     console.log("often lands there for its first few messages.");
     console.log("");
     console.log(
@@ -107,7 +107,7 @@ async function main() {
     console.log(
       "  422  the from address is malformed or not on a verified domain",
     );
-    console.log("  429  rate limited — wait and retry");
+    console.log("  429  rate limited - wait and retry");
     process.exitCode = 1;
   }
 }
