@@ -13,7 +13,7 @@ export function PathCard({ path }: { path: ServicePath }) {
   return (
     <Link
       href={path.href}
-      className={`group bg-surface flex flex-col gap-5 p-[clamp(1.5rem,1rem+2vw,2.75rem)] transition-colors duration-200 ${
+      className={`group bg-surface flex h-full flex-col gap-5 p-[clamp(1.5rem,1rem+2vw,2.75rem)] transition-colors duration-200 ${
         isGrow ? "hover:bg-grow-soft" : "hover:bg-platform-soft"
       }`}
     >

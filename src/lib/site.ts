@@ -155,8 +155,11 @@ export const proofPoints = [
     figure: "20 yrs",
     note: "In technology - the last nine building software, including for a Fortune 5 company",
   },
-  { figure: "100%", note: "Of critical flows covered by automated tests" },
-  { figure: "< 1s", note: "Target load time on every page we ship" },
+  {
+    figure: "100%",
+    note: "Of the steps that make you money, tested automatically",
+  },
+  { figure: "< 1s", note: "Target load time on every page we build" },
 ];
 
 export interface Capability {
@@ -199,7 +202,7 @@ export const capabilities: Capability[] = [
   {
     name: "Test automation",
     description:
-      "Playwright suites over the flows that lose you money when they break. Wired into CI - on your application or ours.",
+      "Playwright test suites over the parts that cost you money when they break. They run automatically on every change, on your application or ours.",
     path: "platform",
   },
   {

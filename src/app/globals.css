@@ -7,32 +7,36 @@
    ========================================================================== */
 
 :root {
-  /* neutrals - cool-biased, never pure grey */
-  --paper: #f5f6f4;
-  --surface: #ffffff;
-  --surface-2: #eceeea;
+  /* neutrals - warm, never pure white and never pure grey */
+  --paper: #f7f2e8;
+  --surface: #fffdf7;
+  --surface-2: #f3efe7;
   --ink: #14191a;
   --ink-2: #45514f;
-  /* muted and grow are tuned to clear 4.5:1 on --paper, not picked by eye */
+  /* muted and grow clear 4.5:1 on every ground they are used on, measured
+     rather than picked by eye. surface-2 carries muted at 4.53:1, which is
+     why it sits this close to surface: the older cool pair missed at 4.45. */
   --muted: #646f6e;
-  --rule: #dde2de;
-  --rule-strong: #bcc5c0;
+  --rule: #e0d8c8;
+  --rule-strong: #c6bda8;
 
   /* signals - grow (warm) and platform (cool) */
   --grow: #b55028;
-  /* kept light enough that grow-coloured text stays legible on the hover tint */
-  --grow-soft: #faf2ed;
+  /* On a cream ground the tints lift rather than deepen, the same way
+     --surface does. A tint darker than --paper cannot also carry grow text
+     at 4.5:1, because grow only has 4.54:1 on the paper itself. */
+  --grow-soft: #fef6ef;
   --grow-ink: #ffffff;
   --platform: #0f5b55;
-  --platform-soft: #dceae7;
+  --platform-soft: #f0f8f6;
   --platform-ink: #ffffff;
 
   /* semantic - status only, never decorative */
   --pass: #1f7a4d;
   --fail: #b3341f;
 
-  --shadow-sm: 0 1px 2px rgba(20, 25, 26, 0.05);
-  --shadow-md: 0 12px 32px -12px rgba(20, 25, 26, 0.18);
+  --shadow-sm: 0 1px 2px rgba(58, 44, 26, 0.06);
+  --shadow-md: 0 12px 32px -12px rgba(58, 44, 26, 0.2);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,7 +46,7 @@
     --surface-2: #1a2221;
     --ink: #e9efec;
     --ink-2: #b0bdb9;
-    --muted: #77857f;
+    --muted: #828f8a;
     --rule: #212b29;
     --rule-strong: #35423f;
 
@@ -67,7 +71,7 @@
   --surface-2: #1a2221;
   --ink: #e9efec;
   --ink-2: #b0bdb9;
-  --muted: #77857f;
+  --muted: #828f8a;
   --rule: #212b29;
   --rule-strong: #35423f;
 

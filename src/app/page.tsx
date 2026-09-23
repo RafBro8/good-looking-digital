@@ -222,7 +222,7 @@ export default function HomePage() {
                 </h2>
                 <p className="text-ink-2 mt-5 max-w-[42ch]">
                   Most agencies hand over a website and hope. We write automated
-                  tests over the flows that lose you money when they break -
+                  tests over the parts that lose you money when they break -
                   then run them on every change, so a broken booking form is
                   caught by us rather than reported by your customer.
                 </p>

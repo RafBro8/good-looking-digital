@@ -38,10 +38,11 @@ export default function PlatformPage() {
                 This is what gets handed over
               </h2>
               <p className="text-ink-2 mt-5 max-w-[44ch]">
-                Not a coverage percentage in a report - a suite that runs on
-                every push and names the workflows in language your business
-                actually uses. When one goes red, everyone knows what broke and
-                who it affects.
+                You get tests that run, not a report full of percentages. Every
+                time the code changes they run again, and each one is named
+                after something your business actually does, like booking a job
+                or taking a payment. When one fails, you know what stopped
+                working and who it affects.
               </p>
             </Reveal>
 
