@@ -7,6 +7,14 @@
 
 export const site = {
   name: "Good Looking Digital",
+  /**
+   * The registered entity, approved by Illinois on 23 September 2026 under file
+   * number 18726009. Used only where the legal person is being identified - the
+   * copyright assertion and the privacy notice - never in page titles, social
+   * cards or body copy. We trade as the short name and are incorporated as this
+   * one, and conflating them would put "LLC" in every browser tab.
+   */
+  legalName: "Good Looking Digital LLC",
   tagline: "Looks good. Works even better.",
   description:
     "Websites, branding and marketing for small businesses. Custom applications, portals and automated testing for companies that outgrew their website.",

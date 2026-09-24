@@ -99,7 +99,7 @@ export function SiteFooter() {
 
         <div className="border-rule flex flex-wrap justify-between gap-3 border-t py-6">
           <p className="label text-muted">
-            © {new Date().getFullYear()} {site.name} - {site.base}
+            © {new Date().getFullYear()} {site.legalName} - {site.base}
           </p>
           <p className="label text-muted">Built and tested in-house</p>
         </div>
