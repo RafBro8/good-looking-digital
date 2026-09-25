@@ -464,10 +464,9 @@ export const pathContent: Record<PathId, PathPage> = {
     featureBody:
       "Most agencies hand over an application and hope. We write automated tests over the flows that lose you money when they break, then run them on every change - so a broken checkout is caught by CI rather than reported by your customer.",
     featurePoints: [
-      "Playwright suites over login, checkout, booking and permissions",
+      "Automated Playwright tests over your core functionality - login, checkout, booking and permissions",
       "Cross-browser: Chromium, Firefox and WebKit",
       "Wired into CI so it runs on every push",
-      "Flaky-test cleanup and Cypress-to-Playwright migration",
       "Available on applications we did not build",
     ],
     faqs: [
