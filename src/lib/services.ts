@@ -171,4 +171,172 @@ export const services: ServiceDetail[] = [
     ctaBody:
       "Tell us what you do and who you want calling you. You get a plan and a price in writing, not a brochure.",
   },
+
+  {
+    slug: "logo-design",
+    path: "grow",
+    sourceName: "Logo and brand identity",
+    metaTitle: "Logo and brand identity",
+    metaDescription:
+      "Logo design, colour palette and type for small businesses in Mokena and across Chicagoland. Drawn to work on a van door, a yard sign and a profile picture. Included with a website build.",
+    eyebrow: "Branding",
+    title: "Logo and brand identity",
+    lede: "A mark that still reads at the size of a profile picture and still looks right three feet wide on the side of a van. Plus the colours and type that go with it, so everything carrying your name looks like it came from the same business.",
+    included: [
+      {
+        title: "A mark that survives every size",
+        body: "The test is not how it looks on a designer's screen. It is whether it still reads on a yard sign from across the street, on a van door at forty miles an hour, and shrunk into a circle on a Facebook profile. Those are three different problems, and the logo gets drawn to survive all of them.",
+      },
+      {
+        title: "Colours and type, not just a logo",
+        body: "A logo on its own is not an identity. You get a small palette and a pair of typefaces chosen to sit with it, so an invoice, a sign and a website look like one business rather than three that happen to share a name.",
+      },
+      {
+        title: "Legible in one colour",
+        body: "Some places give you exactly one colour - a stamp, an embroidered shirt, a vinyl cut, a newspaper ad. A logo that falls apart in black and white was never finished, so yours gets checked that way before anyone signs it off.",
+      },
+      {
+        title: "Every file you will actually be asked for",
+        body: "Vector files for anything printed, so a sign shop can scale it as far as it likes without it going soft at the edges. Flat one-colour versions. Correctly sized images for social profiles. Handed over in a labelled folder so you are never guessing which one to send.",
+      },
+      {
+        title: "Yours outright",
+        body: "You own the artwork and the source files. No licence, no annual fee, and no asking permission before you put it on something.",
+      },
+    ],
+    process: [
+      {
+        title: "What you actually do",
+        body: "Twenty minutes on the phone about the work, the customers and who else is competing for them. Most of the useful material comes from how you describe the jobs you like, not from a mood board.",
+      },
+      {
+        title: "Two or three directions",
+        body: "Options that genuinely differ from each other, rather than one real idea flanked by two weak ones put there to make it look better.",
+      },
+      {
+        title: "Refine the one you pick",
+        body: "Spacing, weight, how it behaves small, how it behaves in a single colour. This is where a rough idea becomes something you can hand to a sign shop.",
+      },
+      {
+        title: "Handover",
+        body: "The full set of files, labelled, with a short note on which version to send where.",
+      },
+    ],
+    notIncluded: [
+      "Trademark searches and registration - nothing gets knowingly copied, but clearing a name legally is a trademark attorney's job rather than ours",
+      "Printing of any kind - artwork is supplied print-ready and you take it to whichever printer or sign shop you prefer",
+      "Rebranding a business that already has signage, vehicles and stationery out in the field, which is a considerably bigger job than this",
+    ],
+    faqs: [
+      {
+        q: "Why does the price say included?",
+        a: "Because a new website carrying a logo that does not match it is half a job. Branding comes with a website build rather than being sold alongside it. If you want the logo without the site, say so and it gets priced on its own.",
+      },
+      {
+        q: "What if I already have a logo?",
+        a: "Then we use it. The work becomes making sure it is properly set up - the file formats you will be asked for, a palette and type that sit with it, and a one-colour version if you do not already have one. That is usually faster and cheaper than starting again, and we will say so rather than talk you into a redesign.",
+      },
+      {
+        q: "How many options do I get?",
+        a: "Two or three real directions, then proper refinement on the one you choose. Not fifty thumbnails - that makes a decision harder, not easier.",
+      },
+      {
+        q: "Can it go on a vehicle or a large sign?",
+        a: "Yes, and that is specifically what the vector files are for - a wrap installer or sign shop will ask for exactly those. Worth mentioning a vehicle wrap up front though, because it changes how wide the mark wants to be drawn.",
+      },
+      {
+        q: "Do I own it?",
+        a: "Yes, outright, including the source files. No licence and no annual fee.",
+      },
+    ],
+    ctaTitle: "Let us see what you do.",
+    ctaBody:
+      "Tell us about the work and the customers you want more of. You get real options and a price in writing, not a mood board.",
+  },
+
+  {
+    slug: "lead-capture",
+    path: "grow",
+    sourceName: "Lead capture & follow-up",
+    metaTitle: "Lead capture and follow-up",
+    metaDescription:
+      "The form, the database behind it, the alert that reaches you in seconds, the confirmation your customer gets, and a reminder if nobody called back. Running on this site today.",
+    eyebrow: "Lead capture",
+    title: "Lead capture and follow-up",
+    lede: "The most expensive enquiry is the one that arrived and nobody answered. The advertising was already paid for and the customer was already interested - then it landed in a spam folder, or got read on a phone between jobs and forgotten. This is everything that happens after someone decides to contact you.",
+    included: [
+      {
+        title: "A form that works, and is tested",
+        body: "Short, because every extra field costs you enquiries. Usable one-handed on a phone. Readable by a screen reader, with errors that say what is actually wrong. Automated tests run over it on every change, because a contact form that quietly stops working is the most expensive bug a small business site can have.",
+      },
+      {
+        title: "Stored, not just emailed",
+        body: "Email is where enquiries go to die - a spam filter, a full mailbox, a bad moment. Every enquiry is written to a database first, so the email failing to arrive stops being a way to lose work.",
+      },
+      {
+        title: "You know within seconds",
+        body: "A notification reaches you as soon as the form is sent, carrying what you need in order to call the person back. Not a daily digest, and not a dashboard you have to remember to open.",
+      },
+      {
+        title: "Your customer hears back immediately",
+        body: "An automatic confirmation goes out, so nobody is left wondering whether the form worked. Silence after sending a form is exactly why people contact three businesses instead of one.",
+      },
+      {
+        title: "A reminder if nobody called back",
+        body: "When an enquiry sits unanswered past a threshold you choose, you get chased about it - once, inside working hours, never overnight. One nudge, because a reminder arriving every hour gets muted, and a muted reminder protects nothing.",
+      },
+      {
+        title: "You can tell where they came from",
+        body: "An enquiry from a yard sign, a Google listing and a Facebook post look different in the record, so you can find out which of them is actually worth the money.",
+      },
+    ],
+    process: [
+      {
+        title: "Work out what you need to know",
+        body: "Which questions genuinely help you quote the job, and which ones simply cost you enquiries. Usually fewer than people expect.",
+      },
+      {
+        title: "Build and wire it up",
+        body: "The form, the storage, the notification and the confirmation, connected and tested end to end rather than assumed to work.",
+      },
+      {
+        title: "Set the follow-up rules",
+        body: "How long an enquiry may sit before you get chased, and the hours a reminder is allowed to arrive.",
+      },
+      {
+        title: "Tune it on real enquiries",
+        body: "Real ones behave differently from test ones. The thresholds are worth adjusting once traffic is genuine rather than guessed up front.",
+      },
+    ],
+    notIncluded: [
+      "Advertising - this does not make enquiries appear, it makes sure none of the ones you get go missing",
+      "Replacing a CRM you already run - connecting to one is automation work and gets quoted separately",
+      "Answering the enquiries, which remains the part only you can do",
+    ],
+    faqs: [
+      {
+        q: "Is this the same thing as advertising?",
+        a: "No, and the difference is worth being clear about. Advertising is how somebody finds out you exist. This is what happens after they have already decided to contact you. We do not make enquiries appear - we make sure none of them are lost.",
+      },
+      {
+        q: "Does this actually run anywhere, or is it a promise?",
+        a: "It runs on this site. The form you would use to contact us is the same one, with the same storage, the same notification and the same follow-up reminder behind it. The lead path here is covered by automated tests, which is how we know it still works rather than assuming it does.",
+      },
+      {
+        q: "What if I miss the notification anyway?",
+        a: "That is precisely what the reminder exists for. If an enquiry has been sitting unanswered past your threshold, you get told - once, inside the hours you set. It is meant to say this was missed, not you are busy.",
+      },
+      {
+        q: "Where does my customer's information go?",
+        a: "Into a database only you have access to, and nowhere else. Not sold, not used for advertising, not shared. Whatever gets built for you comes with a privacy notice describing accurately what actually happens to it, rather than boilerplate copied from somewhere else.",
+      },
+      {
+        q: "Can I tell which sign or page produced a call?",
+        a: "Yes. Where an enquiry came from is recorded alongside it, so a QR code on a yard sign and a link in a Google listing are distinguishable afterwards. That is how you work out which one is worth continuing with.",
+      },
+    ],
+    ctaTitle: "Stop losing the ones you already paid for.",
+    ctaBody:
+      "Tell us how enquiries reach you now, and where you think they go missing. You get a plan and a price in writing.",
+  },
 ];
