@@ -74,7 +74,7 @@ export default async function ServicePage({
     "@type": "Service",
     name: service.title,
     description: service.metaDescription,
-    serviceType: service.sourceName,
+    serviceType: service.sourceNames.join(" and "),
     provider: {
       "@type": "ProfessionalService",
       name: site.legalName,

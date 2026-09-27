@@ -32,13 +32,24 @@ export interface ServiceDetail {
   slug: string;
   path: PathId;
   /**
-   * The exact `name` of the matching row in paths[].services.
+   * The exact `name` of every matching row in paths[].services.
    *
-   * Prices are read from that row rather than repeated here, so a price can
+   * Prices are read from those rows rather than repeated here, so a price can
    * never be right on the path page and stale on the service page. A typo
    * fails loudly at build time instead of quietly showing the wrong number.
+   *
+   * Usually one entry. It is a list because a page can legitimately cover two
+   * rows - Google and Facebook presence is one job sold as two line items -
+   * and splitting it into two near-identical pages would be worse for both a
+   * reader and a search engine than covering it once properly.
    */
-  sourceName: string;
+  sourceNames: string[];
+  /**
+   * Appended to the price when the number alone would mislead. "each" on a
+   * page covering two separately priced rows, so "from $350" cannot be read
+   * as the total for both.
+   */
+  priceSuffix?: string;
   metaTitle: string;
   metaDescription: string;
   eyebrow: string;
@@ -64,21 +75,43 @@ export interface ServiceDetail {
  */
 export function servicePrice(service: ServiceDetail): string {
   const path = paths.find((p) => p.id === service.path);
-  const row = path?.services.find((s) => s.name === service.sourceName);
 
-  if (!row) {
+  const prices = service.sourceNames.map((name) => {
+    const row = path?.services.find((s) => s.name === name);
+
+    if (!row) {
+      throw new Error(
+        `services.ts: "${name}" does not match any row in paths[${service.path}]. ` +
+          `The service list and the price list have drifted apart.`,
+      );
+    }
+
+    return row.price;
+  });
+
+  // Covering two rows only works while they cost the same. The moment they
+  // diverge, one number cannot honestly describe both, and the page needs
+  // splitting or its own explicit wording - so fail rather than pick one.
+  const distinct = [...new Set(prices)];
+  if (distinct.length > 1) {
     throw new Error(
-      `services.ts: "${service.sourceName}" does not match any row in paths[${service.path}]. ` +
-        `The service list and the price list have drifted apart.`,
+      `services.ts: "${service.slug}" covers rows priced differently (${distinct.join(", ")}). ` +
+        `A single price cannot describe both.`,
     );
   }
 
-  return row.price;
+  return service.priceSuffix
+    ? `${distinct[0]} ${service.priceSuffix}`
+    : distinct[0];
 }
 
-/** The row on /grow or /platform this service expands on. */
+/**
+ * The row on /grow or /platform this service expands on. Where a page covers
+ * two rows they sit next to each other in the list, so the first is close
+ * enough to land the reader in the right place.
+ */
 export function serviceRowHref(service: ServiceDetail): string {
-  return `/${service.path}#${serviceAnchor(service.sourceName)}`;
+  return `/${service.path}#${serviceAnchor(service.sourceNames[0])}`;
 }
 
 export function serviceBySlug(slug: string): ServiceDetail | undefined {
@@ -89,7 +122,7 @@ export const services: ServiceDetail[] = [
   {
     slug: "website-design",
     path: "grow",
-    sourceName: "Website design and build",
+    sourceNames: ["Website design and build"],
     metaTitle: "Website design and build",
     metaDescription:
       "Custom website design and build for small businesses in Mokena and across Chicagoland. Designed from scratch, fast on a phone, tested automatically, and yours to own.",
@@ -175,7 +208,7 @@ export const services: ServiceDetail[] = [
   {
     slug: "logo-design",
     path: "grow",
-    sourceName: "Logo and brand identity",
+    sourceNames: ["Logo and brand identity"],
     metaTitle: "Logo and brand identity",
     metaDescription:
       "Logo design, colour palette and type for small businesses in Mokena and across Chicagoland. Drawn to work on a van door, a yard sign and a profile picture. Included with a website build.",
@@ -257,7 +290,7 @@ export const services: ServiceDetail[] = [
   {
     slug: "lead-capture",
     path: "grow",
-    sourceName: "Lead capture & follow-up",
+    sourceNames: ["Lead capture & follow-up"],
     metaTitle: "Lead capture and follow-up",
     metaDescription:
       "The form, the database behind it, the alert that reaches you in seconds, the confirmation your customer gets, and a reminder if nobody called back. Running on this site today.",
@@ -338,5 +371,249 @@ export const services: ServiceDetail[] = [
     ctaTitle: "Stop losing the ones you already paid for.",
     ctaBody:
       "Tell us how enquiries reach you now, and where you think they go missing. You get a plan and a price in writing.",
+  },
+
+  {
+    slug: "google-business-profile",
+    path: "grow",
+    sourceNames: [
+      "Google Business Profile setup",
+      "Facebook & Instagram page setup",
+    ],
+    priceSuffix: "each",
+    metaTitle: "Google Business Profile and Facebook setup",
+    metaDescription:
+      "Google Business Profile, Facebook and Instagram pages set up properly for small businesses in Mokena and across Chicagoland. Created in your name, verified, and consistent with your website.",
+    eyebrow: "Local presence",
+    title: "Google and Facebook presence",
+    lede: "Being findable in the places people actually look. A Google listing that appears when somebody nearby searches for what you do, and social pages that read as a working business rather than an abandoned one.",
+    included: [
+      {
+        title: "The Google listing, set up properly",
+        body: "Categories, service area, hours, description, services and photos. Most of the value sits in the category and the service area, which are also the two things most often set wrong - and a wrong category quietly keeps you out of searches you should be winning.",
+      },
+      {
+        title: "Verified, which is the part people abandon",
+        body: "Google will not show a listing it has not verified, and it chooses the verification method rather than letting you pick. It takes days rather than minutes, and it is the step most people start and never finish.",
+      },
+      {
+        title: "Photos that do actual work",
+        body: "Listings with real photographs get contacted more than listings without. You will be told exactly what to photograph and from where, which is usually less work than people expect.",
+      },
+      {
+        title: "Facebook and Instagram, set up as a business",
+        body: "Proper business pages rather than personal profiles, carrying the same name, hours, service area and contact details as everything else.",
+      },
+      {
+        title: "The same details in every place",
+        body: "Name, address and phone written identically across your site, your Google listing and your social pages. Search engines treat that agreement as evidence you are a real business, and disagreement as a reason to trust none of them.",
+      },
+      {
+        title: "In your name from the start",
+        body: "Created under your account with delegated access for us, never the other way round. If we stop working together you keep the pages, the reviews and the history.",
+      },
+    ],
+    process: [
+      {
+        title: "Gather the details",
+        body: "Hours, service area, the categories that match what you actually do, and a short list of photographs worth taking.",
+      },
+      {
+        title: "Create and verify",
+        body: "The listing goes up and verification starts. This is the slow part, so it gets started first rather than last.",
+      },
+      {
+        title: "Fill it in properly",
+        body: "Description, services, photos and the questions people ask. An empty verified listing is only marginally better than none.",
+      },
+      {
+        title: "Hand over",
+        body: "Access confirmed as yours, with a short note on how to post and what is worth posting.",
+      },
+    ],
+    notIncluded: [
+      "Advertising spend on Google, Facebook or anywhere else - profiles get set up, campaigns are not run here",
+      "Day-to-day social posting and content creation. Keeping a Google profile current is part of the Growth care plan; running your social accounts is not a service offered here",
+      "Removing or disputing existing bad reviews, which is between you and the platform",
+    ],
+    faqs: [
+      {
+        q: "Who owns the pages?",
+        a: "You do, always, and they are created in your name from the start. Good Looking Digital gets delegated access to do the work and nothing more. If we stop working together you keep the pages, the reviews and the history.",
+      },
+      {
+        q: "Will this get me to the top of Google?",
+        a: "Nobody can promise that, and anybody who does is guessing. What a properly set up profile does is make you eligible to appear when somebody nearby searches for what you do. Eligible is not the same as first, and the distance between them is mostly reviews and time.",
+      },
+      {
+        q: "How long does verification take?",
+        a: "Usually a few days, occasionally a couple of weeks. Google picks the method and you cannot choose it, which is why it gets started at the beginning rather than left to the end.",
+      },
+      {
+        q: "What if someone already set up a listing for me?",
+        a: "Then it gets claimed back into your name rather than a second one being created. Duplicate listings actively work against you, because Google splits the signals between them and neither ranks as well as one would.",
+      },
+      {
+        q: "Do I need Facebook and Instagram if I only care about Google?",
+        a: "No. Google is the one that gets you called. The social pages are worth having so your details agree everywhere and so you do not look absent, but if you only want the Google listing then that is a smaller job and it gets priced as one.",
+      },
+    ],
+    ctaTitle: "Get found where people are looking.",
+    ctaBody:
+      "Tell us what you do and the towns you cover. The listing goes up in your name, and verification starts the same week.",
+  },
+
+  {
+    slug: "qr-signage",
+    path: "grow",
+    sourceNames: ["QR codes and landing pages"],
+    metaTitle: "QR codes for signs and vehicles",
+    metaDescription:
+      "A QR code on your own domain, the short tracked link behind it, and the page it opens. Supplied as vector so it scales to any sign. You print it wherever you like.",
+    eyebrow: "QR marketing",
+    title: "QR codes that keep working",
+    lede: "Most yard signs end at a phone number nobody dials. A QR code turns the person standing on the pavement into an enquiry before they have walked away - but only if it points somewhere worth landing, and only if nobody else can switch it off. Offered on sites we built or host, because the tracked link has to live on your own domain.",
+    included: [
+      {
+        title: "The code as a vector file",
+        body: "Supplied as SVG, so it scales from a business card to a van door without softening at the edges. A PNG off a free generator is a fixed grid of pixels, and blown up to sign size the edges blur into each other - which is exactly what stops a camera reading it.",
+      },
+      {
+        title: "It points at your domain, not somebody else's",
+        body: "Free QR sites usually route through their own redirect. When that service expires, starts charging or simply shuts down, every sign you printed dies with it. Yours points at your own address, so nobody else is holding the other end.",
+      },
+      {
+        title: "A short link, which is why it scans from further",
+        body: "The more characters a code carries, the more squares it needs, and the smaller each square becomes at the same printed size. A short path scans from roughly twice the distance of the same code carrying tracking parameters - so the tracking lives in the link itself rather than trailing off the end of it.",
+      },
+      {
+        title: "You can tell which sign produced which call",
+        body: "Each code gets its own short path, so a sign on one road and a flyer left at the hardware store are distinguishable afterwards. That is how you find out which one is worth repeating.",
+      },
+      {
+        title: "A page built for one thing",
+        body: "The code opens a page about the offer on the sign, not your homepage. Somebody who scanned a sign about gutter cleaning should land on gutter cleaning rather than a menu of everything you do.",
+      },
+      {
+        title: "The numbers your printer will ask for",
+        body: "The minimum printed width for the distance you want it read from, how much clear space it needs around it, and why a logo must not go through the middle. Hand it to whoever makes the sign.",
+      },
+    ],
+    process: [
+      {
+        title: "Pick the one offer",
+        body: "A code opening a menu converts badly. Decide the single thing the sign is about before anything else happens.",
+      },
+      {
+        title: "Build the page and the short link",
+        body: "A single-purpose page, fast on a phone held one-handed at the kerbside, behind a short path that records where the scan came from.",
+      },
+      {
+        title: "Generate and check the code",
+        body: "Vector output, error correction chosen for outdoors, clear space enforced. Then printed at several sizes and actually scanned from a distance, because the arithmetic is a guide and a real phone is the test.",
+      },
+      {
+        title: "You take it from there",
+        body: "The file and the numbers are yours. Your sign shop lays it out, or you drop it into a sticker order yourself.",
+      },
+    ],
+    notIncluded: [
+      "Sign artwork and layout - you get the code and the measurements, and your sign shop does the design, which they do every day and usually include with a print order",
+      "Printing, the physical signs, putting them out, and any permit your town wants before you do",
+      "The form, storage, notifications and follow-up behind the page, which is lead capture and is priced separately",
+    ],
+    faqs: [
+      {
+        q: "Why pay for this when QR generators are free?",
+        a: "Because the code is the easy part and it is not what you are buying. A free generator gives you a pixel image pointing through somebody else's redirect, with no way to tell which sign produced which call. You are paying for a link on your own domain that cannot be switched off, a page worth landing on, and knowing which sign worked.",
+      },
+      {
+        q: "Do you design the sign itself?",
+        a: "No. You get the code as a scalable file plus the measurements it needs, and your sign shop does the layout - it is what they do all day, and most of them include it with the print order. It keeps you free to shop on price and means nobody is marking printing up.",
+      },
+      {
+        q: "How big does the code need to be?",
+        a: "Roughly a tenth of the distance you want it read from, so a code read from ten feet away wants to be around a foot across. Which is worth knowing before you order: a code on a yard sign works for somebody walking past it, and will never work for somebody driving past it.",
+      },
+      {
+        q: "Can I change where it points after it is printed?",
+        a: "Yes, and that is the point of it living on your domain. The printed sign never has to change - what it opens can, as often as you like, including pointing it somewhere seasonal and then back again.",
+      },
+      {
+        q: "Does this work if my website is on Wix or Squarespace?",
+        a: "Usually not, and it is better to say so now. The short tracked link has to be added to your own site, which needs a level of control those builders do not give you. This works best on a site we built or host.",
+      },
+    ],
+    ctaTitle: "Give the sign somewhere worth going.",
+    ctaBody:
+      "Tell us the offer and how far away you want it read from. You get the code, the link behind it, and the page it opens.",
+  },
+
+  {
+    slug: "hosting-and-care",
+    path: "grow",
+    sourceNames: ["Hosting and care"],
+    metaTitle: "Hosting and care plans",
+    metaDescription:
+      "Hosting, monitoring, security updates and small changes for small business websites, from $95 a month. Month to month, and the same person who built it answers.",
+    eyebrow: "Care",
+    title: "Hosting and care plans",
+    lede: "A website is not furniture. The things around it keep moving - browsers, certificates, the software underneath, the businesses you connect to - and a site nobody maintains stops working quietly rather than loudly. This is what keeps it working, and who answers when it does not.",
+    included: [
+      {
+        title: "Hosting that is genuinely fast",
+        body: "Served from the edge, close to whoever is asking for it, with a certificate that renews itself. Not a cheap shared server three states away with four hundred other sites on it.",
+      },
+      {
+        title: "Instant rollback",
+        body: "If an update breaks something, the previous version is back live in under a minute. That is a property of how the site is deployed rather than a promise to work quickly under pressure.",
+      },
+      {
+        title: "Watched from outside",
+        body: "Checked every few minutes from somewhere that is not us, because a site reporting on its own health is a night watchman asleep at the desk. If it stops answering, we find out before you do.",
+      },
+      {
+        title: "Security and dependency updates",
+        body: "The software a site sits on gets patched. Left alone for a year, it becomes the easiest way in - and the overwhelming majority of small business sites that get defaced were simply out of date.",
+      },
+      {
+        title: "Small changes included",
+        body: "Text, prices, photos, opening hours, a new team member. Send them over rather than working out how to do it yourself at nine in the evening.",
+      },
+      {
+        title: "A person who answers",
+        body: "The same person who built it. Not a ticket queue, and not somebody junior reading from a runbook written by whoever left last.",
+      },
+    ],
+    notIncluded: [
+      "Advertising and campaign management of any kind",
+      "Substantial new features or a redesign, which are quoted as projects rather than absorbed into a monthly plan",
+      "Third-party subscriptions you hold directly, such as a domain, a booking tool or stock photography",
+    ],
+    faqs: [
+      {
+        q: "What are the tiers?",
+        a: "Three, from $95 to $250 a month, and the full breakdown is on the pricing page. The short version: Essential keeps the site up and current, Growth keeps it changing as the business does, and Care+ is for a site or application doing real work every day.",
+      },
+      {
+        q: "Do I have to take a care plan?",
+        a: "No. The site is yours and you can host it yourself or with anyone else. What you give up is the monitoring, the updates and the person who answers, which is a perfectly reasonable trade right up until the morning something breaks.",
+      },
+      {
+        q: "Can I cancel?",
+        a: "Yes, month to month, and you keep the site. Leaving means pointing your domain somewhere else rather than negotiating a release with anybody.",
+      },
+      {
+        q: "What happens if the site goes down at two in the morning?",
+        a: "Monitoring notices and an alert fires. Whether it is fixed at two in the morning depends on what broke and which plan you are on. This business runs alongside a full-time job, which is said plainly here rather than dressed up as round-the-clock support.",
+      },
+      {
+        q: "Are there backups?",
+        a: "The site itself lives in version control, so any previous version can be put back live. Where there is a database behind it, Atlas takes an automatic daily snapshot that cannot be switched off, so the data can be restored as well as the code.",
+      },
+    ],
+    ctaTitle: "Keep it working.",
+    ctaBody:
+      "Tell us what you have and where it is hosted now. You get a straight answer about which plan fits, or that you do not need one.",
   },
 ];

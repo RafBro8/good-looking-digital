@@ -107,7 +107,7 @@ export const paths: ServicePath[] = [
         footerLabel: "Lead capture",
       },
       {
-        name: "QR signage artwork",
+        name: "QR codes and landing pages",
         price: "from $250",
         footerLabel: "QR marketing",
       },
@@ -383,7 +383,7 @@ export const pathContent: Record<PathId, PathPage> = {
       },
       {
         title: "Launch",
-        body: "Live on your domain, and showing up when someone nearby searches for what you do. Print-ready sign artwork in your hands, to take to whichever printer you like.",
+        body: "Live on your domain, and showing up when someone nearby searches for what you do. Any QR codes handed over as scalable files, ready for whoever makes your signs.",
       },
       {
         title: "Care",
@@ -395,7 +395,7 @@ export const pathContent: Record<PathId, PathPage> = {
     featureBody:
       "Most signs end at a phone number nobody dials. We design the code and the page it opens, you print the sign wherever you like, and the neighbour standing on the sidewalk becomes an enquiry in your pocket before they have walked away.",
     featurePoints: [
-      "Print-ready QR artwork for yard signs, stickers, flyers or vehicle graphics",
+      "A QR code as a scalable file, for yard signs, stickers, flyers or vehicle graphics",
       "Opens a page built for one offer, not your homepage",
       "Short form - you are notified within seconds, by email",
       "Your customer gets an instant confirmation, not silence",

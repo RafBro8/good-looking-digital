@@ -67,7 +67,7 @@ test.describe("footer service links", () => {
       await (await footerLink(page, label)).click();
       await page.waitForFunction(
         (expected) => window.location.hash === expected,
-        `#${{ Websites: "website-design-and-build", Branding: "logo-and-brand-identity", "QR marketing": "qr-signage-artwork" }[label]}`,
+        `#${{ Websites: "website-design-and-build", Branding: "logo-and-brand-identity", "QR marketing": "qr-codes-and-landing-pages" }[label]}`,
       );
       positions.push(await page.evaluate(() => Math.round(window.scrollY)));
     }
@@ -110,7 +110,7 @@ test.describe("footer service links", () => {
 
     const rows = [
       ["Branding", "logo-and-brand-identity"],
-      ["QR marketing", "qr-signage-artwork"],
+      ["QR marketing", "qr-codes-and-landing-pages"],
       ["Websites", "website-design-and-build"],
       // Back to one already visited, and then the same one twice: clicking
       // the row you are already on must leave it marked, not toggle it off.
