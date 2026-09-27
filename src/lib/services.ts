@@ -616,4 +616,169 @@ export const services: ServiceDetail[] = [
     ctaBody:
       "Tell us what you have and where it is hosted now. You get a straight answer about which plan fits, or that you do not need one.",
   },
+
+  /* ---------------------------------------------------------------- */
+  /* Platform - deliberately shorter. These are read by someone who    */
+  /* arrived by referral and is checking for a match, not by someone   */
+  /* who needs persuading. Padding loses that reader. None carry a     */
+  /* process: /platform already sets out how an engagement runs, and   */
+  /* repeating it three times would say nothing new.                   */
+  /* ---------------------------------------------------------------- */
+
+  {
+    slug: "custom-software",
+    path: "platform",
+    sourceNames: ["Custom web applications", "Customer and staff portals"],
+    metaTitle: "Custom software development",
+    metaDescription:
+      "Custom web applications, customer portals and staff dashboards built by one senior engineer. TypeScript, React, Next.js, Angular, Node, Java and Spring Boot. Fixed price wherever scope allows.",
+    eyebrow: "Applications",
+    title: "Custom software development",
+    lede: "The point where a website stops being enough: people have to sign in, do something that changes data, and come back tomorrow expecting it to still be there. Portals, dashboards, internal tools, and the integrations tying them to what you already run.",
+    included: [
+      {
+        title: "One engineer, start to finish",
+        body: "Database schema to the last pixel, by the person who took the first call. Nothing gets passed between three companies, so nothing falls into the gap between them.",
+      },
+      {
+        title: "Working software, not status reports",
+        body: "Deployed to a preview environment from the first week. You click through what exists rather than reading about what is planned.",
+      },
+      {
+        title: "Fixed price wherever the scope allows",
+        body: "Most defined projects get a number before work starts. Where scope genuinely cannot be pinned down, you get a rate and an agreed ceiling rather than an open meter.",
+      },
+      {
+        title: "Handover is a supported ending",
+        body: "Documentation and a clean handover to your own team is a normal outcome, not a failure. So is a retainer. Both get quoted honestly.",
+      },
+    ],
+    notIncluded: [
+      "Team augmentation at scale - this is one senior engineer working alongside your people, not a supplier of several",
+      "Anything requiring 24/7 on-call. This runs alongside a full-time job, and the timelines you get are honest rather than optimistic",
+      "Desktop and robotic process automation of legacy software",
+      "Work a large agency would genuinely serve better, which gets said on the first call rather than after three meetings",
+    ],
+    faqs: [
+      {
+        q: "What stack do you work in?",
+        a: "TypeScript and JavaScript across React, Next.js and Angular; Node and Express or Java and Spring Boot behind them; SQL and MongoDB for data. The full list, including cloud and CI, is on the platform page.",
+      },
+      {
+        q: "Will you work alongside our developers?",
+        a: "Yes, and it is a normal arrangement - your repository, your branch strategy, your review process. Including building a test suite your team then owns.",
+      },
+      {
+        q: "How do we start without committing to a build?",
+        a: "A paid, fixed-price assessment. You keep the findings and the prioritised list whatever you decide next, and the fee credits toward the build if you go ahead.",
+      },
+    ],
+    ctaTitle: "Describe the problem, not the solution.",
+    ctaBody:
+      "Tell us what people need to do and what is currently in the way. You get an honest read on whether that is a build, a fix, or something you do not need at all.",
+  },
+
+  {
+    slug: "automation-and-integrations",
+    path: "platform",
+    sourceNames: ["Automation & integrations"],
+    metaTitle: "Automation and integrations",
+    metaDescription:
+      "Connecting systems you already run: moving data between them, triggering notifications, and removing the manual steps nobody notices any more. From $1,500.",
+    eyebrow: "Automation",
+    title: "Automation and integrations",
+    lede: "Most businesses do not need new software. They need the software they already have to talk to itself, so that somebody stops copying the same data between two screens every morning.",
+    included: [
+      {
+        title: "Moving data between systems you already run",
+        body: "Two tools that both hold your customer list, kept in step. An order raised in one place appearing in the other without anybody retyping it.",
+      },
+      {
+        title: "Triggering the things that depend on somebody remembering",
+        body: "A notification when a threshold is crossed. A record created when a form arrives. The small events currently held together by one person's attention.",
+      },
+      {
+        title: "Removing the repeated manual step",
+        body: "The daily export, the weekly reconciliation, the copy-and-paste everybody stopped noticing because it has always been done that way.",
+      },
+      {
+        title: "Built to fail loudly",
+        body: "An integration that stops silently is worse than none at all, because you carry on trusting it. These alert when they break rather than quietly doing nothing.",
+      },
+    ],
+    notIncluded: [
+      "Desktop and robotic process automation - if the only way in is by driving a Windows application's interface, this is not the right service",
+      "Systems with no API and no usable export. Where a vendor has genuinely closed the door, that gets said early rather than billed for",
+      "Replacing a system outright, which is a build rather than an integration",
+    ],
+    faqs: [
+      {
+        q: "What can you connect?",
+        a: "Anything with an API or a usable export, which is most modern tools. The first question on any integration is whether the door exists at all, and that gets answered before a quote rather than after one.",
+      },
+      {
+        q: "How do I know it is still working?",
+        a: "Because it tells you. Failures raise an alert instead of passing silently, which is the whole difference between an integration you can rely on and one you end up checking by hand anyway.",
+      },
+      {
+        q: "Is $1,500 for one integration?",
+        a: "It is the starting point for a defined one. Two systems with good APIs and a clear rule sits at the cheap end; a chain of five with edge cases does not. You get the number before work starts.",
+      },
+    ],
+    ctaTitle: "Describe the thing somebody does every morning.",
+    ctaBody:
+      "If it is the same steps in the same order, it is probably worth automating. You get a straight answer on whether it can be, and what it would cost.",
+  },
+
+  {
+    slug: "playwright-testing",
+    path: "platform",
+    sourceNames: ["Playwright test automation"],
+    metaTitle: "Playwright test automation",
+    metaDescription:
+      "Automated end-to-end tests over login, checkout, booking and permissions. Cross-browser, wired into your CI, and available on applications we did not build. From $2,500.",
+    eyebrow: "Test automation",
+    title: "Playwright test automation",
+    lede: "A suite over the flows that cost you money when they break, running on every push. Available on applications we did not build, which is most of this work.",
+    included: [
+      {
+        title: "The flows that matter, not a coverage number",
+        body: "Login, checkout, booking, permissions. Named in the language your business already uses, so a red build says what broke and who it affects rather than which file threw.",
+      },
+      {
+        title: "Three engines",
+        body: "Chromium, Firefox and WebKit. The bugs that only show up in Safari are real, and this is usually how they get found before a customer finds them.",
+      },
+      {
+        title: "Wired into your pipeline",
+        body: "Runs on every push, in whatever you already use - GitHub Actions, Jenkins, something else. Not a suite somebody has to remember to run.",
+      },
+      {
+        title: "Written to be owned by your team",
+        body: "Readable and extendable, handed over with documentation. A clean handover is a supported ending rather than a lost retainer.",
+      },
+    ],
+    notIncluded: [
+      "Migrating an existing suite from another framework, and cleaning up somebody else's flaky tests - both tend to become open-ended commitments and are not taken on",
+      "Load and performance testing, which is a different discipline with different tools",
+      "Manual QA",
+    ],
+    faqs: [
+      {
+        q: "Can you test an application you did not build?",
+        a: "Yes, and it is the more common engagement. Writing tests does not require having written the application - often the opposite helps, because a fresh reader finds the assumptions the original team stopped being able to see.",
+      },
+      {
+        q: "Will you work in our repository?",
+        a: "Yes. Your repo, your branch strategy, your review process. The suite arrives as pull requests like any other work.",
+      },
+      {
+        q: "What does $2,500 buy?",
+        a: "A starting suite over the handful of flows that would hurt most, wired into CI and actually running. It is a starting point rather than a menu price: the number depends on how many flows matter and how much work it takes to get the application into a testable state.",
+      },
+    ],
+    ctaTitle: "Find out what breaks before your customers do.",
+    ctaBody:
+      "Tell us which flows would cost you most if they stopped working tomorrow. That is usually the entire scoping conversation.",
+  },
 ];
