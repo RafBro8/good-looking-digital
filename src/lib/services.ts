@@ -118,6 +118,37 @@ export function serviceBySlug(slug: string): ServiceDetail | undefined {
   return services.find((s) => s.slug === slug);
 }
 
+/**
+ * The service page covering a given row in paths[], if there is one.
+ *
+ * Two rows deliberately have none: Platform assessment is a way of starting an
+ * engagement rather than a service, and lives on /platform; Ongoing engineering
+ * is a retainer. So this returns undefined rather than throwing, and callers
+ * fall back to the row itself.
+ */
+export function serviceForRow(
+  path: PathId,
+  rowName: string,
+): ServiceDetail | undefined {
+  return services.find(
+    (s) => s.path === path && s.sourceNames.includes(rowName),
+  );
+}
+
+/**
+ * Where a service row should send someone.
+ *
+ * The page where one exists, and the row itself where one does not. Used by
+ * the footer and by the rows on /grow and /platform, so both always agree
+ * about a service's destination and neither can be updated without the other.
+ */
+export function serviceHrefForRow(path: PathId, rowName: string): string {
+  const service = serviceForRow(path, rowName);
+  return service
+    ? `/services/${service.slug}`
+    : `/${path}#${serviceAnchor(rowName)}`;
+}
+
 export const services: ServiceDetail[] = [
   {
     slug: "website-design",
