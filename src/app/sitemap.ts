@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { services } from "@/lib/services";
+import { towns } from "@/lib/towns";
 import { site } from "@/lib/site";
 
 /**
@@ -49,5 +50,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...fixed, ...servicePages];
+  // Highest priority of the generated pages: a town page is the one a
+  // local search should land on, and it is the reason the others get found.
+  const townPages = towns.map((town) => ({
+    url: `${site.url}/${town.slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.9,
+  }));
+
+  return [...fixed, ...servicePages, ...townPages];
 }
