@@ -174,9 +174,15 @@ Copy and pricing live in `src/lib/site.ts` so they can be edited without touchin
 
 ## Build stages
 
-This site is being built in reviewed stages. Current: **Stage 02 - foundation**.
+Built in reviewed stages, each one shown and approved before it ships.
 
-Remaining: homepage, the two buyer paths, services and pricing, lead capture, case studies and local SEO, Playwright coverage, launch.
+Done: the design system, the homepage, the two buyer paths, pricing, about,
+lead capture with follow-up reminders, Playwright coverage running in CI across
+three engines, a health endpoint for monitoring from outside, and a page for
+each of the nine services.
+
+Remaining: per-town landing pages, case studies once there are projects worth
+showing, and launch - which is waiting on the domain being attached.
 
 ## Note on `AGENTS.md`
 
