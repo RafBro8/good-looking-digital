@@ -44,12 +44,7 @@ export interface ServiceDetail {
    * reader and a search engine than covering it once properly.
    */
   sourceNames: string[];
-  /**
-   * Appended to the price when the number alone would mislead. "each" on a
-   * page covering two separately priced rows, so "from $350" cannot be read
-   * as the total for both.
-   */
-  priceSuffix?: string;
+
   metaTitle: string;
   metaDescription: string;
   eyebrow: string;
@@ -100,9 +95,7 @@ export function servicePrice(service: ServiceDetail): string {
     );
   }
 
-  return service.priceSuffix
-    ? `${distinct[0]} ${service.priceSuffix}`
-    : distinct[0];
+  return distinct[0];
 }
 
 /**
@@ -407,11 +400,7 @@ export const services: ServiceDetail[] = [
   {
     slug: "google-business-profile",
     path: "grow",
-    sourceNames: [
-      "Google Business Profile setup",
-      "Facebook & Instagram page setup",
-    ],
-    priceSuffix: "each",
+    sourceNames: ["Google and Facebook presence"],
     metaTitle: "Google Business Profile and Facebook setup",
     metaDescription:
       "Google Business Profile, Facebook and Instagram pages set up properly for small businesses in Mokena and across Chicagoland. Created in your name, verified, and consistent with your website.",
@@ -659,7 +648,7 @@ export const services: ServiceDetail[] = [
   {
     slug: "custom-software",
     path: "platform",
-    sourceNames: ["Custom web applications", "Customer and staff portals"],
+    sourceNames: ["Custom applications and portals"],
     metaTitle: "Custom software development",
     metaDescription:
       "Custom web applications, customer portals and staff dashboards built by one senior engineer. TypeScript, React, Next.js, Angular, Node, Java and Spring Boot. Fixed price wherever scope allows.",

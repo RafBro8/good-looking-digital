@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 import { Container } from "@/components/ui";
-import { paths, serviceAnchor, serviceArea, site } from "@/lib/site";
+import { serviceHrefForRow } from "@/lib/services";
+import { paths, serviceArea, site } from "@/lib/site";
 
 /**
  * Both service columns come from paths[] rather than from a hand-written list
@@ -10,6 +11,12 @@ import { paths, serviceAnchor, serviceArea, site } from "@/lib/site";
  * click after it was a no-op, because the router was already on that URL.
  * Generating the links from the same data as the rows they point at means a
  * renamed service moves its own link with it.
+ *
+ * Fragments then replaced that, and every link still felt like the same
+ * destination - because it was: a row in a price table is not somewhere to
+ * arrive. serviceHrefForRow now sends each label to its own service page, and
+ * falls back to the row only for the two services that deliberately have no
+ * page of their own.
  */
 function ServiceColumn({ pathId }: { pathId: "grow" | "platform" }) {
   const path = paths.find((p) => p.id === pathId)!;
@@ -26,7 +33,7 @@ function ServiceColumn({ pathId }: { pathId: "grow" | "platform" }) {
           .map((service) => (
             <li key={service.name}>
               <Link
-                href={`${path.href}#${serviceAnchor(service.name)}`}
+                href={serviceHrefForRow(pathId, service.name)}
                 className={`text-ink-2 ${hover} transition-colors duration-200`}
               >
                 {service.footerLabel}

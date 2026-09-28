@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
 /**
@@ -13,6 +14,10 @@ import { site } from "@/lib/site";
  *
  * URLs are built from site.url, so they follow the real domain the moment it
  * is attached rather than needing a second edit here.
+ *
+ * The service pages are generated from services[] rather than listed, so a new
+ * one appears here by existing. A hand-kept copy of that list would drift, and
+ * a page missing from the sitemap is a page nobody finds.
  */
 
 const PAGES = [
@@ -28,10 +33,21 @@ const PAGES = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
-  return PAGES.map((page) => ({
+  const fixed = PAGES.map((page) => ({
     url: `${site.url}${page.path}`,
     lastModified,
     changeFrequency: page.changeFrequency,
     priority: page.priority,
   }));
+
+  // Below the two path pages they sit under, above the legal pages: a service
+  // page is what somebody searching for the service should land on.
+  const servicePages = services.map((service) => ({
+    url: `${site.url}/services/${service.slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...fixed, ...servicePages];
 }

@@ -96,11 +96,10 @@ export const paths: ServicePath[] = [
         footerLabel: "Branding",
       },
       {
-        name: "Google Business Profile setup",
-        price: "from $350",
+        name: "Google and Facebook presence",
+        price: "from $350 each",
         footerLabel: "Google presence",
       },
-      { name: "Facebook & Instagram page setup", price: "from $350" },
       {
         name: "Lead capture & follow-up",
         price: "from $900",
@@ -124,16 +123,15 @@ export const paths: ServicePath[] = [
       "Your customers need to log in, do something real, and come back. That is software, and it is built differently.",
     services: [
       {
-        name: "Custom web applications",
+        name: "Custom applications and portals",
         price: "after discovery",
-        footerLabel: "Web applications",
+        footerLabel: "Applications",
       },
       {
-        name: "Customer and staff portals",
-        price: "after discovery",
-        footerLabel: "Customer portals",
+        name: "Automation & integrations",
+        price: "from $1,500",
+        footerLabel: "Automation",
       },
-      { name: "Automation & integrations", price: "from $1,500" },
       {
         name: "Playwright test automation",
         price: "from $2,500",
@@ -276,7 +274,7 @@ export const testRun = {
   duration: "31.84s",
   specs: [
     {
-      name: "every footer service link points at a row that exists",
+      name: "every footer service link resolves to something real",
       ms: "3.67s",
     },
     { name: "clicking one service after another moves each time", ms: "7.16s" },
@@ -284,7 +282,7 @@ export const testRun = {
     { name: "the row you clicked is the row that gets marked", ms: "3.61s" },
     { name: "arriving cold on a fragment marks the row too", ms: "715ms" },
     {
-      name: "a footer link from one path reaches the other path's row",
+      name: "a footer link from one path reaches the other path's service",
       ms: "1.16s",
     },
     {

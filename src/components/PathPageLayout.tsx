@@ -5,6 +5,7 @@ import { Container, Eyebrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { serviceForRow, serviceHrefForRow } from "@/lib/services";
 import {
   pathContent,
   paths,
@@ -145,9 +146,22 @@ export function PathPageLayout({
                     <span className="label tnum text-muted">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-lg font-semibold tracking-tight">
-                      {service.name}
-                    </span>
+                    {/* The name links to the service page where one
+                        exists. Platform assessment and Ongoing engineering
+                        have none by decision, so they stay plain text rather
+                        than pointing at the row they already are. */}
+                    {serviceForRow(pathId, service.name) ? (
+                      <Link
+                        href={serviceHrefForRow(pathId, service.name)}
+                        className={`text-lg font-semibold tracking-tight underline decoration-[var(--rule-strong)] decoration-1 underline-offset-4 transition-colors duration-200 ${accentText} hover:decoration-current`}
+                      >
+                        {service.name}
+                      </Link>
+                    ) : (
+                      <span className="text-lg font-semibold tracking-tight">
+                        {service.name}
+                      </span>
+                    )}
                     <span className="label tnum text-muted whitespace-nowrap">
                       {service.price}
                     </span>
