@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
 
+import { services } from "@/lib/services";
+
 /**
  * What crawlers are told, and what a screen reader is told.
  *
@@ -20,6 +22,10 @@ const PUBLIC_PAGES = [
   "/about",
   "/contact",
   "/privacy",
+  // Derived rather than listed. A hand-kept copy went stale the moment the
+  // service pages were added, and this spec failed for the right reason -
+  // the sitemap had grown and nothing had told it.
+  ...services.map((service) => `/services/${service.slug}`),
 ];
 
 test.describe("what search engines are told", () => {

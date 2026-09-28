@@ -75,10 +75,21 @@ test.describe("footer service links", () => {
   }) => {
     await page.goto("/grow");
 
+    // Each destination is named rather than matched loosely. Waiting for
+    // /services/ alone resolves instantly from the second click onwards,
+    // because the URL already matches it - so the assertion read the previous
+    // page. CI caught this on all three engines; it never failed locally
+    // because the navigation happened to win the race.
+    const targets = [
+      ["Websites", "/services/website-design"],
+      ["Branding", "/services/logo-design"],
+      ["Lead capture", "/services/lead-capture"],
+    ] as const;
+
     const seen: string[] = [];
-    for (const label of ["Websites", "Branding", "Lead capture"]) {
+    for (const [label, destination] of targets) {
       await (await footerLink(page, label)).click();
-      await page.waitForURL(/\/services\//);
+      await page.waitForURL(`**${destination}`);
       seen.push(new URL(page.url()).pathname);
     }
 
