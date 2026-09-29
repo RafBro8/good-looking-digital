@@ -253,4 +253,80 @@ export const towns: TownDetail[] = [
     ctaBody:
       "Tell us what you do and who you want through the door. Twenty minutes on the phone is most of what this takes to start.",
   },
+
+  {
+    slug: "web-design-lemont",
+    name: "Lemont",
+    metaTitle: "Web design in Lemont, Illinois",
+    metaDescription:
+      "Websites and lead capture for Lemont businesses, from the historic downtown to the trades. Built nearby by an engineer, not briefed out to a template.",
+    lede: "Lemont has fourteen blocks of downtown on the National Register and a national laboratory at the edge of the village. Very few towns this size hold both, and between them they decide who your customers are.",
+    local: [
+      {
+        title: "Thirty-eight buildings nobody is allowed to spoil",
+        body: "The downtown historic district has been on the National Register since 2016, limestone frontages and all, which is a genuine asset and a genuine constraint. You cannot rebuild the shopfront to get noticed. What you can change is what somebody finds when they look the place up first.",
+      },
+      {
+        title: "Your neighbours include fourteen hundred scientists",
+        body: "Argonne has a Lemont address, three and a half thousand staff, and fourteen hundred scientists and engineers, three quarters of whom hold doctorates. That is an unusually exacting local market. A site that looks like it was thrown together in an afternoon reads differently to people who spend their working lives on detail.",
+      },
+      {
+        title: "Visitors who came for the canal",
+        body: "The I and M Canal corridor brings people here for the trail, the history and the restaurants, and they arrive with no plan beyond lunch. Whether they find you is decided entirely by a phone, in the ten minutes between parking and deciding.",
+      },
+      {
+        title: "Old building, current expectations",
+        body: "A business trading out of an 1870s limestone storefront is still judged on a five inch screen. The charm does not carry across on its own, and photographs and words are the only part of it that travel.",
+      },
+    ],
+    nearby: [
+      "Homer Glen",
+      "Orland Park",
+      "Mokena",
+      "Tinley Park",
+      "New Lenox",
+      "Frankfort",
+    ],
+    ctaTitle: "The building already works. Let us do the rest.",
+    ctaBody:
+      "Tell us what you do and who you want finding you. You get a plan and a price in writing, and a straight answer if it is not worth doing.",
+  },
+
+  {
+    slug: "web-design-homer-glen",
+    name: "Homer Glen",
+    metaTitle: "Web design in Homer Glen, Illinois",
+    metaDescription:
+      "Websites and lead capture for Homer Glen nurseries, landscapers and trades. Built nearby, by the person who writes the code and tests it.",
+    lede: "Homer Glen is the rare village that legislated its own quiet. It was the first municipality in Illinois, and the fourth community anywhere, to be named an International Dark Sky Community - which has an odd and useful consequence for anybody trading here.",
+    local: [
+      {
+        title: "Nobody here wins with a brighter sign",
+        body: "The 2007 lighting ordinance exists, in the village's own words, to remove the need for businesses to compete for attention by escalating their outdoor lighting. It works. It also means the usual way of shouting at passing traffic is simply unavailable to you, and whatever is left has to do the shouting instead.",
+      },
+      {
+        title: "A village that grows things",
+        body: "Bell Road alone holds a run of nurseries and garden centres, and the village keeps ordinances on landscaping, tree preservation and conservation design alongside the lighting one. This is a place with a settled idea of itself, and the businesses that fit it tend to be the ones that look like they belong.",
+      },
+      {
+        title: "Most of the year decided in six weeks",
+        body: "Anybody selling plants, mulch, mowing or planting knows the spring is the whole argument. Being easy to find in April is worth more than being findable in November, and a form that quietly stopped working in March is a year's difference rather than an inconvenience.",
+      },
+      {
+        title: "No ticket queue, no account manager",
+        body: "One person builds it, answers about it, and is still there in two years. For a business with an owner who does the quoting themselves, that tends to matter more than a longer list of services.",
+      },
+    ],
+    nearby: [
+      "Lemont",
+      "Orland Park",
+      "Mokena",
+      "New Lenox",
+      "Tinley Park",
+      "Frankfort",
+    ],
+    ctaTitle: "Before the spring, not during it.",
+    ctaBody:
+      "Tell us what you do and when your season starts. The quiet months are when this gets built properly.",
+  },
 ];
