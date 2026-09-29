@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 import { towns } from "@/lib/towns";
+import { serviceArea } from "@/lib/site";
 
 /**
  * Town landing pages.
@@ -130,6 +131,39 @@ test.describe("town pages", () => {
           `${a.name} and ${b.name} share ${(overlap * 100).toFixed(1)}% of their phrasing`,
         ).toBeLessThan(0.1);
       }
+    }
+  });
+
+  /**
+   * A town page names its neighbours by hand, so the list can be ordered by
+   * how close they actually are. That ordering is worth keeping and it is
+   * also what makes the list capable of going stale: adding a town to
+   * serviceArea updates the footer, /grow and /contact automatically, and
+   * updates none of these. Lockport was added on 2026-09-29 and needed seven
+   * separate edits, which is exactly the kind of thing to be told about
+   * rather than to notice later.
+   */
+  test("every town names all of its neighbours", () => {
+    const area = [...serviceArea];
+
+    for (const town of towns) {
+      const named = new Set([town.name, ...town.nearby]);
+      const missing = area.filter((place) => !named.has(place));
+
+      expect(
+        missing,
+        `${town.name} does not mention ${missing.join(", ")}`,
+      ).toEqual([]);
+
+      // And nothing invented: every neighbour has to be somewhere we say we
+      // work, or the page is claiming a service area the site does not.
+      const strangers = town.nearby.filter(
+        (place) => !area.includes(place as (typeof serviceArea)[number]),
+      );
+      expect(
+        strangers,
+        `${town.name} lists ${strangers.join(", ")}, which is not in serviceArea`,
+      ).toEqual([]);
     }
   });
 

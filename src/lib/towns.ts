@@ -96,6 +96,7 @@ export const towns: TownDetail[] = [
       "Orland Park",
       "Homer Glen",
       "Lemont",
+      "Lockport",
     ],
     ctaTitle: "Twenty minutes, and a straight answer.",
     ctaBody:
@@ -129,6 +130,7 @@ export const towns: TownDetail[] = [
     ],
     nearby: [
       "Mokena",
+      "Lockport",
       "Frankfort",
       "Tinley Park",
       "Orland Park",
@@ -172,6 +174,7 @@ export const towns: TownDetail[] = [
       "Orland Park",
       "Homer Glen",
       "Lemont",
+      "Lockport",
     ],
     ctaTitle: "Let us come and see it.",
     ctaBody:
@@ -210,6 +213,7 @@ export const towns: TownDetail[] = [
       "New Lenox",
       "Frankfort",
       "Lemont",
+      "Lockport",
     ],
     ctaTitle: "Before the corner changes.",
     ctaBody:
@@ -248,6 +252,7 @@ export const towns: TownDetail[] = [
       "Frankfort",
       "Homer Glen",
       "Lemont",
+      "Lockport",
     ],
     ctaTitle: "Catch them while they are standing there.",
     ctaBody:
@@ -281,6 +286,7 @@ export const towns: TownDetail[] = [
     ],
     nearby: [
       "Homer Glen",
+      "Lockport",
       "Orland Park",
       "Mokena",
       "Tinley Park",
@@ -319,6 +325,7 @@ export const towns: TownDetail[] = [
     ],
     nearby: [
       "Lemont",
+      "Lockport",
       "Orland Park",
       "Mokena",
       "New Lenox",

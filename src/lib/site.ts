@@ -44,6 +44,7 @@ export const serviceArea = [
   "Orland Park",
   "Tinley Park",
   "Homer Glen",
+  "Lockport",
 ] as const;
 
 export type PathId = "grow" | "platform";
