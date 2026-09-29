@@ -381,7 +381,7 @@ export const services: ServiceDetail[] = [
       },
       {
         q: "What if I miss the notification anyway?",
-        a: "That is precisely what the reminder exists for. If an enquiry has been sitting unanswered past your threshold, you get told - once, inside the hours you set. It is meant to say this was missed, not you are busy.",
+        a: "That is precisely what the reminder exists for. If an enquiry has been sitting unanswered past your threshold, you hear about it - once, inside the hours you set. It is meant to say this was missed, not you are busy.",
       },
       {
         q: "Where does my customer's information go?",
@@ -418,7 +418,7 @@ export const services: ServiceDetail[] = [
       },
       {
         title: "Photos that do actual work",
-        body: "Listings with real photographs get contacted more than listings without. You will be told exactly what to photograph and from where, which is usually less work than people expect.",
+        body: "Listings with real photographs get contacted more than listings without. We can let you know which photographs we need and roughly where to stand for them, which is usually less work than people expect.",
       },
       {
         title: "Facebook and Instagram, set up as a business",

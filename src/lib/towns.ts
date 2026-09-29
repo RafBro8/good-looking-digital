@@ -86,7 +86,7 @@ export const towns: TownDetail[] = [
       },
       {
         title: "Close enough to shake your hand",
-        body: "Fifteen minutes to New Lenox, Frankfort, Tinley Park or Orland Park. Near enough to meet at your shop, photograph the work properly, and go through the wording with you, rather than doing the whole job over email and hoping.",
+        body: "Fifteen minutes to New Lenox, Frankfort, Tinley Park or Orland Park. Near enough to sit down with you, look at the place properly and go through the wording in person, rather than doing the whole thing over email and hoping we understood each other.",
       },
     ],
     nearby: [
@@ -124,7 +124,7 @@ export const towns: TownDetail[] = [
       },
       {
         title: "Fifteen minutes up Route 30",
-        body: "Near enough to come and photograph the work properly, which matters more than most people expect. Photographs of the actual job beat stock images of somebody else's kitchen every time, and they are the part nobody can copy from you.",
+        body: "You take the pictures - a phone in decent daylight is genuinely enough - and we can tell you which ones are worth taking and which to leave out, which is the part most people get wrong. Your actual jobs beat stock images of somebody else's kitchen every time, and they are the one thing on the site nobody can copy from you.",
       },
     ],
     nearby: [
@@ -176,5 +176,81 @@ export const towns: TownDetail[] = [
     ctaTitle: "Let us come and see it.",
     ctaBody:
       "Tell us about the business and what you want more of. You get a plan and a price in writing, not a mood board.",
+  },
+
+  {
+    slug: "web-design-orland-park",
+    name: "Orland Park",
+    metaTitle: "Web design in Orland Park, Illinois",
+    metaDescription:
+      "Websites and lead capture for Orland Park businesses, built and tested by one senior engineer rather than briefed out by an agency. Fifteen minutes away in Mokena.",
+    lede: "Orland Park has the busiest retail corridor for miles and is about to get busier. Amazon is building its first physical megastore in the country at 159th and LaGrange, and whatever you sell, the traffic past that corner is about to change.",
+    local: [
+      {
+        title: "A corridor about to get a lot more crowded",
+        body: "The Village Board approved 229,000 square feet on thirty-five acres at the old Petey's site. Sales tax money from it is already earmarked for widening the junction. More cars, more attention, and a very large competitor teaching everybody nearby to check their phone before deciding where to stop.",
+      },
+      {
+        title: "We are not a marketing agency",
+        body: "There are agencies here and some of them are genuinely good, which is worth saying plainly rather than pretending otherwise. This is a different thing: one senior engineer who builds the site and writes automated tests over the parts that bring you work, rather than a team that briefs the build out to somebody you never meet.",
+      },
+      {
+        title: "Big enough that being second is expensive",
+        body: "In a village of sixty thousand with a regional shopping draw, nobody has to settle for whoever appears first. They compare. Which means the gap between a site that answers their question in five seconds and one that makes them hunt for a phone number is measured in jobs, not in compliments.",
+      },
+      {
+        title: "Down LaGrange Road, not across the country",
+        body: "Most of the firms selling you a website in Orland Park will never set foot in it. We can come and see the place, which changes what gets built, and be back before the afternoon is over.",
+      },
+    ],
+    nearby: [
+      "Tinley Park",
+      "Mokena",
+      "Homer Glen",
+      "New Lenox",
+      "Frankfort",
+      "Lemont",
+    ],
+    ctaTitle: "Before the corner changes.",
+    ctaBody:
+      "Tell us what you sell and who you want walking in. You get a plan and a price in writing, and an honest answer if you do not need us.",
+  },
+
+  {
+    slug: "web-design-tinley-park",
+    name: "Tinley Park",
+    metaTitle: "Web design in Tinley Park, Illinois",
+    metaDescription:
+      "Websites, branding and lead capture for Tinley Park businesses. Built twenty minutes away, by the person who writes the code and tests it.",
+    lede: "Tinley Park spent the last few years rebuilding its downtown, and Harmony Square finished it. A concert stage, an ice rink and new retail at Oak Park Avenue and North Street means more people walking past your door than last year.",
+    local: [
+      {
+        title: "More footfall than you had last year",
+        body: "Harmony Square draws people to Oak Park Avenue for a reason other than an errand, which is the hardest kind of visitor to attract and the easiest to waste. They arrive, they look up what is open, and they decide in about eight seconds.",
+      },
+      {
+        title: "Fourteen hundred businesses is a crowded room",
+        body: "That is roughly how many operate here, and the oldest has been trading since 1928. Plenty of them are excellent and nearly invisible online, because the website was built once and never touched again. That is a gap, and it is a cheaper one to close than most owners expect.",
+      },
+      {
+        title: "People arriving by train are already holding a phone",
+        body: "The Oak Park Avenue station puts visitors on the street with no idea where to go, deciding from whatever their phone shows them. That is a different kind of customer from somebody who drove here on purpose, and it rewards being easy to find far more than being clever.",
+      },
+      {
+        title: "Twenty minutes, and the same person throughout",
+        body: "Near enough to come and look before designing anything. And whoever answers the phone in a year is the person who built it, which is not how this usually goes.",
+      },
+    ],
+    nearby: [
+      "Orland Park",
+      "Mokena",
+      "New Lenox",
+      "Frankfort",
+      "Homer Glen",
+      "Lemont",
+    ],
+    ctaTitle: "Catch them while they are standing there.",
+    ctaBody:
+      "Tell us what you do and who you want through the door. Twenty minutes on the phone is most of what this takes to start.",
   },
 ];
