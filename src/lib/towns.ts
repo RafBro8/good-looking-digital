@@ -101,4 +101,80 @@ export const towns: TownDetail[] = [
     ctaBody:
       "Tell us what you do and who you want calling you. If it is not a fit you hear it on that call, not after an invoice.",
   },
+
+  {
+    slug: "web-design-new-lenox",
+    name: "New Lenox",
+    metaTitle: "Web design in New Lenox, Illinois",
+    metaDescription:
+      "Websites, branding and lead capture for New Lenox trades and small businesses. Built fifteen minutes away in Mokena, by the person who writes the code.",
+    lede: "New Lenox is fifteen minutes from our desk in Mokena. Close enough to meet at the job rather than working the whole thing out over email and hoping we understood each other.",
+    local: [
+      {
+        title: "A hospital, and everybody who works around it",
+        body: "Silver Cross employs something like three and a half thousand people here, which is a remarkable number for a village this size. It pulls in everyone who serves them - the trades, the food, the services - and it is why New Lenox has more small businesses chasing local customers than a place this size normally would.",
+      },
+      {
+        title: "Built for how a contractor actually gets hired",
+        body: "Somebody wants a deck, a bathroom, a floor. They ask a neighbour, then they look you up to see whether you are real. What decides it is photographs of work you have actually done and a number that gets answered, which is a different job from a site selling products.",
+      },
+      {
+        title: "A website you are not embarrassed to send",
+        body: "Plenty of good trades here are still on something built years ago that looks wrong on a phone. It does not lose you the customers who already know you. It loses the ones deciding between you and the other name they were given.",
+      },
+      {
+        title: "Fifteen minutes up Route 30",
+        body: "Near enough to come and photograph the work properly, which matters more than most people expect. Photographs of the actual job beat stock images of somebody else's kitchen every time, and they are the part nobody can copy from you.",
+      },
+    ],
+    nearby: [
+      "Mokena",
+      "Frankfort",
+      "Tinley Park",
+      "Orland Park",
+      "Homer Glen",
+      "Lemont",
+    ],
+    ctaTitle: "Show us the work. We will do the rest.",
+    ctaBody:
+      "Photographs of a few jobs and twenty minutes on the phone is genuinely most of what this takes to start.",
+  },
+
+  {
+    slug: "web-design-frankfort",
+    name: "Frankfort",
+    metaTitle: "Web design in Frankfort, Illinois",
+    metaDescription:
+      "Websites and branding for Frankfort boutiques, restaurants and professional services. Built to look like the shop you already run, by an engineer ten minutes away.",
+    lede: "Frankfort has a downtown people choose to walk around, which is rarer than it sounds. If somebody has already decided your shopfront is worth stopping at, the website should not be the thing that undoes it.",
+    local: [
+      {
+        title: "A downtown that earns its visitors",
+        body: "Breidert Green runs a farmers' market, outdoor concerts, craft fairs and a car show, and the Historic District holds boutiques, restaurants and more than thirty professional services. These are businesses whose customers have already seen them in person, which changes what the website has to do.",
+      },
+      {
+        title: "It has to match the room",
+        body: "Somebody who liked your shop enough to look you up will notice if the site looks nothing like the place they stood in. Type, colour and photography carry that, and they are decisions rather than settings - which is the part a template cannot do for you.",
+      },
+      {
+        title: "Found by people already coming here",
+        body: "Frankfort pulls visitors for the market, the trail and the festivals. They look up where to eat and what is open while they are standing on Kansas Street. Being findable in that moment is worth more than ranking for anything broader.",
+      },
+      {
+        title: "Ten minutes away",
+        body: "Close enough to see the space before designing anything for it. A shop, a studio or a practice has a look already, and the useful version of this job starts by paying attention to it rather than proposing something from scratch.",
+      },
+    ],
+    nearby: [
+      "Mokena",
+      "New Lenox",
+      "Tinley Park",
+      "Orland Park",
+      "Homer Glen",
+      "Lemont",
+    ],
+    ctaTitle: "Let us come and see it.",
+    ctaBody:
+      "Tell us about the business and what you want more of. You get a plan and a price in writing, not a mood board.",
+  },
 ];

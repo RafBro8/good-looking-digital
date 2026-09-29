@@ -82,6 +82,57 @@ test.describe("town pages", () => {
     }
   });
 
+  /**
+   * The doorway-page guard, as a test rather than a good intention.
+   *
+   * Seven town pages are only defensible while each says something that could
+   * only be said about that town. That erodes quietly - a phrase reused here,
+   * a paragraph adapted there - and by the time it is obvious there are seven
+   * pages to rewrite. Overlap is measured on four-word sequences, which
+   * catches a reworded template as well as a copied one.
+   *
+   * The three written so far sit at 0.2% or below. Ten percent is a long way
+   * past drift and well short of a false alarm.
+   */
+  test("no two town pages say the same thing", () => {
+    const shingles = (text: string) => {
+      const words = text
+        .toLowerCase()
+        .replace(/[^a-z0-9 ]/g, " ")
+        .split(/\s+/)
+        .filter(Boolean);
+      const set = new Set<string>();
+      for (let i = 0; i + 4 <= words.length; i++) {
+        set.add(words.slice(i, i + 4).join(" "));
+      }
+      return set;
+    };
+
+    const localText = towns.map((town) => ({
+      name: town.name,
+      grams: shingles(
+        town.local
+          .map((section) => `${section.title} ${section.body}`)
+          .join(" "),
+      ),
+    }));
+
+    for (let i = 0; i < localText.length; i++) {
+      for (let j = i + 1; j < localText.length; j++) {
+        const a = localText[i];
+        const b = localText[j];
+        const shared = [...a.grams].filter((gram) => b.grams.has(gram)).length;
+        const union = new Set([...a.grams, ...b.grams]).size;
+        const overlap = union === 0 ? 0 : shared / union;
+
+        expect(
+          overlap,
+          `${a.name} and ${b.name} share ${(overlap * 100).toFixed(1)}% of their phrasing`,
+        ).toBeLessThan(0.1);
+      }
+    }
+  });
+
   test("a town page says where it works and invents no reviews", async ({
     page,
   }) => {
