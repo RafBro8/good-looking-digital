@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui";
 import { serviceHrefForRow } from "@/lib/services";
+import { townHref } from "@/lib/towns";
 import { paths, serviceArea, site } from "@/lib/site";
 
 /**
@@ -65,8 +66,29 @@ export function SiteFooter() {
 
           <div>
             <p className="label text-muted">Serving</p>
+            {/* Towns with a page of their own link to it. Lockport is
+                served and named here like the rest, and has no page, so it
+                stays plain text rather than pointing at a 404. */}
             <p className="text-ink-2 mt-3 text-sm leading-relaxed">
-              {serviceArea.join(" · ")} - {site.reach}.
+              {serviceArea.map((town, i) => {
+                const href = townHref(town);
+                return (
+                  <span key={town}>
+                    {i > 0 && " · "}
+                    {href ? (
+                      <Link
+                        href={href}
+                        className="hover:text-grow transition-colors duration-200"
+                      >
+                        {town}
+                      </Link>
+                    ) : (
+                      town
+                    )}
+                  </span>
+                );
+              })}{" "}
+              - {site.reach}.
             </p>
             <a
               href={site.phoneHref}

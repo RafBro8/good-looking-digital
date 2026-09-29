@@ -43,6 +43,19 @@ export function townBySlug(slug: string): TownDetail | undefined {
 }
 
 /**
+ * The page for a town, where there is one.
+ *
+ * Returns undefined for places we serve but have not written about - Lockport
+ * is in the service area and is named everywhere the others are, but it had
+ * nothing to say that Lemont and Frankfort had not already said, so it has no
+ * page. Callers render plain text in that case rather than a link to nowhere.
+ */
+export function townHref(name: string): string | undefined {
+  const town = towns.find((t) => t.name === name);
+  return town ? `/${town.slug}` : undefined;
+}
+
+/**
  * The Grow services, with their pages. Town pages carry these links and no
  * description - the description lives on the page being linked to.
  *

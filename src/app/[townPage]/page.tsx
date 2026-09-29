@@ -6,7 +6,7 @@ import { Container, Eyebrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { growServiceLinks, townBySlug, towns } from "@/lib/towns";
+import { growServiceLinks, townBySlug, townHref, towns } from "@/lib/towns";
 import { site } from "@/lib/site";
 
 /**
@@ -165,12 +165,27 @@ export default async function TownPage({
           <Container>
             <Reveal>
               <Eyebrow tone="grow">Also working in</Eyebrow>
+              {/* Neighbours link to their own page where there is one. It
+                  is how these pages reach each other at all - nothing else
+                  on the site points from one town to the next. */}
               <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
-                {town.nearby.map((name) => (
-                  <li key={name} className="label text-ink">
-                    {name}
-                  </li>
-                ))}
+                {town.nearby.map((name) => {
+                  const href = townHref(name);
+                  return (
+                    <li key={name} className="label text-ink">
+                      {href ? (
+                        <Link
+                          href={href}
+                          className="hover:text-grow transition-colors duration-200"
+                        >
+                          {name}
+                        </Link>
+                      ) : (
+                        name
+                      )}
+                    </li>
+                  );
+                })}
                 <li className="label text-muted">{site.reach}</li>
               </ul>
             </Reveal>

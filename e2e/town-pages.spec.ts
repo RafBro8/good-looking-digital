@@ -167,6 +167,47 @@ test.describe("town pages", () => {
     }
   });
 
+  /**
+   * These pages reach each other through the footer and through each other's
+   * neighbour lists, and through nothing else. Before this they were only
+   * reachable from the sitemap, which is a poor way for a page to be found
+   * and no way at all for one to lend weight to another.
+   *
+   * A town without a page has to stay plain text: a link to a 404 is worse
+   * than no link, and Lockport is the case that proves it.
+   */
+  test("towns link to each other, and only where there is somewhere to go", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    for (const place of serviceArea) {
+      const hasPage = towns.some((town) => town.name === place);
+      const link = page.locator("footer a").filter({
+        hasText: new RegExp(`^${place}$`),
+      });
+
+      if (hasPage) {
+        await expect(link, `${place} links from the footer`).toHaveCount(1);
+        await expect(link).toHaveAttribute(
+          "href",
+          `/web-design-${place.toLowerCase().replace(/\s+/g, "-")}`,
+        );
+      } else {
+        await expect(
+          link,
+          `${place} has no page, so it must not be a link`,
+        ).toHaveCount(0);
+      }
+    }
+
+    // And from one town to the next, which is the part that was missing.
+    await page.goto("/web-design-mokena");
+    const neighbourLinks = page.locator('main a[href^="/web-design-"]');
+    await expect(neighbourLinks.first()).toBeVisible();
+    expect(await neighbourLinks.count()).toBeGreaterThanOrEqual(5);
+  });
+
   test("a town page says where it works and invents no reviews", async ({
     page,
   }) => {
