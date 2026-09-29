@@ -49,3 +49,6 @@ public/logo-lab.html
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Generated QR artefacts for clients. Regenerate with scripts/make-qr.js.
+qr-output/

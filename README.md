@@ -172,17 +172,51 @@ src/
 
 Copy and pricing live in `src/lib/site.ts` so they can be edited without touching layout code, and so the same data can later feed pages, the sitemap, and structured data.
 
+## Scripts
+
+### `make-qr.js` - QR codes a sign shop can print
+
+```bash
+node scripts/make-qr.js https://clientsite.com/s/wolf-rd
+node scripts/make-qr.js https://clientsite.com/s/wolf-rd --distance 15 --name wolf-road
+```
+
+Writes `qr-output/<name>/` containing the code as **SVG** and a printable
+**print guide**: the minimum width for the distance you want it read from, the
+rules a sign shop needs (quiet zone, contrast, no logo through the middle), and
+a test sheet of the same code at four printable sizes with the distance each
+should reach and a blank to write down what it actually managed.
+
+Error correction is **M** and the quiet zone is four modules. The code is
+**decoded again with a second library before anything is written** - nothing
+ships that does not read back as the URL it was made from.
+
+Two things it will tell you that people get wrong: a longer link needs a
+physically larger code for the same scan distance, and a code on a yard sign
+works for somebody walking up to it and never for somebody driving past.
+
+### `refresh-test-panel.js` - update the homepage test panel
+
+```bash
+node scripts/refresh-test-panel.js --check   # report drift, change nothing
+node scripts/refresh-test-panel.js           # update from the latest green CI run
+```
+
+Pulls artefacts from a successful CI run, takes the slowest engine per spec and
+the slowest engine's total, and refuses to write if any engine failed. Run
+prettier afterwards. CI artefacts are kept 14 days.
+
 ## Build stages
 
 Built in reviewed stages, each one shown and approved before it ships.
 
 Done: the design system, the homepage, the two buyer paths, pricing, about,
 lead capture with follow-up reminders, Playwright coverage running in CI across
-three engines, a health endpoint for monitoring from outside, and a page for
-each of the nine services.
+three engines, a health endpoint for monitoring from outside, a page for each
+of the nine services, and landing pages for seven of the eight towns served.
 
-Remaining: per-town landing pages, case studies once there are projects worth
-showing, and launch - which is waiting on the domain being attached.
+Remaining: case studies once there are projects worth showing, and launch -
+which is waiting on the domain being attached.
 
 ## Note on `AGENTS.md`
 
