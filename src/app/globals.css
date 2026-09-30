@@ -308,10 +308,18 @@ html[data-js="true"] .rise {
  * Ticker. Two identical tracks sit side by side and the pair slides exactly
  * half its own width, so the loop is seamless with no visible reset.
  */
+/*
+ * The duration is tied to how many items are in the strip, which is easy to
+ * miss. The keyframe translates a fixed -50% - one full copy - so the distance
+ * grows with the content while the time does not, and adding items silently
+ * speeds the whole thing up. Eleven items ran at about 32px a second, which
+ * reads comfortably; fourteen at the old 38s measured 41px a second, which
+ * does not. Keep it near 3.4s per item.
+ */
 .ticker-track {
   display: inline-flex;
   gap: 2.5rem;
-  animation: ticker 38s linear infinite;
+  animation: ticker 48s linear infinite;
 }
 
 @keyframes ticker {
