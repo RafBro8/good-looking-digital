@@ -674,7 +674,7 @@ export const services: ServiceDetail[] = [
       },
     ],
     notIncluded: [
-      "Team augmentation at scale - this is one senior engineer working alongside your people, not a supplier of several",
+      "Work that needs more than one pair of hands - this is one senior engineer, so the scope has to fit what one person can deliver properly",
       "Anything requiring 24/7 on-call. This runs alongside a full-time job, and the timelines you get are honest rather than optimistic",
       "Desktop and robotic process automation of legacy software",
       "Work a large agency would genuinely serve better, which gets said on the first call rather than after three meetings",
@@ -685,8 +685,12 @@ export const services: ServiceDetail[] = [
         a: "TypeScript and JavaScript across React, Next.js and Angular; Node and Express or Java and Spring Boot behind them; SQL and MongoDB for data. The full list, including cloud and CI, is on the platform page.",
       },
       {
-        q: "Will you work alongside our developers?",
-        a: "Yes, and it is a normal arrangement - your repository, your branch strategy, your review process. Including building a test suite your team then owns.",
+        q: "Who owns the code?",
+        a: "You do, outright - the source, the repository and anything built for you. No licence, no per-seat fee, and nothing that needs our permission to change later. If you want it in your own GitHub organisation from the first commit, that is the normal arrangement rather than a special request.",
+      },
+      {
+        q: "You are one person. What if you are not available?",
+        a: "The right question to ask before hiring one engineer instead of a firm. Three things make it survivable: the repository is yours from the start, documentation is part of the delivery rather than an extra, and the stack is deliberately ordinary - TypeScript, React, Node, plain SQL - so another developer can pick it up without needing anything explained. A clean handover is a supported ending here, not a failure.",
       },
       {
         q: "How do we start without committing to a build?",

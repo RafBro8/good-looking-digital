@@ -558,10 +558,6 @@ export const pathContent: Record<PathId, PathPage> = {
         a: "TypeScript and JavaScript across React, Next.js and Angular on the front end; Node and Express or Java and Spring Boot on the back; SQL and MongoDB for data. Playwright and Cypress for end-to-end coverage, Vitest, Jest and React Testing Library for unit tests, JUnit and Rest Assured on the Java side. Deployed on AWS, Google Cloud or Pivotal Cloud Foundry, with Docker, Kubernetes and Jenkins or GitHub Actions behind it. Nine years of it, including for a Fortune 5 company - not a design studio subcontracting the hard part.",
       },
       {
-        q: "Will you work alongside our developers?",
-        a: "Yes. Working inside an existing team, in your repository and your process, is a normal arrangement - including building the test suite your team then owns.",
-      },
-      {
         q: "What does automation actually cover?",
         a: "Workflow automation and API integrations between systems you already run: moving data between them, triggering notifications, and removing repeated manual steps. It does not cover desktop or robotic process automation of legacy software, which we do not take on.",
       },
@@ -793,7 +789,7 @@ export const stack = [
     items: ["AWS", "Google Cloud", "Pivotal Cloud Foundry", "Vercel", "Render"],
   },
   {
-    group: "Working with your team",
+    group: "Working in your environment",
     items: ["Git", "Bitbucket", "Jira", "Code review", "Pull request workflow"],
   },
 ] as const;
