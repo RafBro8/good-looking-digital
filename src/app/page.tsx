@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Container, Eyebrow } from "@/components/ui";
@@ -6,11 +7,58 @@ import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TestRunPanel } from "@/components/TestRunPanel";
-import { capabilities, paths, proofPoints, site } from "@/lib/site";
+import { capabilities, paths, proofPoints, serviceArea, site } from "@/lib/site";
+
+/**
+ * Title and description are inherited from the root layout. The canonical is
+ * not inherited and has to be stated: without it the same page served from
+ * the vercel.app deployment URL is a second, competing copy.
+ */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
+/**
+ * The business itself, stated once on the page that represents it.
+ *
+ * Same shape as the town pages, which describe the business in relation to one
+ * town; this is the whole service area. No aggregateRating, for the same
+ * reason as there: there are no reviews, and inventing them is a manual action
+ * waiting to happen.
+ */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: site.legalName,
+  alternateName: site.name,
+  description: site.description,
+  url: site.url,
+  telephone: site.phone,
+  email: site.email,
+  image: `${site.url}/brand/og-default.png`,
+  logo: `${site.url}/brand/mark-1024.png`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Mokena",
+    addressRegion: "IL",
+    addressCountry: "US",
+  },
+  areaServed: serviceArea.map((name) => ({
+    "@type": "City",
+    name,
+    addressRegion: "IL",
+  })),
+};
 
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        // Built from our own constants, never from user input.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <SiteHeader />
 
       <main>

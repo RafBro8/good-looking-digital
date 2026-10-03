@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Privacy",
   description:
     "What Good Looking Digital collects when you use this site, why, who processes it, and what we never do with it. No cookies, no tracking scripts, and nothing loaded from a third party.",
+  alternates: { canonical: "/privacy" },
 };
 
 /**

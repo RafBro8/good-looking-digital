@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: "Pricing",
   description:
     "What things cost at Good Looking Digital - websites, branding, local presence, lead capture, custom applications, test automation and monthly care plans. Starting points, not menu prices.",
+  alternates: { canonical: "/pricing" },
 };
 
 export default function PricingPage() {

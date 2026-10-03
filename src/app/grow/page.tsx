@@ -8,6 +8,7 @@ import { pathContent, serviceArea } from "@/lib/site";
 export const metadata: Metadata = {
   title: pathContent.grow.metaTitle,
   description: pathContent.grow.metaDescription,
+  alternates: { canonical: "/grow" },
 };
 
 export default function GrowPage() {

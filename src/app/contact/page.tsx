@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Start a project",
   description:
     "Tell us what your business needs to do. Websites and marketing for small businesses, custom applications and test automation for companies that outgrew theirs.",
+  alternates: { canonical: "/contact" },
 };
 
 const helpful = [

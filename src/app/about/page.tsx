@@ -11,6 +11,7 @@ import { about, proofPoints, site } from "@/lib/site";
 export const metadata: Metadata = {
   title: about.metaTitle,
   description: about.metaDescription,
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

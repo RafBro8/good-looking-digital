@@ -9,6 +9,7 @@ import { pathContent, stack } from "@/lib/site";
 export const metadata: Metadata = {
   title: pathContent.platform.metaTitle,
   description: pathContent.platform.metaDescription,
+  alternates: { canonical: "/platform" },
 };
 
 /** What a paid assessment actually inspects - the entry offer made concrete. */
