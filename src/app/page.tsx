@@ -7,7 +7,13 @@ import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TestRunPanel } from "@/components/TestRunPanel";
-import { capabilities, paths, proofPoints, serviceArea, site } from "@/lib/site";
+import {
+  capabilities,
+  paths,
+  proofPoints,
+  serviceArea,
+  site,
+} from "@/lib/site";
 
 /**
  * Title and description are inherited from the root layout. The canonical is
