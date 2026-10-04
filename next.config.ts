@@ -44,7 +44,13 @@ const contentSecurityPolicy = [
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
-  "upgrade-insecure-requests",
+  // `upgrade-insecure-requests` is deliberately absent. In production it has
+  // nothing to do: Vercel sends HSTS for two years and every request this site
+  // makes is same-origin HTTPS, so there is no insecure request to upgrade.
+  // Against the test server, which is plain http on 127.0.0.1, it is actively
+  // harmful: WebKit does not exempt loopback from the upgrade the way Chromium
+  // and Firefox do, so client-side navigation fetches were rewritten to an
+  // https port with nothing listening and the router silently stopped moving.
 ].join("; ");
 
 /**
