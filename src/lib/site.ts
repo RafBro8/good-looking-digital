@@ -663,6 +663,13 @@ export const pricingFaqs = [
     a: "Yes. Typically a deposit to start, and the balance on launch. Larger projects are split across milestones so you are never far ahead of what has been delivered.",
   },
   {
+    // People are too polite to ask this and then wonder about it anyway. The
+    // fourteen days matches clause 5.3 of the services agreement, so the site
+    // and the contract say the same thing.
+    q: "How do I actually pay?",
+    a: "An invoice arrives by email with a link to pay it, by bank transfer or by card. There is no account to create and no portal to log into. Invoices are due fourteen days from the date on them, and care plans are billed monthly on the same card or account.",
+  },
+  {
     q: "What is not included?",
     a: "Domain registration, third-party subscriptions, stock photography, sign printing and advertising spend are paid by you directly. Nothing is marked up quietly.",
   },
