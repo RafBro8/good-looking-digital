@@ -117,6 +117,12 @@ export function SiteFooter() {
                 About
               </Link>
               <Link
+                href="/sign"
+                className="text-ink-2 hover:text-ink text-sm transition-colors duration-200"
+              >
+                Sign a document
+              </Link>
+              <Link
                 href="/privacy"
                 className="text-ink-2 hover:text-ink text-sm transition-colors duration-200"
               >

@@ -22,6 +22,7 @@ const PUBLIC_PAGES = [
   "/pricing",
   "/about",
   "/contact",
+  "/sign",
   "/privacy",
   // Derived rather than listed. A hand-kept copy went stale the moment the
   // service pages were added, and this spec failed for the right reason -

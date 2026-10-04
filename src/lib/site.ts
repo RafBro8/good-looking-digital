@@ -793,3 +793,62 @@ export const stack = [
     items: ["Git", "Bitbucket", "Jira", "Code review", "Pull request workflow"],
   },
 ] as const;
+
+/**
+ * The signing page.
+ *
+ * Its first job is practical: a client who has just been sent an agreement
+ * needs to sign it without owning a printer. Its second job is that a prospect
+ * reading it sees we built the tool rather than resold one.
+ *
+ * The install steps are deliberately identical to the ones on sealmark.app, so
+ * the two never drift into saying different things about the same four menus.
+ */
+export const signing = {
+  metaTitle: "Sign a document",
+  metaDescription:
+    "Sign a PDF in your browser - no printer, no scanner, no account and no fee. Your document is never uploaded. Built by Good Looking Digital, and free for anyone to use.",
+  eyebrow: "Signing",
+  title: "No printer. No scanner. No account.",
+  lede: "If we have sent you an agreement, this is where you sign it. Open the tool, place your signature, and save the file straight back to your device. It is free, and your document never leaves your browser.",
+  toolUrl: "https://sealmark.app",
+  toolName: "Sealmark",
+  steps: [
+    {
+      title: "Open the tool and choose your document",
+      body: "A PDF, or photographs of a paper document. If yours is a Word or Pages file, save it as a PDF first and the tool will show you how.",
+    },
+    {
+      title: "Place your signature and sign",
+      body: "Draw your signature or pick a style, drop it where it belongs, and add the date. Nothing is uploaded while you do it.",
+    },
+    {
+      title: "Save it back to your device",
+      body: "You get the signed PDF and a small record file proving the document has not been altered since. Send both back to us and we are done.",
+    },
+  ],
+  /** Lifted verbatim from sealmark.app so the wording cannot drift. */
+  install: [
+    {
+      where: "Chrome or Edge, on a computer",
+      how: 'Click the install icon at the right-hand end of the address bar. If it is not there, open the browser menu and look for "Install".',
+    },
+    {
+      where: "Safari, on a Mac",
+      how: 'File menu, then "Add to Dock".',
+    },
+    {
+      where: "iPhone or iPad",
+      how: 'Tap the Share button, then "Add to Home Screen".',
+    },
+    {
+      where: "Android",
+      how: 'Open the browser menu, then "Install app" or "Add to Home screen".',
+    },
+  ],
+  privacy: [
+    "Your document is never uploaded. It is opened, signed and saved inside your own browser.",
+    "There is no account to create, nothing to install unless you want to, and no fee.",
+    "Every signed file carries a record proving it has not changed since it was signed.",
+  ],
+} as const;

@@ -28,6 +28,10 @@ const PAGES = [
   { path: "/pricing", changeFrequency: "monthly", priority: 0.8 },
   { path: "/about", changeFrequency: "yearly", priority: 0.6 },
   { path: "/contact", changeFrequency: "yearly", priority: 0.7 },
+  // Indexable on purpose. Its first job is to be the link in an email to a
+  // client who needs to sign something, but "sign a PDF without an account" is
+  // the kind of low-competition phrase we can actually win.
+  { path: "/sign", changeFrequency: "yearly", priority: 0.6 },
   { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
 ] as const;
 
