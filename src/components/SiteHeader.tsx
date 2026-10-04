@@ -14,6 +14,9 @@ const nav = [
   { label: "Platform", href: "/platform" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
+  // "Sign" rather than "Sign a document": this row has to survive 320px with
+  // five links and a theme toggle beside them. The page itself explains.
+  { label: "Sign", href: "/sign" },
 ];
 
 export function SiteHeader() {
@@ -101,18 +104,23 @@ export function SiteHeader() {
           {/* py-3 on the links rather than the row: it buys a 44px tap target
               on a control a contractor uses one-handed, and costs nothing in
               header height because the row's own padding shrinks to match. */}
-          <nav className="flex items-center gap-4">
+          {/* The fifth link put the theme toggle 7px past the viewport at 320.
+              Sizing the gap to buy those pixels back is what failed last time:
+              it held locally and lost on CI, where the same text renders wider.
+              So the layout decides instead. The nav may scroll, the toggle may
+              never be pushed, and no width can break the row. */}
+          <nav className="flex min-w-0 [scrollbar-width:none] items-center gap-3 overflow-x-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-ink-2 hover:text-ink py-3 text-sm transition-colors duration-200"
+                className="text-ink-2 hover:text-ink shrink-0 py-3 text-sm transition-colors duration-200"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
-          <ThemeToggle className="py-3" />
+          <ThemeToggle className="shrink-0 py-3" />
         </div>
       </Container>
     </header>
