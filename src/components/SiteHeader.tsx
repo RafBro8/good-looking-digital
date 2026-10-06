@@ -6,10 +6,14 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { site } from "@/lib/site";
 
 /**
- * Only routes that exist. Work joins when Stage 07 lands - a nav link that
- * 404s costs more trust than a shorter menu does.
+ * Only routes that exist. A nav link that 404s costs more trust than a shorter
+ * menu does.
+ *
+ * "Work" rather than "Showcase": this row has to survive 320px, and it now
+ * carries six links beside a theme toggle. The page itself is headed Showcase.
  */
 const nav = [
+  { label: "Work", href: "/work" },
   { label: "Grow", href: "/grow" },
   { label: "Platform", href: "/platform" },
   { label: "Pricing", href: "/pricing" },

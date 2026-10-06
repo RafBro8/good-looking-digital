@@ -25,6 +25,9 @@ const PAGES = [
   { path: "", changeFrequency: "monthly", priority: 1 },
   { path: "/grow", changeFrequency: "monthly", priority: 0.9 },
   { path: "/platform", changeFrequency: "monthly", priority: 0.9 },
+  // The proof behind both path pages, and the one a prospect sends to whoever
+  // else has to agree before they can spend the money.
+  { path: "/work", changeFrequency: "monthly", priority: 0.9 },
   { path: "/pricing", changeFrequency: "monthly", priority: 0.8 },
   { path: "/about", changeFrequency: "yearly", priority: 0.6 },
   { path: "/contact", changeFrequency: "yearly", priority: 0.7 },
