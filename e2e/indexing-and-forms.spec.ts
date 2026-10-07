@@ -19,6 +19,7 @@ const PUBLIC_PAGES = [
   "",
   "/grow",
   "/platform",
+  "/work",
   "/pricing",
   "/about",
   "/contact",
