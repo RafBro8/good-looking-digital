@@ -26,6 +26,11 @@ jobs:
       - run: npx prettier --check .
       - run: npx eslint .
       - run: npx tsc --noEmit
+      # The home page lists every spec by name and counts them. That claim has
+      # to match the suite, and it silently drifted once. `--list` starts no
+      # browser, no web server and no database - verified by running it with an
+      # empty PLAYWRIGHT_BROWSERS_PATH - so it belongs here, not in the e2e job.
+      - run: npm run test:panel
 
   e2e:
     name: End-to-end (${{ matrix.project }})

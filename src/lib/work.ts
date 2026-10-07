@@ -167,6 +167,47 @@ const technical: WorkProject[] = [
   },
 ];
 
+/**
+ * The ready-made offer.
+ *
+ * A badge saying "available to buy" with no price and no terms is an
+ * unfinished sentence on a page that is otherwise trying to close, so the
+ * numbers live here and the showcase states them plainly.
+ */
+export const readyMade = {
+  eyebrow: "Ready to buy",
+  title: "A finished site, made yours, live in a week",
+  lede: "Three of the sites above are built, tested and waiting. You are not commissioning a design, you are buying one that already exists and having it turned into your business.",
+  price: "$1,500",
+  priceNote:
+    "One price, whichever of the three you take. Half to start, half when you approve it.",
+  includes: [
+    {
+      title: "The name, and the .com",
+      body: "The business name is part of the package and the domain is transferred to you. A name people remember is worth more than most of what a website costs.",
+    },
+    {
+      title: "Your content in place of ours",
+      body: "Services, prices, hours, staff and contact details. The demo wording comes out and yours goes in before anything goes live.",
+    },
+    {
+      title: "Forms that reach you",
+      body: "Enquiries and bookings arrive in your inbox rather than disappearing. Tested before handover, not after.",
+    },
+    {
+      title: "Live, on your domain",
+      body: "Hosting set up, certificate issued, Google Business Profile connected. You get the keys to all of it.",
+    },
+  ],
+  excludes: {
+    title: "What it does not include",
+    body: "Photographs of your own business, which you supply or we shoot separately. Every demo above uses stock imagery, and a site showing somebody else's premises is a promise you cannot keep when a customer walks through the door.",
+  },
+  careNote:
+    "Hosting and care is separate, from $95 a month. The site is yours either way.",
+  cta: "Ask about a ready-made site",
+};
+
 export const workGroups: WorkGroup[] = [
   {
     id: "grow",
@@ -185,3 +226,39 @@ export const workGroups: WorkGroup[] = [
 ];
 
 export const forSaleCount = localBusiness.filter((p) => p.forSale).length;
+
+export const allProjects: WorkProject[] = workGroups.flatMap((g) => g.projects);
+
+/**
+ * The four shown on the home page.
+ *
+ * Chosen to span rather than to flatter: one ready-made site, one application
+ * for a local business, one product, one engineering project. A visitor who
+ * reads only this row should still learn that both halves of the business
+ * exist.
+ */
+const FEATURED_IDS = [
+  "front-street",
+  "kreworx",
+  "sealmark",
+  "release-sentinel",
+];
+
+export const featuredProjects: WorkProject[] = FEATURED_IDS.map((id) => {
+  const found = allProjects.find((p) => p.id === id);
+  if (!found) throw new Error(`featured project "${id}" is not in workGroups`);
+  return found;
+});
+
+/** Which group a project belongs to, so the home row can colour it correctly. */
+export function audienceOf(project: WorkProject): WorkAudience {
+  const group = workGroups.find((g) => g.projects.includes(project));
+  return group ? group.id : "grow";
+}
+
+export const workTeaser = {
+  eyebrow: "Showcase",
+  title: "Ten live projects, not ten screenshots",
+  lede: `Every site and application we have built is on the public internet, and every one of them opens in a new tab from here. ${forSaleCount} are finished sites you can buy outright at $1,500, business name included.`,
+  cta: "See all ten",
+};

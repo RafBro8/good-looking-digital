@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Fragment } from "react";
 
 import { Container, Eyebrow, Section } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import type { WorkGroup, WorkProject } from "@/lib/work";
-import { workGroups, workMeta } from "@/lib/work";
+import { readyMade, workGroups, workMeta } from "@/lib/work";
 
 export const metadata: Metadata = {
   title: workMeta.metaTitle,
@@ -59,8 +60,15 @@ function WorkRow({
          hundred characters per entry. The label names the destination and warns
          about the new tab; the prose underneath is still read in browse mode. */
       aria-label={`${project.name}, ${project.kind}. Opens ${project.host} in a new tab.`}
+      /* A touch screen reports (hover: none), so the hover tint that tells a
+         mouse user the whole row is clickable never fires on a phone and the
+         row reads as plain text. `active` is the touch equivalent: the tint
+         arrives on press instead of on approach. Both are listed, because a
+         laptop with a touchscreen is both kinds of device. */
       className={`group border-rule block border-t py-[clamp(1.75rem,1rem+2.5vw,3rem)] transition-colors duration-200 ${
-        isGrow ? "hover:bg-grow-soft" : "hover:bg-platform-soft"
+        isGrow
+          ? "hover:bg-grow-soft active:bg-grow-soft"
+          : "hover:bg-platform-soft active:bg-platform-soft"
       }`}
     >
       <div className="flex flex-col gap-x-[clamp(1.5rem,1rem+3vw,4rem)] gap-y-5 md:flex-row">
@@ -131,6 +139,70 @@ function WorkRow({
   );
 }
 
+/**
+ * The offer behind the "Available to buy" badges.
+ *
+ * Sits immediately after the local-business group, while the three badged rows
+ * are still on screen, rather than at the foot of the page where it would be
+ * answering a question the reader has already given up on.
+ */
+function ReadyMadeOffer() {
+  return (
+    <Section divided className="bg-grow-soft">
+      <Container>
+        <Reveal>
+          <Eyebrow tone="grow">{readyMade.eyebrow}</Eyebrow>
+          <h2 className="mt-3 max-w-[20ch] text-3xl">{readyMade.title}</h2>
+          <p className="text-ink-2 measure mt-5">{readyMade.lede}</p>
+
+          <p className="mt-8 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+            <span className="font-display text-grow text-5xl tracking-tight">
+              {readyMade.price}
+            </span>
+            <span className="text-ink-2 max-w-[34ch] text-sm">
+              {readyMade.priceNote}
+            </span>
+          </p>
+        </Reveal>
+
+        <dl className="mt-[clamp(2rem,1.25rem+2.5vw,3rem)] grid gap-x-[clamp(1.5rem,1rem+2vw,3rem)] gap-y-7 sm:grid-cols-2">
+          {readyMade.includes.map((item, i) => (
+            <Reveal key={item.title} delay={i * 40}>
+              <dt className="flex items-baseline gap-3 text-lg">
+                <span aria-hidden="true" className="text-grow">
+                  &#10003;
+                </span>
+                {item.title}
+              </dt>
+              <dd className="text-ink-2 mt-2 pl-7 text-sm">{item.body}</dd>
+            </Reveal>
+          ))}
+        </dl>
+
+        <Reveal>
+          <div className="border-rule mt-[clamp(2rem,1.25rem+2vw,2.75rem)] border-t pt-7">
+            <h3 className="text-lg">{readyMade.excludes.title}</h3>
+            <p className="text-ink-2 measure mt-2 text-sm">
+              {readyMade.excludes.body}
+            </p>
+            <p className="text-muted measure mt-4 text-sm">
+              {readyMade.careNote}
+            </p>
+            <p className="mt-7">
+              <Link
+                href="/contact"
+                className="bg-grow text-grow-ink inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold tracking-tight transition-opacity duration-200 hover:opacity-90"
+              >
+                {readyMade.cta}
+              </Link>
+            </p>
+          </div>
+        </Reveal>
+      </Container>
+    </Section>
+  );
+}
+
 function WorkSection({ group, start }: { group: WorkGroup; start: number }) {
   return (
     <Section divided>
@@ -193,7 +265,10 @@ export default function WorkPage() {
         </section>
 
         {workGroups.map((group, i) => (
-          <WorkSection key={group.id} group={group} start={groupStarts[i]} />
+          <Fragment key={group.id}>
+            <WorkSection group={group} start={groupStarts[i]} />
+            {group.id === "grow" ? <ReadyMadeOffer /> : null}
+          </Fragment>
         ))}
 
         {/* ---------- close ---------- */}

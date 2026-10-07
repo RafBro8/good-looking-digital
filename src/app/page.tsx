@@ -7,6 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TestRunPanel } from "@/components/TestRunPanel";
+import { WorkTeaser } from "@/components/WorkTeaser";
 import {
   capabilities,
   paths,
@@ -229,6 +230,9 @@ export default function HomePage() {
             </div>
           </Container>
         </section>
+
+        {/* ================= showcase ================= */}
+        <WorkTeaser />
 
         {/* ================= capabilities ================= */}
         <section className="border-rule border-t py-[clamp(3rem,2rem+4vw,5.5rem)]">

@@ -13,7 +13,8 @@
     "mail:check": "node scripts/check-mail.js",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "test:panel": "node scripts/check-test-panel.js"
   },
   "dependencies": {
     "mongodb": "^7.6.0",
