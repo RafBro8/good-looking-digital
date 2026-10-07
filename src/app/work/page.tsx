@@ -53,6 +53,12 @@ function WorkRow({
       href={project.url}
       target="_blank"
       rel="noopener"
+      /* The whole row is the target, which is right for a mouse and wrong for
+         a screen reader: without this, the link's accessible name is the entire
+         row, blurb and stack chips included, and the links list becomes four
+         hundred characters per entry. The label names the destination and warns
+         about the new tab; the prose underneath is still read in browse mode. */
+      aria-label={`${project.name}, ${project.kind}. Opens ${project.host} in a new tab.`}
       className={`group border-rule block border-t py-[clamp(1.75rem,1rem+2.5vw,3rem)] transition-colors duration-200 ${
         isGrow ? "hover:bg-grow-soft" : "hover:bg-platform-soft"
       }`}
