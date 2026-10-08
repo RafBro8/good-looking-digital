@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { services } from "@/lib/services";
 import { towns } from "@/lib/towns";
 import { site } from "@/lib/site";
+import { caseStudyProjects } from "@/lib/work";
 
 /**
  * The pages worth indexing, and nothing else.
@@ -57,6 +58,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  // Below /work itself, which is the page that lists them. A case study is
+  // worth indexing on its own because it is the page that answers "have you
+  // built anything like mine", but nobody arrives at the site looking for it.
+  const caseStudyPages = caseStudyProjects.map((project) => ({
+    url: `${site.url}/work/${project.caseStudy.slug}`,
+    lastModified,
+    changeFrequency: "yearly" as const,
+    priority: 0.7,
+  }));
+
   // Highest priority of the generated pages: a town page is the one a
   // local search should land on, and it is the reason the others get found.
   const townPages = towns.map((town) => ({
@@ -66,5 +77,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  return [...fixed, ...servicePages, ...townPages];
+  return [...fixed, ...servicePages, ...caseStudyPages, ...townPages];
 }

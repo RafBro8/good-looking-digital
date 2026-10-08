@@ -7,7 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import type { WorkGroup, WorkProject } from "@/lib/work";
-import { readyMade, workGroups, workMeta } from "@/lib/work";
+import { caseStudyHref, readyMade, workGroups, workMeta } from "@/lib/work";
 
 export const metadata: Metadata = {
   title: workMeta.metaTitle,
@@ -37,6 +37,13 @@ const groupStarts = workGroups.reduce<number[]>((acc, group, i) => {
  * exactly the undifferentiated wall we are trying not to build. A row gives the
  * hook enough width to land as a sentence, and the hairline between rows does
  * the work a border would otherwise do on every side.
+ *
+ * The row used to be one anchor wrapping everything. It is not any more,
+ * because a case study link cannot live inside another link: nested anchors
+ * are invalid and the parser silently un-nests them. Instead the project name
+ * is the link and stretches itself over the whole row with an absolutely
+ * positioned ::after, so a click anywhere still opens the live site while the
+ * case study link stays a real, separate link above it.
  */
 function WorkRow({
   project,
@@ -48,27 +55,19 @@ function WorkRow({
   tone: "grow" | "platform";
 }) {
   const isGrow = tone === "grow";
+  const study = caseStudyHref(project);
 
   return (
-    <a
-      href={project.url}
-      target="_blank"
-      rel="noopener"
-      /* The whole row is the target, which is right for a mouse and wrong for
-         a screen reader: without this, the link's accessible name is the entire
-         row, blurb and stack chips included, and the links list becomes four
-         hundred characters per entry. The label names the destination and warns
-         about the new tab; the prose underneath is still read in browse mode. */
-      aria-label={`${project.name}, ${project.kind}. Opens ${project.host} in a new tab.`}
+    <div
       /* A touch screen reports (hover: none), so the hover tint that tells a
          mouse user the whole row is clickable never fires on a phone and the
-         row reads as plain text. `active` is the touch equivalent: the tint
-         arrives on press instead of on approach. Both are listed, because a
-         laptop with a touchscreen is both kinds of device. */
-      className={`group border-rule block border-t py-[clamp(1.75rem,1rem+2.5vw,3rem)] transition-colors duration-200 ${
+         row reads as plain text. :active is the touch equivalent, but it has
+         to be read off the link rather than this div, because a plain div is
+         not pressable and iOS will not apply :active to one. */
+      className={`group border-rule relative border-t py-[clamp(1.75rem,1rem+2.5vw,3rem)] transition-colors duration-200 ${
         isGrow
-          ? "hover:bg-grow-soft active:bg-grow-soft"
-          : "hover:bg-platform-soft active:bg-platform-soft"
+          ? "hover:bg-grow-soft has-[a:active]:bg-grow-soft"
+          : "hover:bg-platform-soft has-[a:active]:bg-platform-soft"
       }`}
     >
       <div className="flex flex-col gap-x-[clamp(1.5rem,1rem+3vw,4rem)] gap-y-5 md:flex-row">
@@ -88,7 +87,21 @@ function WorkRow({
         {/* the substance */}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <h3 className="text-2xl">{project.name}</h3>
+            <h3 className="text-2xl">
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener"
+                /* Without this, the stretched link's accessible name would be
+                   just the project name, which says nothing about where it
+                   goes or that it leaves the site. The prose underneath is
+                   still read normally in browse mode. */
+                aria-label={`${project.name}, ${project.kind}. Opens ${project.host} in a new tab.`}
+                className="after:absolute after:inset-0 after:content-['']"
+              >
+                {project.name}
+              </a>
+            </h3>
             {project.forSale ? (
               <span
                 className={`label border px-2 py-1 ${
@@ -132,10 +145,30 @@ function WorkRow({
                 &rarr;
               </span>
             </span>
+
+            {/* Sits above the stretched ::after, so clicking it reaches the
+                case study rather than the live site behind it. Only the two
+                projects that have one get a link; the rest keep the single
+                destination they always had. */}
+            {study ? (
+              <Link
+                href={study}
+                /* The negative margin pays back the padding, so the hit area
+                   grows to roughly 36px without moving anything. It matters
+                   more here than on an ordinary link: this one sits on top of
+                   a tap target the size of the whole row, so a near miss does
+                   not do nothing, it opens somebody else's website. The 8px
+                   stays inside the row's 12px gap, so a wrapped line cannot
+                   overlap the chips above it. */
+                className="text-ink-2 hover:text-ink relative z-10 -my-2 py-2 text-sm font-semibold underline decoration-1 underline-offset-4 transition-colors duration-200"
+              >
+                Read the case study
+              </Link>
+            ) : null}
           </div>
         </div>
       </div>
-    </a>
+    </div>
   );
 }
 

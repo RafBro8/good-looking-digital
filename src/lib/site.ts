@@ -277,7 +277,13 @@ export const testRun = {
   // Slowest of the three engines for each spec, and the slowest engine's total
   // run. Worst case rather than best, because quoting the fastest number would
   // be the same kind of flattery the invented figures were.
-  duration: "49.6s",
+  //
+  // The three case study specs and this total are the slowest of chromium and
+  // webkit only: Firefox will not launch on the machine these were measured
+  // on (browserType.launch: spawn UNKNOWN), and inventing its number would be
+  // exactly the thing this panel exists to avoid. CI runs all three, so
+  // refresh them from a run as described above.
+  duration: "59.8s",
   specs: [
     {
       name: "every footer service link resolves to something real",
@@ -445,6 +451,15 @@ export const testRun = {
     {
       name: "the home page shows the showcase and links to the rest of it",
       ms: "568ms",
+    },
+    { name: "only the projects with a case study link to one", ms: "360ms" },
+    {
+      name: "the whole row is the live link, and the case study link sits above it",
+      ms: "3.1s",
+    },
+    {
+      name: "a case study names its project and still sends you to the live site",
+      ms: "431ms",
     },
     { name: "both groups render, each with its own heading", ms: "523ms" },
   ],

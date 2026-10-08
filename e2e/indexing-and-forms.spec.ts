@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 
 import { services } from "@/lib/services";
 import { towns } from "@/lib/towns";
+import { caseStudyProjects } from "@/lib/work";
 
 /**
  * What crawlers are told, and what a screen reader is told.
@@ -29,6 +30,7 @@ const PUBLIC_PAGES = [
   // service pages were added, and this spec failed for the right reason -
   // the sitemap had grown and nothing had told it.
   ...services.map((service) => `/services/${service.slug}`),
+  ...caseStudyProjects.map((project) => `/work/${project.caseStudy.slug}`),
   ...towns.map((town) => `/${town.slug}`),
 ];
 

@@ -13,6 +13,44 @@
 
 export type WorkAudience = "grow" | "platform";
 
+export type CaseStudySection = { title: string; body: string };
+
+/**
+ * The long version of a project, for the reader who clicked.
+ *
+ * Only some projects have one, and that is the point: a case study is written
+ * when there is something worth saying, not generated for every row so the
+ * grid looks even. A row without one simply has no second link.
+ *
+ * There are deliberately no numbers in this shape. No conversion lift, no
+ * "40% faster", no visitor counts. There are no paying clients behind these
+ * yet, so any figure would be invented, and a portfolio that opens with a
+ * fabricated statistic has told you what it is on the first line.
+ */
+export type CaseStudy = {
+  /** URL segment under /work. */
+  slug: string;
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  title: string;
+  lede: string;
+  /** Who this is for and what was actually wrong. */
+  brief: CaseStudySection[];
+  /** The decisions worth defending, and the reasoning behind them. */
+  decisions: CaseStudySection[];
+  /** Said plainly, because saying what you did not build reads as confidence. */
+  limits: string[];
+  /**
+   * What this project *is* commercially: our own product, a demo, or a
+   * finished site for sale. Stated outright rather than left to be inferred
+   * from a missing client name.
+   */
+  standing: string;
+  ctaTitle: string;
+  ctaBody: string;
+};
+
 export type WorkProject = {
   id: string;
   name: string;
@@ -29,6 +67,8 @@ export type WorkProject = {
   built: string[];
   /** Ready-made sites a client can buy as they stand, name included. */
   forSale?: boolean;
+  /** The long version, if one has been written. See CaseStudy. */
+  caseStudy?: CaseStudy;
 };
 
 export type WorkGroup = {
@@ -95,6 +135,62 @@ const localBusiness: WorkProject[] = [
     blurb:
       "Drag a job across the board to reschedule it, watch the crews move on a live map, and send the customer a link that answers 'what time are they coming' so nobody has to pick up the phone. Built for home-services contractors who are currently running the day out of a group chat.",
     built: ["React", "Node", "MongoDB", "Live map", "Realtime"],
+    caseStudy: {
+      slug: "kreworx",
+      metaTitle: "Kreworx: dispatch software for home-services contractors",
+      metaDescription:
+        "How Kreworx was built: four seats on the same morning, drag-to-reschedule dispatch, and a customer link that replaces the 'what time are they coming' phone call.",
+      eyebrow: "Case study",
+      title: "The same morning, seen from four different seats",
+      lede: "Dispatch software is four products wearing one name. The owner, the dispatcher, the technician and the customer all need the same Tuesday, and every one of them needs it to look different. Kreworx is built around that, and the demo lets you sit in any of the four chairs.",
+      brief: [
+        {
+          title: "The group chat is the system",
+          body: "A four-van contractor runs the day across a whiteboard, a paper diary and a group chat, held together by one person who remembers everything. It works, right up until that person takes a holiday, or two people move the same job, or a customer rings about an appointment nobody wrote down.",
+        },
+        {
+          title: "Four people, four different mornings",
+          body: "The owner wants to know what got done and what is owed. The dispatcher wants the board and the gaps in it. The technician wants his own day and nobody else's. The customer wants one thing: a time. Software that serves one of them well and the rest badly gets abandoned by the three it failed.",
+        },
+        {
+          title: "The call that costs the most and is worth the least",
+          body: "'What time are they coming' is the most common inbound call a service business takes. It interrupts whoever picks up, it tells the customer nothing they could not have been told automatically, and it happens again an hour later.",
+        },
+      ],
+      decisions: [
+        {
+          title: "Four seats, and no sign-up to reach them",
+          body: "The demo opens on a role picker rather than a login. Pick the owner, the dispatcher, the lead technician or the customer, and switch at any time. A single demo account would only ever show one of the four products, and a prospect who saw the dispatcher view would never learn why a technician tolerates carrying it around all day.",
+        },
+        {
+          title: "Drag the job, do not fill in a form",
+          body: "Rescheduling happens under pressure, usually with a phone against one ear. A modal with a date picker and a Save button is three decisions where there should be one gesture. The job moves on the board and everyone else's view moves with it.",
+        },
+        {
+          title: "The customer gets a link, not an account",
+          body: "Nobody is installing an app to find out when the furnace engineer arrives. The customer receives a text with a link, the link shows the day, and when the job moves the link already knows. No password, nothing to download, and nothing to delete afterwards.",
+        },
+        {
+          title: "The board shows state, not just time",
+          body: "A job waiting on a part cannot happen today however much room the calendar says there is. Done, on site, and parts on order each read differently at a glance, because a dispatcher scanning for the next gap is pattern matching rather than reading.",
+        },
+        {
+          title: "The data resets every night",
+          body: "It is a demo, so it is built to be broken. Move everything, cancel everything, and it is back by morning. Nothing in it is real: Northline Mechanical, its crews and its customers are all invented.",
+        },
+      ],
+      limits: [
+        "It does not take payments. The owner view tells you what is owed, and collecting it is somebody else's job.",
+        "No accounting or payroll integration. A contractor already has one of each, and the useful version of this is an export rather than a second place to keep the same numbers.",
+        "Map tiles are a free tier, which is right for a demo and would be a paid plan for a real fleet.",
+        "It is built for a handful of vans rather than a hundred. The fleet that needs seat-based enterprise pricing is not the one this is for.",
+      ],
+      standing:
+        "Kreworx is our own product rather than client work, which is why it carries no client logo. It exists to be shown, and for the right contractor, to be installed and run as theirs.",
+      ctaTitle: "Running the day out of a group chat?",
+      ctaBody:
+        "Open the demo, sit in whichever chair matches your job, and see whether the board is better than the whiteboard. If it is, the next step is a twenty-minute call about what your version would need.",
+    },
   },
   {
     id: "provisio",
@@ -232,6 +328,27 @@ export const workGroups: WorkGroup[] = [
 export const forSaleCount = localBusiness.filter((p) => p.forSale).length;
 
 export const allProjects: WorkProject[] = workGroups.flatMap((g) => g.projects);
+
+/**
+ * The projects that have a written case study, in showcase order.
+ *
+ * Derived rather than listed, so the sitemap, the route and the showcase all
+ * learn about a new one by it existing. The hand-kept copy of a list like this
+ * is what broke the build when /work was added.
+ */
+export const caseStudyProjects: (WorkProject & { caseStudy: CaseStudy })[] =
+  allProjects.filter(
+    (p): p is WorkProject & { caseStudy: CaseStudy } => p.caseStudy !== undefined,
+  );
+
+export function projectByCaseStudySlug(slug: string) {
+  return caseStudyProjects.find((p) => p.caseStudy.slug === slug);
+}
+
+/** Where a project's case study lives, for the showcase row to link at. */
+export function caseStudyHref(project: WorkProject): string | null {
+  return project.caseStudy ? `/work/${project.caseStudy.slug}` : null;
+}
 
 /**
  * The four shown on the home page.

@@ -1,6 +1,11 @@
 import { test, expect } from "@playwright/test";
 
-import { allProjects, featuredProjects, workGroups } from "@/lib/work";
+import {
+  allProjects,
+  caseStudyProjects,
+  featuredProjects,
+  workGroups,
+} from "@/lib/work";
 
 /**
  * The showcase makes three claims that are cheap to break and expensive to get
@@ -55,8 +60,12 @@ test.describe("the work showcase", () => {
     await page.goto("/work");
 
     const expected = allProjects.map((_, i) => String(i + 1).padStart(2, "0"));
+    // The number used to sit inside the row's single anchor. It does not any
+    // more: the row is a div so that the case study link can be a real link
+    // beside the stretched one, so this reads the spans directly. Nothing
+    // else on the page is a two-digit aria-hidden span.
     const shown = await page
-      .locator("main a[target='_blank'] span[aria-hidden='true']")
+      .locator("main span[aria-hidden='true']")
       .filter({ hasText: /^\d\d$/ })
       .allTextContents();
 
@@ -93,6 +102,102 @@ test.describe("the work showcase", () => {
 
     await expect(page.locator('main a[href="/work"]')).toHaveCount(1);
     await expect(page.locator('header a[href="/work"]').first()).toBeVisible();
+  });
+
+  test("only the projects with a case study link to one", async ({ page }) => {
+    await page.goto("/work");
+
+    const links = page.locator('main a[href^="/work/"]');
+    await expect(links).toHaveCount(caseStudyProjects.length);
+
+    for (const project of caseStudyProjects) {
+      await expect(
+        page.locator(`main a[href="/work/${project.caseStudy.slug}"]`),
+        `${project.name} links to its case study once`,
+      ).toHaveCount(1);
+    }
+  });
+
+  /**
+   * The stretched link is the part most likely to break silently. If the
+   * ::after stops covering the row the page still looks right and only the
+   * click target shrinks to the width of the title, which nobody notices
+   * until a visitor cannot open anything.
+   */
+  test("the whole row is the live link, and the case study link sits above it", async ({
+    page,
+  }) => {
+    const project = caseStudyProjects[0];
+    const studyHref = `/work/${project.caseStudy.slug}`;
+    await page.goto("/work");
+
+    const row = page
+      .locator(`main a[href="${project.url}"]`)
+      .locator("xpath=ancestor::div[contains(@class,'group')][1]");
+
+    await row.scrollIntoViewIfNeeded();
+    const box = await row.boundingBox();
+    expect(box, "the row has a box").not.toBeNull();
+
+    /**
+     * Asks the browser what is actually under a point, rather than clicking
+     * and following it. Clicking the live link would open somebody else's
+     * site, which this file deliberately never does; and a popup's url is
+     * still empty in WebKit until it navigates, so reading it races.
+     *
+     * elementFromPoint returns the anchor that owns the stretched ::after,
+     * since a pseudo-element hit resolves to its originating element.
+     */
+    const hitAt = (x: number, y: number) =>
+      page.evaluate(
+        ([px, py]) =>
+          document
+            .elementFromPoint(px, py)
+            ?.closest("a")
+            ?.getAttribute("href") ?? null,
+        [x, y],
+      );
+
+    // Well away from the title, near the bottom of the row, where only the
+    // stretched ::after can be covering. If it ever stops reaching, the page
+    // still looks right and the click target silently shrinks to the title.
+    expect(
+      await hitAt(box!.x + box!.width * 0.4, box!.y + box!.height - 20),
+      "the row body opens the live site",
+    ).toBe(project.url);
+
+    const studyBox = await page
+      .locator(`main a[href="${studyHref}"]`)
+      .boundingBox();
+    expect(
+      await hitAt(
+        studyBox!.x + studyBox!.width / 2,
+        studyBox!.y + studyBox!.height / 2,
+      ),
+      "the case study link wins over the stretched link beneath it",
+    ).toBe(studyHref);
+
+    await page.locator(`main a[href="${studyHref}"]`).click();
+    await expect(page).toHaveURL(new RegExp(`${studyHref}$`));
+  });
+
+  test("a case study names its project and still sends you to the live site", async ({
+    page,
+  }) => {
+    for (const project of caseStudyProjects) {
+      await page.goto(`/work/${project.caseStudy.slug}`);
+
+      await expect(
+        page.getByRole("heading", { level: 1, name: project.caseStudy.title }),
+      ).toBeVisible();
+
+      const live = page.locator(`main a[href="${project.url}"]`);
+      await expect(live, `${project.name} links to itself`).toHaveCount(1);
+      await expect(live).toHaveAttribute("target", "_blank");
+      await expect(live).toHaveAttribute("rel", /noopener/);
+
+      await expect(page.locator('main a[href="/work"]')).toHaveCount(1);
+    }
   });
 
   test("both groups render, each with its own heading", async ({ page }) => {
