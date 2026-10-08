@@ -13,6 +13,20 @@
 
 export type WorkAudience = "grow" | "platform";
 
+/**
+ * The ready-made price, in one place.
+ *
+ * It is quoted in four: the offer block, the home page teaser, the Good Build
+ * Co case study, and a test that checks the badge is backed by a number. A
+ * literal in each of those is how a page ends up advertising two prices for
+ * the same thing, which is the drift servicePrice() in services.ts throws to
+ * prevent. Raised from $1,500 on 7 Oct 2026: at $1,500 this undercut
+ * professional template setup ($2,000 to $3,000) while delivering a finished
+ * custom site with the business name and domain included. $2,000 matches that
+ * band for a better product and leaves a clear step down from the custom build.
+ */
+export const READY_MADE_PRICE = "$2,000";
+
 export type CaseStudySection = { title: string; body: string };
 
 /**
@@ -100,6 +114,62 @@ const localBusiness: WorkProject[] = [
       "A residential construction company from first scroll to quote request. The whole job is convincing a homeowner that these people will turn up on the day they said they would, so the site spends its space on finished work and plain answers rather than on adjectives.",
     built: ["React", "Vite", "Tailwind"],
     forSale: true,
+    caseStudy: {
+      slug: "the-good-build-co",
+      metaTitle: "The Good Build Co: a contractor website built to survive the shortlist",
+      metaDescription:
+        "How a residential construction site is put together: process before portfolio, scope before numbers, and a finished site a contractor can buy outright.",
+      eyebrow: "Case study, and for sale",
+      title: "Homeowners are not choosing a builder. They are ruling builders out.",
+      lede: "By the time somebody opens a contractor's website they have three tabs open and they are looking for a reason to close two of them. This site is built around that, which is why it leads with how the work happens rather than with how good the work looks.",
+      brief: [
+        {
+          title: "The fear is not the price, it is the chaos",
+          body: "Homeowners who have been burned once are not worried about the number. They are worried about the number moving, about a crew that does not turn up on Tuesday, and about living in the mess for six weeks longer than anyone said. A site that answers only 'look how nice this kitchen is' has not touched the thing they are actually afraid of.",
+        },
+        {
+          title: "Most contractor sites are a gallery and a phone number",
+          body: "Beautiful photographs, a list of services, and nothing at all about what happens between the first call and the final invoice. That gap is where the homeowner's imagination fills in the worst version, and the tab gets closed.",
+        },
+        {
+          title: "The shortlist is made in about a minute",
+          body: "Three builders get a call, not seven. Everything above the fold is competing for one of those three slots, and nothing below it matters if the page does not earn the scroll.",
+        },
+      ],
+      decisions: [
+        {
+          title: "Process is a page, not a paragraph",
+          body: "Walkthrough, scope and estimate, build schedule, craft closeout. Four named steps with a page of their own, because a homeowner who can picture the sequence stops imagining the chaos. This is the single biggest difference between this site and the gallery-and-a-number template it is competing with.",
+        },
+        {
+          title: "Scope before numbers, in the form as well as the copy",
+          body: "The estimate flow opens by asking what needs to work better at home, not what the budget is. Asking for a budget first turns the first contact into a price negotiation before anyone has agreed what the job even is. Asking what is wrong turns it into a conversation, and a conversation is what gets a walkthrough booked.",
+        },
+        {
+          title: "Every project carries a fact, not just a photograph",
+          body: "Six week timeline. Four hundred and eighty square feet. Three rooms coordinated. A photograph proves taste, which every competitor also has. A number proves the job was managed, which is the thing the homeowner cannot tell by looking.",
+        },
+        {
+          title: "No stock photo of a hard hat on a desk",
+          body: "The imagery is finished rooms, because what the homeowner is buying is the result rather than the labour. Pictures of tools and high-vis vests sell the process to the builder, who already owns both.",
+        },
+        {
+          title: "No backend, deliberately",
+          body: "The whole site is static. A contractor running four vans should not be renting a server to host a brochure, and there is nothing here that can fall over at two in the morning. Hosting costs pennies, pages load immediately, and the only moving part is the form.",
+        },
+      ],
+      limits: [
+        "In the demo the estimate flow is a simulation and goes nowhere. Wiring it to a real inbox, and testing that it arrives, is part of handover rather than something left for the buyer to discover.",
+        "No customer portal, no scheduling, no payments. A brochure site that tries to be an operations tool does both badly, and Kreworx is the answer to the other half.",
+        "The numbers on the page are placeholders. Years of experience and projects completed get replaced with the buyer's real ones, or removed.",
+        "The photography is stock, so it is somebody else's work. A real contractor supplies their own, which is the one part of this nobody else can do for them.",
+        "The Good Build Co. is not a real company, and the site carries a demo notice and a noindex tag. Both come off at handover.",
+      ],
+      standing: `This is one of three finished sites available to buy outright at ${READY_MADE_PRICE}, with the business name and the .com included. You are not commissioning a design, you are buying one that already exists and having it turned into your business.`,
+      ctaTitle: "Want this one, with your name on it?",
+      ctaBody:
+        "The name comes with it, the domain transfers to you, and your services, prices and photographs replace the demo content before anything goes live. Roughly a week from yes to live.",
+    },
   },
   {
     id: "front-street",
@@ -114,8 +184,8 @@ const localBusiness: WorkProject[] = [
     forSale: true,
   },
   {
-    id: "big-day",
-    name: "Big Day Yard Co.",
+    id: "front-yard-famous",
+    name: "Front Yard Famous",
     kind: "Celebration displays",
     url: "https://big-day-yard-co-demo.vercel.app",
     host: "big-day-yard-co-demo.vercel.app",
@@ -274,11 +344,7 @@ export const readyMade = {
   eyebrow: "Ready to buy",
   title: "A finished site, made yours, live in a week",
   lede: "Three of the sites above are built, tested and waiting. You are not commissioning a design, you are buying one that already exists and having it turned into your business.",
-  // Raised from $1,500 on 7 Oct 2026. At $1,500 this undercut professional
-  // template setup ($2,000 to $3,000) while delivering a finished custom site
-  // with the business name and domain included. $2,000 matches that band for a
-  // better product and leaves a clear $1,500 step down from the custom build.
-  price: "$2,000",
+  price: READY_MADE_PRICE,
   priceNote:
     "One price, whichever of the three you take. Half to start, half when you approve it.",
   includes: [
@@ -380,6 +446,6 @@ export function audienceOf(project: WorkProject): WorkAudience {
 export const workTeaser = {
   eyebrow: "Showcase",
   title: "Ten live projects, not ten screenshots",
-  lede: `Every site and application we have built is on the public internet, and every one of them opens in a new tab from here. ${forSaleCount} are finished sites you can buy outright at $2,000, business name included.`,
+  lede: `Every site and application we have built is on the public internet, and every one of them opens in a new tab from here. ${forSaleCount} are finished sites you can buy outright at ${READY_MADE_PRICE}, business name included.`,
   cta: "See all ten",
 };

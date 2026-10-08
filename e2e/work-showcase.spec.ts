@@ -4,6 +4,7 @@ import {
   allProjects,
   caseStudyProjects,
   featuredProjects,
+  READY_MADE_PRICE,
   workGroups,
 } from "@/lib/work";
 
@@ -85,7 +86,9 @@ test.describe("the work showcase", () => {
     await expect(
       page.getByRole("heading", { name: /made yours, live in a week/i }),
     ).toBeVisible();
-    await expect(page.getByText("$2,000", { exact: true })).toBeVisible();
+    await expect(
+      page.getByText(READY_MADE_PRICE, { exact: true }),
+    ).toBeVisible();
   });
 
   test("the home page shows the showcase and links to the rest of it", async ({
