@@ -88,7 +88,12 @@ export const paths: ServicePath[] = [
     services: [
       {
         name: "Website design and build",
-        price: "from $2,500",
+        // Raised from $2,500 on 7 Oct 2026. Chicago agencies put a professional
+        // custom marketing site at $3,000 to $15,000, and professional template
+        // setup at $2,000 to $3,000. The old floor sat inside the template band
+        // while the work belonged in the one above it, so the price itself was
+        // arguing we were a template shop.
+        price: "from $3,500",
         footerLabel: "Websites",
       },
       {

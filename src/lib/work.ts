@@ -178,7 +178,11 @@ export const readyMade = {
   eyebrow: "Ready to buy",
   title: "A finished site, made yours, live in a week",
   lede: "Three of the sites above are built, tested and waiting. You are not commissioning a design, you are buying one that already exists and having it turned into your business.",
-  price: "$1,500",
+  // Raised from $1,500 on 7 Oct 2026. At $1,500 this undercut professional
+  // template setup ($2,000 to $3,000) while delivering a finished custom site
+  // with the business name and domain included. $2,000 matches that band for a
+  // better product and leaves a clear $1,500 step down from the custom build.
+  price: "$2,000",
   priceNote:
     "One price, whichever of the three you take. Half to start, half when you approve it.",
   includes: [
@@ -259,6 +263,6 @@ export function audienceOf(project: WorkProject): WorkAudience {
 export const workTeaser = {
   eyebrow: "Showcase",
   title: "Ten live projects, not ten screenshots",
-  lede: `Every site and application we have built is on the public internet, and every one of them opens in a new tab from here. ${forSaleCount} are finished sites you can buy outright at $1,500, business name included.`,
+  lede: `Every site and application we have built is on the public internet, and every one of them opens in a new tab from here. ${forSaleCount} are finished sites you can buy outright at $2,000, business name included.`,
   cta: "See all ten",
 };

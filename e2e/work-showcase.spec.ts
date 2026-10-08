@@ -68,15 +68,15 @@ test.describe("the work showcase", () => {
   }) => {
     await page.goto("/work");
 
-    await expect(page.getByText("Available to buy", { exact: true })).toHaveCount(
-      forSale.length,
-    );
+    await expect(
+      page.getByText("Available to buy", { exact: true }),
+    ).toHaveCount(forSale.length);
 
     // The badge is a promise; the section below it has to pay the promise off.
     await expect(
       page.getByRole("heading", { name: /made yours, live in a week/i }),
     ).toBeVisible();
-    await expect(page.getByText("$1,500", { exact: true })).toBeVisible();
+    await expect(page.getByText("$2,000", { exact: true })).toBeVisible();
   });
 
   test("the home page shows the showcase and links to the rest of it", async ({
@@ -92,9 +92,7 @@ test.describe("the work showcase", () => {
     }
 
     await expect(page.locator('main a[href="/work"]')).toHaveCount(1);
-    await expect(
-      page.locator('header a[href="/work"]').first(),
-    ).toBeVisible();
+    await expect(page.locator('header a[href="/work"]').first()).toBeVisible();
   });
 
   test("both groups render, each with its own heading", async ({ page }) => {
