@@ -283,7 +283,7 @@ export const testRun = {
   // on (browserType.launch: spawn UNKNOWN), and inventing its number would be
   // exactly the thing this panel exists to avoid. CI runs all three, so
   // refresh them from a run as described above.
-  duration: "59.8s",
+  duration: "72s",
   specs: [
     {
       name: "every footer service link resolves to something real",
@@ -334,6 +334,11 @@ export const testRun = {
     { name: "the quote form submits", ms: "2.4s" },
     { name: "the lead is stored, not lost", ms: "2.9s" },
     { name: "a lead from the QR page records where it came from", ms: "921ms" },
+    {
+      name: "how they heard reaches the database, in their own words",
+      ms: "1.5s",
+    },
+    { name: "a note is dropped unless the answer is Other", ms: "81ms" },
     { name: "spam is turned away", ms: "43ms" },
     { name: "a lead is never falsely reported as emailed", ms: "34ms" },
     {

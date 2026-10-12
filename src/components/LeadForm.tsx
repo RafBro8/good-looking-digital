@@ -6,6 +6,7 @@ import { cloneElement, isValidElement, useRef, useState } from "react";
 import {
   BUDGET_OPTIONS,
   hasErrors,
+  HEARD_FROM_OPTIONS,
   validateLead,
   type FieldErrors,
   type LeadInput,
@@ -32,6 +33,9 @@ const field =
  */
 export function LeadForm({ source }: { source?: string }) {
   const [status, setStatus] = useState<Status>("idle");
+  // Only so the "Other" box can appear when it is wanted. The value that gets
+  // submitted is read off the form like every other field.
+  const [heardFrom, setHeardFrom] = useState("");
   // Whether the confirmation email actually sent. The panel used to promise
   // one unconditionally, which is a lie on any day the mail provider is down
   // or the sending domain is not verified yet.
@@ -54,6 +58,9 @@ export function LeadForm({ source }: { source?: string }) {
       message: String(data.get("message") ?? ""),
       website: String(data.get("website") ?? ""),
       source,
+      heardFrom:
+        (data.get("heardFrom") as LeadInput["heardFrom"]) || undefined,
+      heardFromOther: String(data.get("heardFromOther") ?? ""),
     };
 
     const clientErrors = validateLead(input);
@@ -196,6 +203,44 @@ export function LeadForm({ source }: { source?: string }) {
           ))}
         </select>
       </Field>
+
+      <Field label="How did you hear about us?" name="heardFrom" optional>
+        <select
+          id="heardFrom"
+          name="heardFrom"
+          className={field}
+          value={heardFrom}
+          onChange={(e) => setHeardFrom(e.target.value)}
+        >
+          <option value="">Prefer not to say</option>
+          {HEARD_FROM_OPTIONS.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </Field>
+
+      {/* Revealed rather than always present. An empty box sitting under every
+          answer adds weight to a form that is already long, and this one is
+          wanted by a minority of people. */}
+      {heardFrom === "Other" && (
+        <Field
+          label="Where did you find us?"
+          name="heardFromOther"
+          error={errors.heardFromOther}
+          optional
+        >
+          <input
+            id="heardFromOther"
+            name="heardFromOther"
+            type="text"
+            className={field}
+            maxLength={120}
+            placeholder="A neighbour, a sign, somewhere else"
+          />
+        </Field>
+      )}
 
       <Field
         label="About the project"

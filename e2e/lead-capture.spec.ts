@@ -12,6 +12,21 @@ import { TEST_DB, uniqueEmail, withDb } from "./support/db";
  */
 
 test.describe("lead capture", () => {
+  /**
+   * The route allows five submissions per client per hour, and every spec here
+   * submits from the same machine, so they share one bucket. Five specs used
+   * to fit under it by luck; the sixth and seventh started being turned away
+   * with a 429, and the failure landed on whichever spec happened to run last
+   * rather than on the one that caused it.
+   *
+   * Clearing the bucket between specs keeps the production limit exactly as it
+   * is and stops tests queueing behind each other. Three browser projects run
+   * the same files, so this also stops them colliding.
+   */
+  test.beforeEach(async () => {
+    await withDb((db) => db.collection("rate_limits").deleteMany({}));
+  });
+
   test("visitor reaches the quote form", async ({ page }) => {
     await page.goto("/");
 
@@ -125,6 +140,70 @@ test.describe("lead capture", () => {
 
     expect(stored, `no lead stored for ${email} in ${TEST_DB}`).not.toBeNull();
     expect(stored?.source).toBe("qr");
+  });
+
+  /**
+   * The answer to "how did you hear about us" is the only record of the
+   * channels no referrer can see: a recommendation from a past client, or
+   * somebody who saw the business somewhere and searched for it a week later.
+   * It is also optional and easy to drop silently on the way to the database,
+   * which would leave the question being asked and the answer discarded.
+   */
+  test("how they heard reaches the database, in their own words", async ({
+    page,
+  }) => {
+    const email = uniqueEmail("heard-from");
+    await page.goto("/contact");
+
+    await page.locator("#name").fill("Dana Whitfield");
+    await page.locator("#email").fill(email);
+    await page
+      .getByRole("textbox", { name: /about the project/i })
+      .fill("Landscaping business in Homer Glen, need a site that takes quotes.");
+
+    await page.locator("#heardFrom").selectOption("Other");
+    // The box only exists once Other is chosen, so this also proves it appeared.
+    await page.locator("#heardFromOther").fill("Saw your van at the lumber yard");
+
+    await page.getByRole("button", { name: /send it/i }).click();
+    await expect(page.getByRole("status")).toContainText(/that reached us/i);
+
+    const stored = await withDb((db) =>
+      db.collection("leads").findOne({ email }),
+    );
+
+    expect(stored, `no lead stored for ${email} in ${TEST_DB}`).not.toBeNull();
+    expect(stored?.heardFrom).toBe("Other");
+    expect(stored?.heardFromOther).toBe("Saw your van at the lumber yard");
+  });
+
+  /**
+   * Posted at the api rather than through the form, because the form unmounts
+   * the note when the answer changes and so can never produce this. Anything
+   * posting directly still can, and a note filed under an answer it does not
+   * belong to is worse than no note.
+   */
+  test("a note is dropped unless the answer is Other", async ({ request }) => {
+    const email = uniqueEmail("heard-orphan");
+
+    const response = await request.post("/api/leads", {
+      data: {
+        name: "Orphaned Note",
+        email,
+        path: "grow",
+        message: "Changed my mind about the answer but the note tagged along.",
+        heardFrom: "Google",
+        heardFromOther: "typed before switching the dropdown",
+      },
+    });
+    expect(response.status()).toBe(200);
+
+    const stored = await withDb((db) =>
+      db.collection("leads").findOne({ email }),
+    );
+
+    expect(stored?.heardFrom).toBe("Google");
+    expect(stored).not.toHaveProperty("heardFromOther");
   });
 
   test("spam is turned away", async ({ request }) => {

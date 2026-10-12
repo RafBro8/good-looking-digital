@@ -59,6 +59,11 @@ const collected = [
     why: "To tell you honestly whether we are a fit before either of us spends time.",
   },
   {
+    field: "How you heard about us",
+    required: false,
+    why: "So we know which of the things we do actually reaches people. We ask because we would rather not work it out by following you around.",
+  },
+  {
     field: "Your message",
     required: true,
     why: "It is the enquiry.",

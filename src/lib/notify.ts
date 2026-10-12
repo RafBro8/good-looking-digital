@@ -144,6 +144,14 @@ export async function notifyOwner(lead: StoredLead): Promise<boolean> {
     `Path:      ${lead.path}`,
     lead.budget ? `Budget:    ${lead.budget}` : null,
     lead.source ? `Source:    ${lead.source}` : null,
+    // What they say, next to what the page recorded. The two disagreeing is
+    // informative rather than a problem: somebody who saw the truck and
+    // searched a week later arrives via Google and says so themselves.
+    lead.heardFrom
+      ? `Heard via: ${lead.heardFrom}${
+          lead.heardFromOther ? ` - ${lead.heardFromOther}` : ""
+        }`
+      : null,
     "",
     "Message",
     "-------",

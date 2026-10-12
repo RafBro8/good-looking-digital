@@ -18,6 +18,26 @@ export const BUDGET_OPTIONS = [
 ] as const;
 export type LeadBudget = (typeof BUDGET_OPTIONS)[number];
 
+/**
+ * What the person says brought them here.
+ *
+ * Optional, and deliberately short. Asking is cruder than reading a referrer
+ * and far more complete: it is the only thing that catches a recommendation
+ * from a past client, or somebody who saw the business somewhere and searched
+ * for it a week later, both of which every analytics tool records as "Google".
+ *
+ * At ten enquiries a year the answers can simply be read. That is the whole
+ * reason this is a question on a form rather than a tracking script.
+ */
+export const HEARD_FROM_OPTIONS = [
+  "Google",
+  "Facebook",
+  "Someone recommended me",
+  "Scanned a QR code",
+  "Other",
+] as const;
+export type LeadHeardFrom = (typeof HEARD_FROM_OPTIONS)[number];
+
 export interface LeadInput {
   name: string;
   email: string;
@@ -30,6 +50,14 @@ export interface LeadInput {
   website?: string;
   /** Where the visitor came from - a QR code, a page, a campaign. */
   source?: string;
+  /**
+   * What they say brought them here. Kept separate from `source`, which the
+   * page sets automatically: the two will sometimes disagree, and that
+   * disagreement is itself worth seeing.
+   */
+  heardFrom?: LeadHeardFrom;
+  /** Their own words, and only meaningful when heardFrom is "Other". */
+  heardFromOther?: string;
 }
 
 export type FieldErrors = Partial<Record<keyof LeadInput, string>>;
@@ -41,6 +69,7 @@ const MAX = {
   business: 160,
   message: 4000,
   source: 120,
+  heardFromOther: 120,
 } as const;
 
 /**
@@ -90,6 +119,19 @@ export function validateLead(input: Partial<LeadInput>): FieldErrors {
   if (input.path && !PATH_OPTIONS.includes(input.path))
     errors.path = "Pick one of the options.";
 
+  /**
+   * Note what is deliberately absent: choosing "Other" and typing nothing is
+   * not an error. The question is optional, and blocking a submission over an
+   * unanswered nicety would trade an enquiry for a data point. "Other" with no
+   * detail still says "none of the channels I know about", which is useful.
+   */
+  if (input.heardFrom && !HEARD_FROM_OPTIONS.includes(input.heardFrom))
+    errors.heardFrom = "Pick one of the options.";
+
+  const heardFromOther = (input.heardFromOther ?? "").trim();
+  if (heardFromOther.length > MAX.heardFromOther)
+    errors.heardFromOther = "Keep that one short.";
+
   return errors;
 }
 
@@ -132,5 +174,15 @@ export function normalizeLead(
     budget: input.budget,
     message: (input.message ?? "").trim().slice(0, MAX.message),
     source: clamp(input.source, MAX.source),
+    heardFrom: HEARD_FROM_OPTIONS.includes(input.heardFrom as LeadHeardFrom)
+      ? (input.heardFrom as LeadHeardFrom)
+      : undefined,
+    // Dropped unless "Other" is the answer. Somebody who types a note, then
+    // changes their mind and picks Google, should not have the orphaned text
+    // stored against an answer it no longer belongs to.
+    heardFromOther:
+      input.heardFrom === "Other"
+        ? clamp(input.heardFromOther, MAX.heardFromOther)
+        : undefined,
   };
 }
