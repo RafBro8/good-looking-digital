@@ -194,7 +194,10 @@ export const services: ServiceDetail[] = [
       },
       {
         title: "Launch",
-        body: "Live on your domain, submitted to Google, and wired so an enquiry reaches you within seconds of someone sending it.",
+        // "Emails you" rather than "reaches you": the lead capture page sells
+        // the text alert, and a vague verb here made the two read as the same
+        // promise at two prices.
+        body: "Live on your domain, submitted to Google, and wired so an enquiry emails you within seconds of someone sending it.",
       },
     ],
     notIncluded: [
@@ -317,22 +320,30 @@ export const services: ServiceDetail[] = [
     sourceNames: ["Lead capture & follow-up"],
     metaTitle: "Lead capture and follow-up",
     metaDescription:
-      "The form, the database behind it, the alert that reaches you in seconds, the confirmation your customer gets, and a reminder if nobody called back. Running on this site today.",
+      "The database behind your contact form, the text alert that reaches you in seconds, the confirmation your customer gets, and a reminder if nobody called back. Running on this site today.",
     eyebrow: "Lead capture",
     title: "Lead capture and follow-up",
     lede: "The most expensive enquiry is the one that arrived and nobody answered. The advertising was already paid for and the customer was already interested - then it landed in a spam folder, or got read on a phone between jobs and forgotten. This is everything that happens after someone decides to contact you.",
     included: [
       {
-        title: "A form that works, and is tested",
-        body: "Short, because every extra field costs you enquiries. Usable one-handed on a phone. Readable by a screen reader, with errors that say what is actually wrong. Automated tests run over it on every change, because a contact form that quietly stops working is the most expensive bug a small business site can have.",
+        /**
+         * First on purpose, and it is the only bullet here that describes what
+         * the reader already owns. The website build includes a working,
+         * tested, emailing contact form, and this page used to open by
+         * promising exactly that - which read as being charged twice for one
+         * thing. Naming the boundary out loud is what makes the five bullets
+         * below land as additions.
+         */
+        title: "Starts from the form you already have",
+        body: "The website build includes a contact form that works, is tested, and emails you. None of this replaces that. What follows is the machinery behind it: where an enquiry is kept, how fast you hear about it, what your customer is told, and what happens if nobody calls back.",
       },
       {
         title: "Stored, not just emailed",
         body: "Email is where enquiries go to die - a spam filter, a full mailbox, a bad moment. Every enquiry is written to a database first, so the email failing to arrive stops being a way to lose work.",
       },
       {
-        title: "You know within seconds",
-        body: "A notification reaches you as soon as the form is sent, carrying what you need in order to call the person back. Not a daily digest, and not a dashboard you have to remember to open.",
+        title: "A text, not just an email",
+        body: "The website emails you. This also sends a text the moment the form is sent, carrying what you need in order to call the person back. Not a daily digest, and not a dashboard you have to remember to open.",
       },
       {
         title: "Your customer hears back immediately",
