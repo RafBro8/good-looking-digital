@@ -320,7 +320,11 @@ export const services: ServiceDetail[] = [
     sourceNames: ["Lead capture & follow-up"],
     metaTitle: "Lead capture and follow-up",
     metaDescription:
-      "The database behind your contact form, the text alert that reaches you in seconds, the confirmation your customer gets, and a reminder if nobody called back. Running on this site today.",
+      // "the alert" rather than "the text alert" until Twilio is actually
+      // wired up. The sentence ends "running on this site today", and that is
+      // only worth saying while every word of it is true. Restore the sharper
+      // wording the day the first test message arrives.
+      "The database behind your contact form, the alert that reaches you in seconds, the confirmation your customer gets, and a reminder if nobody called back. Running on this site today.",
     eyebrow: "Lead capture",
     title: "Lead capture and follow-up",
     lede: "The most expensive enquiry is the one that arrived and nobody answered. The advertising was already paid for and the customer was already interested - then it landed in a spam folder, or got read on a phone between jobs and forgotten. This is everything that happens after someone decides to contact you.",
