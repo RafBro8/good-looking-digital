@@ -133,7 +133,17 @@ export function SiteFooter() {
                 href="/privacy"
                 className="text-ink-2 hover:text-ink text-sm transition-colors duration-200"
               >
-                Privacy
+                Privacy Policy
+              </Link>
+              {/* Linked from the footer because the A2P campaign names this
+                  page as the programme's terms, and a carrier reviewing it
+                  should be able to find it from any page rather than only
+                  from a url pasted into a form. */}
+              <Link
+                href="/text-alerts"
+                className="text-ink-2 hover:text-ink text-sm transition-colors duration-200"
+              >
+                Text alerts
               </Link>
             </div>
           </div>
