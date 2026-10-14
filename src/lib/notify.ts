@@ -97,7 +97,29 @@ export async function notifyOwnerBySms(lead: StoredLead): Promise<boolean> {
   if (!sid || !token || !from || !to) return false;
 
   const who = lead.business ? `${lead.name} (${lead.business})` : lead.name;
-  const gist = lead.message.replace(/\s+/g, " ").slice(0, 90);
+
+  /**
+   * Anything a stranger typed that looks like a link comes out before the
+   * quote is built. Two reasons, and the second is the one that bites.
+   *
+   * A text alert should never hand you a live link written by someone you
+   * have not met. And the A2P campaign declares that these messages contain
+   * no embedded links: carriers filter on that, so one enquirer pasting a url
+   * would turn a registered-clean message into a blocked one, silently.
+   *
+   * Nothing is lost. The email carries the message in full.
+   */
+  const gist = lead.message
+    .replace(/\s+/g, " ")
+    .replace(/\b(?:https?:\/\/|www\.)\S+/gi, "[link]")
+    // The lookbehind spares email addresses. An email is not an embedded
+    // link, and without it "marcus@bellroofing.com" became "marcus@[link]".
+    .replace(
+      /(?<![@\w])[\w-]+\.(?:com|net|org|io|co|uk|biz|info)\b\S*/gi,
+      "[link]",
+    )
+    .trim()
+    .slice(0, 90);
 
   /**
    * The brand name leads and the opt-out closes, and neither is decoration.
