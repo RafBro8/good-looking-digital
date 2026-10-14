@@ -80,7 +80,15 @@ test.describe("lead capture", () => {
 
     await page.getByRole("button", { name: /send it/i }).click();
 
-    await expect(page.getByRole("status")).toContainText(/that reached us/i);
+    await expect(page.getByRole("status")).toContainText(
+      /that reached us/i,
+      // Longer than the default five seconds. These four specs make a real
+      // round trip through the route and into Mongo, and on a loaded machine
+      // webkit was still showing "Sending..." when the assertion gave up - a
+      // slow test, not a broken one, and it failed on a different spec each
+      // time depending on scheduling.
+      { timeout: 20_000 },
+    );
   });
 
   test("the lead is stored, not lost", async ({ page }) => {
@@ -95,7 +103,15 @@ test.describe("lead capture", () => {
       .fill("Roofing company in Tinley Park. We need to be found on Google.");
 
     await page.getByRole("button", { name: /send it/i }).click();
-    await expect(page.getByRole("status")).toContainText(/that reached us/i);
+    await expect(page.getByRole("status")).toContainText(
+      /that reached us/i,
+      // Longer than the default five seconds. These four specs make a real
+      // round trip through the route and into Mongo, and on a loaded machine
+      // webkit was still showing "Sending..." when the assertion gave up - a
+      // slow test, not a broken one, and it failed on a different spec each
+      // time depending on scheduling.
+      { timeout: 20_000 },
+    );
 
     // The response said yes. This checks the database agrees, which is the
     // claim that actually matters to whoever filled the form in.
@@ -132,7 +148,15 @@ test.describe("lead capture", () => {
       .fill("Scanned the code on a yard sign in Frankfort. Need a quote.");
 
     await page.getByRole("button", { name: /send it/i }).click();
-    await expect(page.getByRole("status")).toContainText(/that reached us/i);
+    await expect(page.getByRole("status")).toContainText(
+      /that reached us/i,
+      // Longer than the default five seconds. These four specs make a real
+      // round trip through the route and into Mongo, and on a loaded machine
+      // webkit was still showing "Sending..." when the assertion gave up - a
+      // slow test, not a broken one, and it failed on a different spec each
+      // time depending on scheduling.
+      { timeout: 20_000 },
+    );
 
     const stored = await withDb((db) =>
       db.collection("leads").findOne({ email }),
@@ -159,14 +183,26 @@ test.describe("lead capture", () => {
     await page.locator("#email").fill(email);
     await page
       .getByRole("textbox", { name: /about the project/i })
-      .fill("Landscaping business in Homer Glen, need a site that takes quotes.");
+      .fill(
+        "Landscaping business in Homer Glen, need a site that takes quotes.",
+      );
 
     await page.locator("#heardFrom").selectOption("Other");
     // The box only exists once Other is chosen, so this also proves it appeared.
-    await page.locator("#heardFromOther").fill("Saw your van at the lumber yard");
+    await page
+      .locator("#heardFromOther")
+      .fill("Saw your van at the lumber yard");
 
     await page.getByRole("button", { name: /send it/i }).click();
-    await expect(page.getByRole("status")).toContainText(/that reached us/i);
+    await expect(page.getByRole("status")).toContainText(
+      /that reached us/i,
+      // Longer than the default five seconds. These four specs make a real
+      // round trip through the route and into Mongo, and on a loaded machine
+      // webkit was still showing "Sending..." when the assertion gave up - a
+      // slow test, not a broken one, and it failed on a different spec each
+      // time depending on scheduling.
+      { timeout: 20_000 },
+    );
 
     const stored = await withDb((db) =>
       db.collection("leads").findOne({ email }),

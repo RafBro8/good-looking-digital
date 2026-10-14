@@ -40,7 +40,7 @@ export const metadata: Metadata = {
  * be able to read this page and find the programme described.
  */
 
-const UPDATED = "18 September 2026";
+const UPDATED = "14 October 2026";
 
 const collected = [
   {
@@ -99,9 +99,21 @@ const processors = [
   },
   {
     name: "Twilio",
-    role: "Sends the text alerts, and only to clients whose plan includes them. Nobody who contacts us through this site is ever texted.",
+    role: "Sends the text alerts, and only to clients who have opted in to them themselves. Nobody who contacts us through this site is ever texted.",
   },
 ];
+
+/**
+ * Spells the count in the heading above the list.
+ *
+ * Written out rather than hardcoded because it had already gone wrong: the
+ * heading said "Four companies" while five were listed underneath, which is a
+ * small thing on a page whose entire claim is that it is specific and true.
+ */
+function countWord(n: number): string {
+  const words = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven"];
+  return words[n] ?? String(n);
+}
 
 export default function PrivacyPage() {
   return (
@@ -192,8 +204,9 @@ export default function PrivacyPage() {
               Only what is in the contact form
             </h2>
             <p className="text-ink-2 measure mt-4">
-              There is one form on this site. These are all of its fields, and
-              why each one exists.
+              These are all of its fields, and why each one exists. The only
+              other form on this site is the text alert opt-in, which existing
+              clients use and which is covered further down.
             </p>
 
             <div className="mt-9 max-w-[52rem]">
@@ -300,7 +313,7 @@ export default function PrivacyPage() {
           <Container>
             <Eyebrow>Who else handles it</Eyebrow>
             <h2 className="mt-3 max-w-[24ch] text-3xl">
-              Four companies, each doing one job
+              {countWord(processors.length)} companies, each doing one job
             </h2>
             <p className="text-ink-2 measure mt-4">
               Some of the machinery behind the site belongs to other companies.
@@ -366,16 +379,21 @@ export default function PrivacyPage() {
               <div className="grid max-w-[62ch] gap-4">
                 <p className="text-ink-2">
                   This part is not about visiting the site. It applies only if
-                  you are a client of ours and your plan includes lead alerts
-                  by text, which you ask for in writing when you sign the
-                  agreement. Nobody who sends us an enquiry through this site
-                  is ever texted.
+                  you are a client of ours and you have opted in to lead alerts
+                  by text, which you do yourself on our{" "}
+                  <Link href="/text-alerts" className="underline">
+                    text alerts page
+                  </Link>
+                  . Signing our agreement does not opt you in. Nobody who sends
+                  us an enquiry through this site is ever texted.
                 </p>
                 <p className="text-ink-2">
-                  Where it applies, we hold one mobile number, yours, and use
-                  it for one thing: telling you an enquiry has arrived on your
-                  own site. Message and data rates from your carrier may apply.
-                  Reply STOP to any of them and they stop.
+                  Where it applies, we hold one mobile number, yours, and use it
+                  for one thing: telling you an enquiry has arrived on your own
+                  site. Alongside it we keep the date you opted in and a copy of
+                  the wording you agreed to, which is the record that the
+                  consent exists. Message and data rates from your carrier may
+                  apply. Reply STOP to any of them and they stop.
                 </p>
                 {/* Required verbatim by the mobile carriers as a condition of
                     the A2P 10DLC campaign registration. Narrower than the
@@ -386,16 +404,14 @@ export default function PrivacyPage() {
                     spec, and quietly editing it would make the campaign
                     non-compliant without anything visibly breaking. */}
                 <p className="text-ink-2">
-                  Stated here because the carriers require these words
-                  exactly:{" "}
+                  Stated here because the carriers require these words exactly:{" "}
                   <span className="text-ink font-semibold">
                     We do not sell or share your SMS opt-in data or personal
                     information with third parties for marketing purposes.
                   </span>
                 </p>
                 <p className="text-ink-2">
-                  The fuller terms of the programme, and the clause you sign,
-                  are under SMS Terms in our{" "}
+                  The fuller terms of the programme are under SMS Terms in our{" "}
                   <Link href="/terms" className="underline">
                     terms of service
                   </Link>

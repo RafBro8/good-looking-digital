@@ -341,7 +341,11 @@ export const testRun = {
       name: "the terms page meets all four carrier requirements",
       ms: "480ms",
     },
-    { name: "the terms page doubles as the opt-in proof", ms: "565ms" },
+    { name: "the terms page doubles as the opt-in proof", ms: "657ms" },
+    {
+      name: "neither legal page claims the agreement is the consent",
+      ms: "714ms",
+    },
     {
       name: "the opt-in page makes clear that consent is not a condition of purchase",
       ms: "594ms",

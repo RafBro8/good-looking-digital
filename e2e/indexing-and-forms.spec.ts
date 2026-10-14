@@ -224,15 +224,52 @@ test.describe("what the carriers require", () => {
   test("the terms page doubles as the opt-in proof", async ({ page }) => {
     await page.goto("/terms");
 
-    // The opt-in proof field points here, so a reviewer has to be able to
-    // read the exact words a client agrees to and how to stop.
+    // A reviewer has to be able to read the exact words a client agrees to
+    // and how to stop, without a login and without asking us.
     const body = (await page.locator("main").innerText()).replace(/\s+/g, " ");
-    expect(body).toContain("clause 12.6");
+    // Case-insensitive for the same reason as "SMS TERMS" above: the only
+    // mention left is the figure's caption, which css uppercases, so
+    // innerText reports "CLAUSE 12.6". What matters is that the quote is
+    // identified as the clause, not how it is cased.
+    expect(body).toMatch(/clause 12\.6/i);
     expect(body).toContain("Reply STOP");
 
     // Both directions, because a carrier follows the link from either page.
     await expect(page.locator('main a[href="/privacy"]')).toHaveCount(1);
     await page.goto("/privacy");
     await expect(page.locator('main a[href="/terms"]')).toHaveCount(1);
+  });
+
+  /**
+   * The half that the first campaign failed on.
+   *
+   * Code 30923 is not "you described consent badly", it is "consent is a
+   * condition of using your service". So both legal pages have to say that
+   * signing the agreement does not opt anybody in, and both have to point at
+   * the page where consent is actually given. A tidy-up that reinstated the
+   * old sentence on either page would put us straight back in front of the
+   * same reviewer.
+   */
+  test("neither legal page claims the agreement is the consent", async ({
+    page,
+  }) => {
+    for (const path of ["/terms", "/privacy"]) {
+      await page.goto(path);
+      const body = (await page.locator("main").innerText()).replace(
+        /\s+/g,
+        " ",
+      );
+
+      // Loose on the middle of the sentence, strict on both ends. The two
+      // pages word it differently, and they should - what must not vary is
+      // that "signing" and "does not opt you in" appear in that order.
+      expect(body, `${path} says signing is not opting in`).toMatch(
+        /signing[^.]{0,60}does not (?:sign you up|opt you in)/i,
+      );
+      await expect(
+        page.locator('main a[href="/text-alerts"]'),
+        `${path} points at where consent is given`,
+      ).not.toHaveCount(0);
+    }
   });
 });
