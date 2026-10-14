@@ -395,9 +395,9 @@ export default function PrivacyPage() {
                 </p>
                 <p className="text-ink-2">
                   The fuller terms of the programme, and the clause you sign,
-                  are on the{" "}
-                  <Link href="/text-alerts" className="underline">
-                    text alerts page
+                  are under SMS Terms in our{" "}
+                  <Link href="/terms" className="underline">
+                    terms of service
                   </Link>
                   .
                 </p>

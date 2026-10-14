@@ -26,7 +26,7 @@ const PUBLIC_PAGES = [
   "/contact",
   "/sign",
   "/privacy",
-  "/text-alerts",
+  "/terms",
   // Derived rather than listed. A hand-kept copy went stale the moment the
   // service pages were added, and this spec failed for the right reason -
   // the sitemap had grown and nothing had told it.
@@ -189,25 +189,49 @@ test.describe("what the carriers require", () => {
     await expect(page.locator("main")).toContainText("Good Looking Digital");
   });
 
-  test("the text alerts page is reachable and shows the consent clause", async ({
+  /**
+   * Four things, and the carriers name all four: the page must be titled
+   * Terms of Service or Terms & Conditions, carry an SMS Terms section, state
+   * the rates disclosure in that exact wording, and name the registered
+   * brand. "Standard message and data rates from your carrier may apply"
+   * reads better and does not count, which is why both sentences are on the
+   * page and only one of them is checked here.
+   */
+  test("the terms page meets all four carrier requirements", async ({
     page,
   }) => {
-    await page.goto("/text-alerts");
+    await page.goto("/terms");
 
-    await expect(
-      page.getByRole("heading", { level: 1, name: /lead alert text messages/i }),
-    ).toBeVisible();
+    await expect(page).toHaveTitle(/terms of service|terms & conditions/i);
 
     const body = (await page.locator("main").innerText()).replace(/\s+/g, " ");
-    // The reviewer has to find the exact words a client agrees to, how to
-    // stop, and that rates may apply. Losing any of the three fails review.
+    expect(body, "page is titled Terms of Service").toContain(
+      "Terms of Service",
+    );
+    // Case-insensitive because the section label is uppercased by css, so
+    // innerText reports "SMS TERMS". The requirement is that the section
+    // exists and is findable, not how it is cased.
+    expect(body, "an SMS Terms section exists").toMatch(/sms terms/i);
+    expect(body, "the canonical rates disclosure, unreworded").toContain(
+      "Message and data rates may apply.",
+    );
+    expect(body, "the registered brand is named").toContain(
+      "Good Looking Digital LLC",
+    );
+  });
+
+  test("the terms page doubles as the opt-in proof", async ({ page }) => {
+    await page.goto("/terms");
+
+    // The opt-in proof field points here, so a reviewer has to be able to
+    // read the exact words a client agrees to and how to stop.
+    const body = (await page.locator("main").innerText()).replace(/\s+/g, " ");
     expect(body).toContain("clause 12.6");
     expect(body).toContain("Reply STOP");
-    expect(body).toContain("message and data rates");
 
     // Both directions, because a carrier follows the link from either page.
     await expect(page.locator('main a[href="/privacy"]')).toHaveCount(1);
     await page.goto("/privacy");
-    await expect(page.locator('main a[href="/text-alerts"]')).toHaveCount(1);
+    await expect(page.locator('main a[href="/terms"]')).toHaveCount(1);
   });
 });

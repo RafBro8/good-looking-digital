@@ -140,10 +140,10 @@ export function SiteFooter() {
                   should be able to find it from any page rather than only
                   from a url pasted into a form. */}
               <Link
-                href="/text-alerts"
+                href="/terms"
                 className="text-ink-2 hover:text-ink text-sm transition-colors duration-200"
               >
-                Text alerts
+                Terms of Service
               </Link>
             </div>
           </div>

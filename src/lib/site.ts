@@ -338,9 +338,10 @@ export const testRun = {
       ms: "477ms",
     },
     {
-      name: "the text alerts page is reachable and shows the consent clause",
-      ms: "622ms",
+      name: "the terms page meets all four carrier requirements",
+      ms: "480ms",
     },
+    { name: "the terms page doubles as the opt-in proof", ms: "565ms" },
     { name: "visitor reaches the quote form", ms: "1.3s" },
     { name: "a bad email address is caught", ms: "1.7s" },
     { name: "the quote form submits", ms: "2.4s" },
