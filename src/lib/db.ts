@@ -69,6 +69,11 @@ export async function ensureIndexes(): Promise<void> {
     .collection("leads")
     .createIndex({ respondedAt: 1, remindedAt: 1, receivedAt: 1 });
 
+  // Consent records are the evidence behind every text alert we send, so
+  // they are never swept and never expire. Indexed on the number because the
+  // only question ever asked of this collection is "did this number agree".
+  await db.collection("sms_consents").createIndex({ phone: 1, at: -1 });
+
   // Rate-limit records expire on their own, so nothing has to sweep them.
   await db
     .collection("rate_limits")

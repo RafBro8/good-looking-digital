@@ -40,6 +40,10 @@ const PAGES = [
   // Indexable because a mobile carrier reviewing the A2P campaign has to be
   // able to reach it without a login. Low priority: nobody searches for it.
   { path: "/terms", changeFrequency: "yearly", priority: 0.2 },
+  // Public for the same reason, and for a second one: it is the url the
+  // A2P campaign names as proof of how consent is collected, so a reviewer
+  // has to be able to load it cold and see an unchecked box.
+  { path: "/text-alerts", changeFrequency: "yearly", priority: 0.2 },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

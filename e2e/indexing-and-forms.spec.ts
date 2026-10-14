@@ -27,6 +27,7 @@ const PUBLIC_PAGES = [
   "/sign",
   "/privacy",
   "/terms",
+  "/text-alerts",
   // Derived rather than listed. A hand-kept copy went stale the moment the
   // service pages were added, and this spec failed for the right reason -
   // the sitemap had grown and nothing had told it.

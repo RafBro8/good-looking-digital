@@ -1,5 +1,6 @@
 import { site } from "@/lib/site";
 import type { StoredLead } from "@/lib/leads";
+import type { StoredConsent } from "@/lib/consent";
 
 /**
  * Lead notifications.
@@ -162,6 +163,51 @@ export async function notifyOwnerBySms(lead: StoredLead): Promise<boolean> {
     console.error("[notify] could not reach the sms provider", error);
     return false;
   }
+}
+
+/**
+ * Tells you a client has turned text alerts on.
+ *
+ * Nothing is automated off the back of this on purpose. The number goes on
+ * the alert list by hand, after a look at whether the name matches a real
+ * client - which is the whole reason a stranger finding the opt-in page and
+ * typing a number into it is a junk row rather than a problem.
+ *
+ * The disclosure is quoted in full because this email is the copy of the
+ * consent record that lands somewhere a person actually reads.
+ */
+export async function notifyOwnerOfConsent(
+  consent: StoredConsent,
+): Promise<boolean> {
+  const { to } = config();
+
+  const lines = [
+    `A client opted in to text alerts via ${site.url}/text-alerts`,
+    "",
+    `Name:      ${consent.name}`,
+    consent.business ? `Business:  ${consent.business}` : null,
+    `Mobile:    ${consent.phoneAsGiven}`,
+    `Digits:    ${consent.phone}`,
+    `At:        ${consent.at.toISOString()}`,
+    `Wording:   version ${consent.version}`,
+    "",
+    "They ticked",
+    "----------",
+    consent.label,
+    "",
+    "Having read",
+    "-----------",
+    consent.disclosure,
+    "",
+    "Nothing has been turned on automatically. Add the number to LEAD_SMS_TO",
+    "once you have checked it against the signed agreement.",
+  ].filter(Boolean);
+
+  return send({
+    to,
+    subject: `Text alerts opt-in - ${consent.name}${consent.business ? ` (${consent.business})` : ""}`,
+    text: lines.join("\n"),
+  });
 }
 
 /** Goes to you. Reply-to is the lead, so replying in your inbox just works. */

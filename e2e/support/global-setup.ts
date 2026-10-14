@@ -24,8 +24,9 @@ export default async function globalSetup(): Promise<void> {
     const db = client.db(TEST_DB);
     const leads = await db.collection("leads").deleteMany({});
     const limits = await db.collection("rate_limits").deleteMany({});
+    const consents = await db.collection("sms_consents").deleteMany({});
     console.log(
-      `[e2e] cleared ${TEST_DB}: ${leads.deletedCount} leads, ${limits.deletedCount} rate-limit records`,
+      `[e2e] cleared ${TEST_DB}: ${leads.deletedCount} leads, ${consents.deletedCount} consents, ${limits.deletedCount} rate-limit records`,
     );
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

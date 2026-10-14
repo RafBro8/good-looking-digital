@@ -342,6 +342,19 @@ export const testRun = {
       ms: "480ms",
     },
     { name: "the terms page doubles as the opt-in proof", ms: "565ms" },
+    {
+      name: "the opt-in page makes clear that consent is not a condition of purchase",
+      ms: "594ms",
+    },
+    { name: "the consent box starts unchecked, every time", ms: "657ms" },
+    {
+      name: "an unticked box is refused, and nothing is recorded",
+      ms: "812ms",
+    },
+    {
+      name: "a ticked box is recorded with the words that were on the screen",
+      ms: "1.1s",
+    },
     { name: "visitor reaches the quote form", ms: "1.3s" },
     { name: "a bad email address is caught", ms: "1.7s" },
     { name: "the quote form submits", ms: "2.4s" },

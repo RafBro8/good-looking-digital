@@ -9,6 +9,7 @@ import {
   type LeadInput,
   type StoredLead,
 } from "@/lib/leads";
+import { overRateLimit } from "@/lib/rate-limit";
 import {
   confirmToSender,
   isNotificationConfigured,
@@ -30,47 +31,6 @@ import {
  * instance sleeps and takes about a minute to wake, which is a minute a
  * prospect spends looking at a form that has not submitted.
  */
-
-const RATE_LIMIT = { max: 5, windowMs: 60 * 60 * 1000 };
-
-function clientKey(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  const ip = forwarded?.split(",")[0]?.trim();
-  return ip || request.headers.get("x-real-ip") || "unknown";
-}
-
-/**
- * Rate limiting through Mongo rather than memory: serverless invocations do
- * not share memory, so an in-process counter would reset constantly and
- * enforce nothing. Records carry a TTL so nothing has to clean up after them.
- */
-async function overRateLimit(key: string): Promise<boolean> {
-  if (key === "unknown") return false;
-
-  try {
-    const db = await getDb();
-    const now = new Date();
-    const since = new Date(now.getTime() - RATE_LIMIT.windowMs);
-
-    const recent = await db
-      .collection("rate_limits")
-      .countDocuments({ key, at: { $gte: since } });
-
-    if (recent >= RATE_LIMIT.max) return true;
-
-    await db.collection("rate_limits").insertOne({
-      key,
-      at: now,
-      expiresAt: new Date(now.getTime() + RATE_LIMIT.windowMs),
-    });
-
-    return false;
-  } catch (error) {
-    // A limiter that is down must not become a closed door.
-    console.error("[leads] rate limit check failed, allowing through", error);
-    return false;
-  }
-}
 
 export async function POST(request: Request) {
   let body: Partial<LeadInput>;
@@ -107,7 +67,7 @@ export async function POST(request: Request) {
     );
   }
 
-  if (await overRateLimit(clientKey(request))) {
+  if (await overRateLimit(request, "leads")) {
     return NextResponse.json(
       {
         ok: false,
