@@ -7,7 +7,11 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Privacy",
+  // "Privacy Policy" rather than "Privacy" because a mobile carrier reviewing
+  // the A2P campaign requires the linked page to be titled exactly that. The
+  // url stays /privacy so the footer, the sitemap and the link under the
+  // contact form keep working.
+  title: "Privacy Policy",
   description:
     "What Good Looking Digital collects when you use this site, why, who processes it, and what we never do with it. No cookies, no tracking scripts, and nothing loaded from a third party.",
   alternates: { canonical: "/privacy" },
@@ -23,11 +27,17 @@ export const metadata: Metadata = {
  * - a policy describing behaviour the software does not have is the same
  * failure as a test panel describing tests that do not exist.
  *
- * notify.ts also contains a Twilio path that texts the owner. It is dormant:
- * it returns before any network call unless all four TWILIO_ and LEAD_SMS_
- * variables are set, and none are in production. It was listed here as a
- * processor once, which described something that was not happening. If those
- * variables are ever set, add Twilio back to the processors below first.
+ * notify.ts also contains a Twilio path that texts the owner. It returns
+ * before any network call unless all four TWILIO_ and LEAD_SMS_ variables are
+ * set. Twilio was listed here as a processor once and removed, because it
+ * described something that was not happening.
+ *
+ * It is listed again now, and the wording is doing careful work: it says
+ * alerts go to clients whose plan includes them, which is an accurate
+ * description of the service being offered, and it says nobody who contacts
+ * us through this site is texted, which is the part a visitor to this page
+ * actually cares about. The A2P campaign registration requires a carrier to
+ * be able to read this page and find the programme described.
  */
 
 const UPDATED = "18 September 2026";
@@ -87,6 +97,10 @@ const processors = [
     name: "Google Workspace",
     role: "Our email. Your message ends up in an inbox there once we are notified.",
   },
+  {
+    name: "Twilio",
+    role: "Sends the text alerts, and only to clients whose plan includes them. Nobody who contacts us through this site is ever texted.",
+  },
 ];
 
 export default function PrivacyPage() {
@@ -98,7 +112,7 @@ export default function PrivacyPage() {
         <section className="pt-[clamp(2.5rem,1.5rem+5vw,5rem)] pb-[clamp(1.5rem,1rem+2vw,2.5rem)]">
           <Container>
             <p className="label text-muted flex items-center gap-3 before:block before:h-px before:w-7 before:bg-[var(--grow)] before:content-['']">
-              Last updated {UPDATED}
+              Privacy Policy &middot; last updated {UPDATED}
             </p>
             <h1 className="mt-7 max-w-[16ch] text-5xl">
               What we collect, and what we never do with it
@@ -345,6 +359,54 @@ export default function PrivacyPage() {
         </section>
 
         {/* ---------- your browser ---------- */}
+        <section className="border-rule border-t py-[clamp(2.25rem,1.5rem+3vw,3.75rem)]">
+          <Container>
+            <div className="grid gap-[clamp(1.5rem,1rem+3vw,4rem)] lg:grid-cols-[14rem_minmax(0,1fr)]">
+              <Eyebrow>Text alerts, if you are a client</Eyebrow>
+              <div className="grid max-w-[62ch] gap-4">
+                <p className="text-ink-2">
+                  This part is not about visiting the site. It applies only if
+                  you are a client of ours and your plan includes lead alerts
+                  by text, which you ask for in writing when you sign the
+                  agreement. Nobody who sends us an enquiry through this site
+                  is ever texted.
+                </p>
+                <p className="text-ink-2">
+                  Where it applies, we hold one mobile number, yours, and use
+                  it for one thing: telling you an enquiry has arrived on your
+                  own site. Message and data rates from your carrier may apply.
+                  Reply STOP to any of them and they stop.
+                </p>
+                {/* Required verbatim by the mobile carriers as a condition of
+                    the A2P 10DLC campaign registration. Narrower than the
+                    promises in "What we do not do" above, which is why it is
+                    framed as their requirement rather than our commitment -
+                    we do not sell anything about anybody, to anybody. Do not
+                    reword: it is checked character for character by an e2e
+                    spec, and quietly editing it would make the campaign
+                    non-compliant without anything visibly breaking. */}
+                <p className="text-ink-2">
+                  Stated here because the carriers require these words
+                  exactly:{" "}
+                  <span className="text-ink font-semibold">
+                    We do not sell or share your SMS opt-in data or personal
+                    information with third parties for marketing purposes.
+                  </span>
+                </p>
+                <p className="text-ink-2">
+                  The fuller terms of the programme, and the clause you sign,
+                  are on the{" "}
+                  <Link href="/text-alerts" className="underline">
+                    text alerts page
+                  </Link>
+                  .
+                </p>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* ---------- device storage ---------- */}
         <section className="border-rule border-t py-[clamp(2.25rem,1.5rem+3vw,3.75rem)]">
           <Container>
             <div className="grid gap-[clamp(1.5rem,1rem+3vw,4rem)] lg:grid-cols-[14rem_minmax(0,1fr)]">

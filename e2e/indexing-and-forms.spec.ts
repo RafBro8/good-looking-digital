@@ -26,6 +26,7 @@ const PUBLIC_PAGES = [
   "/contact",
   "/sign",
   "/privacy",
+  "/text-alerts",
   // Derived rather than listed. A hand-kept copy went stale the moment the
   // service pages were added, and this spec failed for the right reason -
   // the sitemap had grown and nothing had told it.
@@ -146,5 +147,67 @@ test.describe("the form tells a screen reader what is wrong", () => {
         "true",
       );
     }
+  });
+});
+
+/**
+ * What the mobile carriers require in order to keep sending text alerts.
+ *
+ * These are not our rules and not our wording. Registering an A2P 10DLC
+ * campaign means three public urls get checked by a reviewer: a privacy
+ * policy titled exactly that, a terms page for the programme, and proof of
+ * how consent is collected.
+ *
+ * Worth a spec because the failure is invisible. Someone tidies a sentence,
+ * nothing breaks, no page 404s, and the campaign is quietly non-compliant
+ * until messages stop arriving and nobody knows why.
+ */
+test.describe("what the carriers require", () => {
+  const MANDATED =
+    "We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes.";
+
+  test("the privacy policy carries the mandated sentence, character for character", async ({
+    page,
+  }) => {
+    await page.goto("/privacy");
+
+    const body = (await page.locator("main").innerText()).replace(/\s+/g, " ");
+    expect(
+      body.includes(MANDATED),
+      "the sentence the carriers require verbatim is missing or has been reworded",
+    ).toBeTruthy();
+  });
+
+  test("the privacy policy is titled Privacy Policy and names the brand", async ({
+    page,
+  }) => {
+    await page.goto("/privacy");
+
+    // The carrier requirement is literal about the title.
+    await expect(page).toHaveTitle(/privacy policy/i);
+    await expect(page.locator("main")).toContainText("Privacy Policy");
+    await expect(page.locator("main")).toContainText("Good Looking Digital");
+  });
+
+  test("the text alerts page is reachable and shows the consent clause", async ({
+    page,
+  }) => {
+    await page.goto("/text-alerts");
+
+    await expect(
+      page.getByRole("heading", { level: 1, name: /lead alert text messages/i }),
+    ).toBeVisible();
+
+    const body = (await page.locator("main").innerText()).replace(/\s+/g, " ");
+    // The reviewer has to find the exact words a client agrees to, how to
+    // stop, and that rates may apply. Losing any of the three fails review.
+    expect(body).toContain("clause 12.6");
+    expect(body).toContain("Reply STOP");
+    expect(body).toContain("message and data rates");
+
+    // Both directions, because a carrier follows the link from either page.
+    await expect(page.locator('main a[href="/privacy"]')).toHaveCount(1);
+    await page.goto("/privacy");
+    await expect(page.locator('main a[href="/text-alerts"]')).toHaveCount(1);
   });
 });

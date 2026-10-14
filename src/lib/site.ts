@@ -283,7 +283,7 @@ export const testRun = {
   // on (browserType.launch: spawn UNKNOWN), and inventing its number would be
   // exactly the thing this panel exists to avoid. CI runs all three, so
   // refresh them from a run as described above.
-  duration: "72s",
+  duration: "84s",
   specs: [
     {
       name: "every footer service link resolves to something real",
@@ -328,6 +328,18 @@ export const testRun = {
     {
       name: "the required fields say so in the accessibility tree",
       ms: "709ms",
+    },
+    {
+      name: "the privacy policy carries the mandated sentence, character for character",
+      ms: "463ms",
+    },
+    {
+      name: "the privacy policy is titled Privacy Policy and names the brand",
+      ms: "477ms",
+    },
+    {
+      name: "the text alerts page is reachable and shows the consent clause",
+      ms: "622ms",
     },
     { name: "visitor reaches the quote form", ms: "1.3s" },
     { name: "a bad email address is caught", ms: "1.7s" },

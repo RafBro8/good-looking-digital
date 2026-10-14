@@ -37,6 +37,9 @@ const PAGES = [
   // the kind of low-competition phrase we can actually win.
   { path: "/sign", changeFrequency: "yearly", priority: 0.6 },
   { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
+  // Indexable because a mobile carrier reviewing the A2P campaign has to be
+  // able to reach it without a login. Low priority: nobody searches for it.
+  { path: "/text-alerts", changeFrequency: "yearly", priority: 0.2 },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
