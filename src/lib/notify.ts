@@ -99,11 +99,23 @@ export async function notifyOwnerBySms(lead: StoredLead): Promise<boolean> {
   const who = lead.business ? `${lead.name} (${lead.business})` : lead.name;
   const gist = lead.message.replace(/\s+/g, " ").slice(0, 90);
 
+  /**
+   * The brand name leads and the opt-out closes, and neither is decoration.
+   * US carriers vet the sample messages against an A2P 10DLC campaign, and
+   * they expect a recipient to be able to tell who is texting them and how to
+   * make it stop. A text from an unrecognised number reading only "New
+   * enquiry" fails both tests, and would fail them for the client too.
+   *
+   * Whatever is changed here has to be changed in the registered campaign
+   * samples as well, or the samples stop describing what is actually sent.
+   */
   const body = [
-    `New enquiry - ${who}`,
+    `${site.name}: new enquiry`,
+    who,
     lead.phone ? lead.phone : lead.email,
     `"${gist}${lead.message.length > 90 ? "..." : ""}"`,
     lead.source ? `via ${lead.source}` : null,
+    "Reply STOP to opt out.",
   ]
     .filter(Boolean)
     .join("\n")
