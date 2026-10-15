@@ -9,18 +9,25 @@ import { site } from "@/lib/site";
  * Only routes that exist. A nav link that 404s costs more trust than a shorter
  * menu does.
  *
- * "Work" rather than "Showcase": this row has to survive 320px, and it now
- * carries six links beside a theme toggle. The page itself is headed Showcase.
+ * "Showcase" rather than "Work", because it is the heading on the page it
+ * leads to and the two should not disagree. It said "Work" while this row
+ * carried six links and had to survive 320px; dropping Sign bought the
+ * characters back, and the row is a link shorter than it was.
+ *
+ * Sign is deliberately not here. It is a free tool rather than a service we
+ * sell, so it earns a footer link and not a slot in the main nav, where every
+ * entry competes with the five that bring in work.
+ *
+ * Order is the two paths first, then the proof, then the terms. A visitor who
+ * does not yet know which door is theirs is not helped by a list of projects,
+ * and one who does know wants to see the work before the price.
  */
 const nav = [
-  { label: "Work", href: "/work" },
   { label: "Grow", href: "/grow" },
   { label: "Platform", href: "/platform" },
+  { label: "Showcase", href: "/work" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
-  // "Sign" rather than "Sign a document": this row has to survive 320px with
-  // five links and a theme toggle beside them. The page itself explains.
-  { label: "Sign", href: "/sign" },
 ];
 
 export function SiteHeader() {

@@ -94,7 +94,10 @@ export type WorkGroup = {
 };
 
 export const workMeta = {
-  metaTitle: "Work",
+  // "Showcase", matching the nav link and the eyebrow on the page. Neither
+  // word is one anybody searches for, so consistency is the only thing this
+  // choice can buy, and three different names for one page bought nothing.
+  metaTitle: "Showcase",
   metaDescription:
     "Websites, applications and engineering projects built by Good Looking Digital, all live and open in a new tab.",
   eyebrow: "Showcase",
@@ -116,11 +119,13 @@ const localBusiness: WorkProject[] = [
     forSale: true,
     caseStudy: {
       slug: "the-good-build-co",
-      metaTitle: "The Good Build Co: a contractor website built to survive the shortlist",
+      metaTitle:
+        "The Good Build Co: a contractor website built to survive the shortlist",
       metaDescription:
         "How a residential construction site is put together: process before portfolio, scope before numbers, and a finished site a contractor can buy outright.",
       eyebrow: "Case study, and for sale",
-      title: "Homeowners are not choosing a builder. They are ruling builders out.",
+      title:
+        "Homeowners are not choosing a builder. They are ruling builders out.",
       lede: "By the time somebody opens a contractor's website they have three tabs open and they are looking for a reason to close two of them. This site is built around that, which is why it leads with how the work happens rather than with how good the work looks.",
       brief: [
         {
@@ -404,7 +409,8 @@ export const allProjects: WorkProject[] = workGroups.flatMap((g) => g.projects);
  */
 export const caseStudyProjects: (WorkProject & { caseStudy: CaseStudy })[] =
   allProjects.filter(
-    (p): p is WorkProject & { caseStudy: CaseStudy } => p.caseStudy !== undefined,
+    (p): p is WorkProject & { caseStudy: CaseStudy } =>
+      p.caseStudy !== undefined,
   );
 
 export function projectByCaseStudySlug(slug: string) {
