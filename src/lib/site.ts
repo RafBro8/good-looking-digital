@@ -498,6 +498,26 @@ export const testRun = {
     },
     { name: "both groups render, each with its own heading", ms: "523ms" },
   ],
+
+  /**
+   * The five shown before anybody clicks, chosen because a roofer can tell
+   * what they mean. The rest are behind a disclosure.
+   *
+   * The whole list used to be on screen in a 22rem scroll box, which was
+   * honest and also meant a thumb swipe down the home page on a phone got
+   * caught inside eighty-nine rows of test names. The claim is the count and
+   * the names being real, not the reader having to scroll past all of them.
+   *
+   * check-test-panel.js fails if a name here is not in specs above, so a
+   * rename cannot quietly empty this.
+   */
+  featured: [
+    "the quote form submits",
+    "the lead is stored, not lost",
+    "it works on a five-year-old phone",
+    "nothing is clipped at 320px, least of all the phone number",
+    "every footer service link resolves to something real",
+  ],
 } as const;
 
 /**
@@ -518,6 +538,13 @@ export interface PathPage {
   featureTitle: string;
   featureBody: string;
   featurePoints: string[];
+  /**
+   * Where the full version of this lives, when the feature has a service page
+   * of its own. The block here is a summary; without the link it would be the
+   * only place a visitor meets the service, and with it the detail does not
+   * have to be repeated on a path page somebody is skimming.
+   */
+  featureHref?: string;
   faqs: { q: string; a: string }[];
   ctaTitle: string;
   ctaBody: string;
@@ -554,15 +581,13 @@ export const pathContent: Record<PathId, PathPage> = {
     featureEyebrow: "The part most people skip",
     featureTitle: "A yard sign that actually does something",
     featureBody:
-      "Most signs end at a phone number nobody dials. We design the code and the page it opens, you print the sign wherever you like, and the neighbour standing on the sidewalk becomes an enquiry in your pocket before they have walked away.",
+      "Most signs end at a phone number nobody dials. We design the code and the page it opens, and the neighbour on the sidewalk becomes an enquiry in your pocket before they have walked away.",
     featurePoints: [
-      "A QR code as a scalable file, for yard signs, stickers, flyers or vehicle graphics",
+      "A QR code as a scalable file, for signs, stickers, flyers or a truck",
       "Opens a page built for one offer, not your homepage",
-      "Short form - you are notified within seconds, by email",
-      "Your customer gets an instant confirmation, not silence",
-      "A reminder fires if nobody has called them back",
-      "You can tell which sign produced which call",
+      "You know which sign produced which call",
     ],
+    featureHref: "/services/qr-signage",
     faqs: [
       {
         q: "Do I own the website?",
@@ -776,12 +801,18 @@ export const about = {
   heroTitle: "An engineer who cares what it looks like.",
   heroLede:
     "Close to twenty years in technology. The last nine building full-stack software for large American companies, including a Fortune 5. Based in Illinois, working across Chicagoland - and anywhere else with a browser.",
+  /**
+   * Three paragraphs, not five. The cut version ran to 293 words and the
+   * `highlights` list directly beneath it already named the capabilities the
+   * first and fourth paragraphs spent most of their length describing: the
+   * enterprise scale, the user research, the UI/UX years, the stakeholder
+   * work, the testing. Saying both was not emphasis, it was the same claim
+   * twice at a point where the reader is deciding whether to keep reading.
+   */
   story: [
-    "Most of that time has been spent on enterprise applications - internal tools and customer-facing products used by thousands of people, at a Fortune 5 company and other large, well-known American names. Front end in JavaScript and TypeScript with React and Angular; back end in Java and Spring Boot or Node and Express, with some Python along the way; SQL and MongoDB behind it; AWS, Google Cloud and Pivotal Cloud Foundry underneath; and testing at every level from unit to end-to-end.",
-    "That range is deliberate. Plenty of engineers go deep on one layer and hand the rest to someone else. Working across all of them means a project does not get passed between three companies before it is finished, and nothing falls into the gap between them.",
-    "It also means the person you speak to on the first call is the person writing the code, and the person who answers when something breaks two years later. Always the same one. Most agencies put a salesperson in front of you and someone junior behind the scenes, and what you explained in the first meeting rarely survives the trip.",
-    "But the part I have always come back to is the front end - the interface, and the person on the other side of it. I have run user interviews and user-experience sessions, worked alongside UI/UX teams for years and picked up a great deal from them, and sat across from senior business stakeholders to work out what a system actually needed to do rather than what someone assumed it did.",
-    "That is what the name means. Plenty of people can make something look good, and plenty can make something work. Doing both, on the same project, without a handoff in the middle - that is the whole idea.",
+    "Most of that time has been on enterprise applications used by thousands of people, at a Fortune 5 company and other large American names. Front end in React and Angular, back end in Java and Spring Boot or Node, SQL and MongoDB behind it, AWS and Google Cloud underneath, and testing at every level from unit to end-to-end.",
+    "The range is deliberate. Working across all of it means a project is not passed between three companies before it is finished. It also means the person you speak to on the first call is the person writing the code, and the person who answers when something breaks two years later. Agencies tend to put a salesperson in front and someone junior behind.",
+    "The part I keep coming back to is the front end, and the person on the other side of it. Plenty of people can make something look good, and plenty can make something work. Doing both on the same project, with no handoff in the middle, is what the name means.",
   ],
   /**
    * One real project, told plainly. No client named and no confidential

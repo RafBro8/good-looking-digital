@@ -55,9 +55,37 @@ const actual = titlesInSuite();
 const missing = [...actual].filter((t) => !listed.includes(t));
 const extra = listed.filter((t) => !actual.has(t));
 
-if (missing.length === 0 && extra.length === 0) {
-  console.log(`test panel matches the suite: ${listed.length} specs`);
+/**
+ * The five names the panel shows before anybody clicks "show all". They are
+ * written out separately from specs[], so a rename in one place and not the
+ * other would quietly leave the panel showing four, or none.
+ */
+function featuredInPanel() {
+  const src = fs.readFileSync(SITE, "utf8");
+  const block = src.split("featured: [")[1];
+  if (!block) throw new Error("testRun.featured not found in site.ts");
+  return [...block.split("],")[0].matchAll(/"([^"]*)"/g)].map((m) => m[1]);
+}
+
+const featured = featuredInPanel();
+const orphaned = featured.filter((t) => !listed.includes(t));
+
+if (missing.length === 0 && extra.length === 0 && orphaned.length === 0) {
+  console.log(
+    `test panel matches the suite: ${listed.length} specs, ${featured.length} featured`,
+  );
   process.exit(0);
+}
+
+if (orphaned.length) {
+  console.error(
+    `\ntestRun.featured names specs that are not in testRun.specs (${orphaned.length}):`,
+  );
+  for (const t of orphaned) console.error(`  ? ${t}`);
+  console.error(
+    "\nThese would silently not appear on the home page. Fix the name or pick another spec.",
+  );
+  if (missing.length === 0 && extra.length === 0) process.exit(1);
 }
 
 console.error("The test panel on the home page no longer matches the suite.\n");

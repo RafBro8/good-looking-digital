@@ -200,6 +200,18 @@ export function PathPageLayout({
                     </li>
                   ))}
                 </ul>
+
+                {/* The rest of it lives on the service page. This block is a
+                    summary on a page somebody is skimming, so the detail goes
+                    one click away rather than into the skim. */}
+                {content.featureHref && (
+                  <Link
+                    href={content.featureHref}
+                    className={`${accentText} mt-5 inline-block text-sm font-semibold transition-opacity duration-200 hover:opacity-80`}
+                  >
+                    How this works, in full →
+                  </Link>
+                )}
               </Reveal>
             </div>
           </Container>

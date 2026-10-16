@@ -5,7 +5,7 @@ import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { LeadForm } from "@/components/LeadForm";
-import { serviceArea, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Start a project",
@@ -128,21 +128,9 @@ export default function ContactPage() {
           </Container>
         </section>
 
-        <section className="border-rule border-t py-[clamp(2.75rem,2rem+3vw,4.5rem)]">
-          <Container>
-            <Reveal>
-              <Eyebrow tone="platform">Service area</Eyebrow>
-              <p className="text-ink-2 measure mt-4">
-                Based in {site.base}. Working across{" "}
-                {serviceArea
-                  .filter((town) => !site.base.startsWith(town))
-                  .join(", ")}{" "}
-                and the surrounding suburbs - {site.reach}. Distance has never
-                been the thing that decides whether a project works.
-              </p>
-            </Reveal>
-          </Container>
-        </section>
+        {/* There was a Service area section here, listing the same towns the
+            footer's Serving column lists two inches below it. One of them had
+            to go and the footer's is on every page, so this one did. */}
       </main>
 
       <SiteFooter />

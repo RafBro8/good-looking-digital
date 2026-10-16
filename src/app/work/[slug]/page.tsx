@@ -130,8 +130,7 @@ export default async function CaseStudyPage({
                       : "bg-platform text-platform-ink"
                   }`}
                 >
-                  Open {project.host}{" "}
-                  <span aria-hidden="true">&rarr;</span>
+                  Open {project.host} <span aria-hidden="true">&rarr;</span>
                 </a>
                 <Link
                   href="/work"

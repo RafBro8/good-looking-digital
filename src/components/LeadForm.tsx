@@ -58,8 +58,7 @@ export function LeadForm({ source }: { source?: string }) {
       message: String(data.get("message") ?? ""),
       website: String(data.get("website") ?? ""),
       source,
-      heardFrom:
-        (data.get("heardFrom") as LeadInput["heardFrom"]) || undefined,
+      heardFrom: (data.get("heardFrom") as LeadInput["heardFrom"]) || undefined,
       heardFromOther: String(data.get("heardFromOther") ?? ""),
     };
 

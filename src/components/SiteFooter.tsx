@@ -109,7 +109,6 @@ export function SiteFooter() {
             >
               {site.email}
             </a>
-
             <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
               <Link
                 href="/pricing"
