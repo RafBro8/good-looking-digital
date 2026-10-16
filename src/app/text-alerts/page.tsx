@@ -38,8 +38,7 @@ export const metadata: Metadata = {
 const programme = [
   {
     term: "Who sends them",
-    detail:
-      "Good Looking Digital LLC, Mokena, Illinois. Messages come from one number, and that number is ours.",
+    detail: `Good Looking Digital LLC, Mokena, Illinois. Every message comes from ${site.smsFrom}, and only from there. Worth saving as a contact now, because the first one will otherwise arrive from a number you do not recognise.`,
   },
   {
     term: "What they say",

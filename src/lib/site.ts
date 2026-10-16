@@ -28,6 +28,14 @@ export const site = {
   phone: "630-400-8748",
   phoneHref: "tel:+16304008748",
   /**
+   * The number lead alerts are sent from, which is not the business number
+   * above and never will be. US A2P messaging has no alphanumeric sender id,
+   * so a client's phone shows ten digits they do not recognise. Naming it on
+   * the opt-in page lets them save it before the first alert arrives instead
+   * of wondering who is texting them about their own enquiry.
+   */
+  smsFrom: "630-884-5802",
+  /**
    * Stated the same way everywhere: local first, because that is where trust
    * comes from - but explicitly unbounded, so a prospect in California or
    * abroad does not read the town names and count themselves out.

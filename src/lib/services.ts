@@ -320,11 +320,13 @@ export const services: ServiceDetail[] = [
     sourceNames: ["Lead capture & follow-up"],
     metaTitle: "Lead capture and follow-up",
     metaDescription:
-      // "the alert" rather than "the text alert" until Twilio is actually
-      // wired up. The sentence ends "running on this site today", and that is
-      // only worth saying while every word of it is true. Restore the sharper
-      // wording the day the first test message arrives.
-      "The database behind your contact form, the alert that reaches you in seconds, the confirmation your customer gets, and a reminder if nobody called back. Running on this site today.",
+      // "the text alert" again as of 16 October 2026. It was softened to "the
+      // alert" on 12 October because the sentence ends "running on this site
+      // today" and the A2P campaign was not approved yet, so it was not true.
+      // The campaign is approved, the Messaging Service is wired up, and a
+      // real enquiry through this form produced a real text. Every word of it
+      // is true now.
+      "The database behind your contact form, the text alert that reaches you in seconds, the confirmation your customer gets, and a reminder if nobody called back. Running on this site today.",
     eyebrow: "Lead capture",
     title: "Lead capture and follow-up",
     lede: "The most expensive enquiry is the one that arrived and nobody answered. The advertising was already paid for and the customer was already interested - then it landed in a spam folder, or got read on a phone between jobs and forgotten. This is everything that happens after someone decides to contact you.",
