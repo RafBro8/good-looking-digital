@@ -67,10 +67,25 @@ async function send(payload: {
 
 const TWILIO_BASE = "https://api.twilio.com/2010-04-01/Accounts";
 
+/**
+ * Prefer the Messaging Service over the bare number.
+ *
+ * The A2P 10DLC campaign is registered against a Messaging Service, not
+ * against a phone number, and so is everything configured alongside it: the
+ * opt-out keywords (STOP, CANCEL, QUIT, OPTOUT, UNSUBSCRIBE, STOPALL, REVOKE,
+ * END), the opt-in keywords, HELP, and the branded replies each one sends.
+ * Those replies are what the registered campaign declares we send, so a
+ * message that does not go through the service risks answering HELP with
+ * something other than what the carriers were told.
+ *
+ * TWILIO_FROM_NUMBER stays as a fallback so an account without a service
+ * still sends rather than silently going quiet.
+ */
 function smsConfig() {
   return {
     sid: process.env.TWILIO_ACCOUNT_SID,
     token: process.env.TWILIO_AUTH_TOKEN,
+    messagingServiceSid: process.env.TWILIO_MESSAGING_SERVICE_SID,
     from: process.env.TWILIO_FROM_NUMBER,
     to: process.env.LEAD_SMS_TO,
   };
@@ -78,7 +93,8 @@ function smsConfig() {
 
 export function isSmsConfigured(): boolean {
   const c = smsConfig();
-  return Boolean(c.sid && c.token && c.from && c.to);
+  // Either sender will do, but one of them has to be set.
+  return Boolean(c.sid && c.token && (c.messagingServiceSid || c.from) && c.to);
 }
 
 /**
@@ -94,8 +110,9 @@ export function isSmsConfigured(): boolean {
  * lives in the email; this exists so a phone in a pocket buzzes.
  */
 export async function notifyOwnerBySms(lead: StoredLead): Promise<boolean> {
-  const { sid, token, from, to } = smsConfig();
-  if (!sid || !token || !from || !to) return false;
+  const { sid, token, messagingServiceSid, from, to } = smsConfig();
+  if (!sid || !token || !to) return false;
+  if (!messagingServiceSid && !from) return false;
 
   const who = lead.business ? `${lead.name} (${lead.business})` : lead.name;
 
@@ -151,7 +168,13 @@ export async function notifyOwnerBySms(lead: StoredLead): Promise<boolean> {
         Authorization: `Basic ${Buffer.from(`${sid}:${token}`).toString("base64")}`,
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: new URLSearchParams({ To: to, From: from, Body: body }),
+      body: new URLSearchParams({
+        To: to,
+        Body: body,
+        ...(messagingServiceSid
+          ? { MessagingServiceSid: messagingServiceSid }
+          : { From: from as string }),
+      }),
     });
 
     if (!res.ok) {
