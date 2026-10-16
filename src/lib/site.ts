@@ -43,6 +43,43 @@ export const site = {
   reach: "across Chicagoland, and anywhere else with a browser",
 } as const;
 
+/**
+ * The profiles the footer links to.
+ *
+ * Google is the maps place link and deliberately not the g.page review url,
+ * which opens the "write a review" form. Asking strangers on your own website
+ * to review a business they have not hired is both odd and the sort of
+ * solicitation Google filters.
+ *
+ * GitHub is not here on purpose. The account is a personal one and its commit
+ * history is signed with a real name, which is a sharper identity link than
+ * anything else on this list.
+ */
+export const socialLinks = [
+  {
+    id: "google",
+    label: "Google Business Profile",
+    href: "https://maps.google.com/?cid=503260421783472507",
+  },
+  {
+    id: "facebook",
+    label: "Facebook",
+    href: "https://www.facebook.com/goodlookingdigital",
+  },
+  {
+    id: "instagram",
+    label: "Instagram",
+    href: "https://www.instagram.com/goodlookingdigital/",
+  },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/goodlookingdigital/",
+  },
+] as const;
+
+export type SocialId = (typeof socialLinks)[number]["id"];
+
 /** Towns that get their own landing page in Stage 07. */
 export const serviceArea = [
   "Mokena",
@@ -311,6 +348,14 @@ export const testRun = {
     { name: "the row you clicked is the row that gets marked", ms: "2.2s" },
     { name: "a service row links to the page that describes it", ms: "2.1s" },
     { name: "a row with no page of its own is not a link", ms: "739ms" },
+    {
+      name: "every social link leaves the site safely and says where it goes",
+      ms: "666ms",
+    },
+    {
+      name: "the Google link opens the profile, not the review form",
+      ms: "459ms",
+    },
     {
       name: "reports ok, and says so in a way a keyword check can read",
       ms: "183ms",

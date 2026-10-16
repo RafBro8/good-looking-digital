@@ -1,5 +1,7 @@
 import { test, expect, type Page } from "@playwright/test";
 
+import { socialLinks } from "@/lib/site";
+
 /**
  * Footer service links.
  *
@@ -199,5 +201,69 @@ test.describe("service pages and the rows they came from", () => {
       page.locator("#ongoing-engineering a"),
       "Ongoing engineering has no service page",
     ).toHaveCount(0);
+  });
+});
+
+/**
+ * The four profile links.
+ *
+ * Guarded because each failure here is invisible on the page. A wrong url
+ * still renders a perfect icon, and the Google one in particular has a near
+ * identical sibling, the g.page review link, that would turn the footer into
+ * a request for reviews from strangers who have never hired us.
+ */
+test.describe("social profile links", () => {
+  test("every social link leaves the site safely and says where it goes", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const links = page.locator("footer a[target='_blank']");
+    await expect(links).toHaveCount(socialLinks.length);
+
+    for (const social of socialLinks) {
+      const link = page.locator(`footer a[href="${social.href}"]`);
+
+      await expect(link, `${social.label} is linked`).toHaveCount(1);
+
+      // Without rel, the opened tab can reach back through window.opener.
+      await expect(link, `${social.label} is safe`).toHaveAttribute(
+        "rel",
+        /noopener/,
+      );
+
+      // An unlabelled glyph announces as "link" and nothing else.
+      await expect(link, `${social.label} is named`).toHaveAttribute(
+        "aria-label",
+        /Opens in a new tab\.$/,
+      );
+
+      // 44px is the accessibility floor, and these are four small targets
+      // sitting next to each other at the bottom of a phone screen.
+      const box = await link.boundingBox();
+      expect(
+        box?.width ?? 0,
+        `${social.label} is tappable`,
+      ).toBeGreaterThanOrEqual(44);
+      expect(
+        box?.height ?? 0,
+        `${social.label} is tappable`,
+      ).toBeGreaterThanOrEqual(44);
+    }
+  });
+
+  /**
+   * The review url belongs in a completion email and on a leave-behind card,
+   * given to someone who actually hired us. On the website it would be an
+   * open invitation to non-customers, which Google filters and which costs
+   * more than it gains while there are no reviews to show.
+   */
+  test("the Google link opens the profile, not the review form", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    await expect(page.locator("footer a[href*='/review']")).toHaveCount(0);
+    await expect(page.locator("footer a[href*='g.page']")).toHaveCount(0);
   });
 });

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Container } from "@/components/ui";
+import { SocialLinks } from "@/components/SocialLinks";
 import { serviceHrefForRow } from "@/lib/services";
 import { townHref } from "@/lib/towns";
 import { paths, serviceArea, site } from "@/lib/site";
@@ -58,6 +59,10 @@ export function SiteFooter() {
             <p className="text-muted mt-2 max-w-[28ch] text-sm">
               {site.tagline}
             </p>
+            {/* Under the wordmark rather than in the bottom bar: this column
+                is the one that says who we are, and a profile link is the
+                same kind of claim as the name and the tagline above it. */}
+            <SocialLinks className="mt-3" />
           </div>
 
           <ServiceColumn pathId="grow" />
