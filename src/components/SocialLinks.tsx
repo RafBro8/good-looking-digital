@@ -39,7 +39,10 @@ export function SocialLinks({ className }: { className?: string }) {
             // Says the destination and that it leaves the site, because an
             // unlabelled glyph announces as "link" and nothing else.
             aria-label={`${site.name} on ${link.label}. Opens in a new tab.`}
-            className="text-muted hover:text-ink block p-3 transition-colors duration-200"
+            // grow on hover, not ink: these sit in the brand column beside
+            // the phone, the email and the town links, which all warm up on
+            // hover. The ink convention belongs to the legal row below.
+            className="text-muted hover:text-grow block p-3 transition-colors duration-200"
           >
             <svg
               viewBox="0 0 24 24"
