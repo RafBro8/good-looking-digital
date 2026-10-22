@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { site } from "@/lib/site";
+
 /**
  * The small-screen guarantee.
  *
@@ -39,7 +41,7 @@ test("it works on a five-year-old phone", async ({ page }) => {
 
   // Controls a contractor uses one-handed need a real target. 44px is the
   // accessibility floor; the phone link is the one that matters most.
-  const phone = header.getByRole("link", { name: /630-400-8748/ });
+  const phone = header.getByRole("link", { name: site.phone });
   const box = await phone.boundingBox();
   expect(
     box?.height ?? 0,
@@ -115,7 +117,7 @@ test.describe("the narrowest phone anybody still uses", () => {
     // like a phone number and dials nothing.
     const phone = page
       .locator("header")
-      .getByRole("link", { name: /630-400-8748/ });
+      .getByRole("link", { name: site.phone });
     await expect(phone).toBeVisible();
 
     const clipped = await phone.evaluate(

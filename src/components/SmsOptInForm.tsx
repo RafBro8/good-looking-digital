@@ -160,7 +160,7 @@ export function SmsOptInForm() {
           type="tel"
           className={field}
           autoComplete="tel"
-          placeholder="630 400 8748"
+          placeholder="708 555 0123"
         />
       </Field>
 

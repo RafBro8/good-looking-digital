@@ -105,9 +105,9 @@ export function SiteFooter() {
                 emits no whitespace between them. On screen it makes no
                 difference, since the phone is a block and the email has a top
                 margin. To anything reading the text out of the markup they
-                were one run of characters, which is how Google printed
-                "630-400-8748hello@goodlookingdigital.com" in the snippet for
-                every page on the site. */}{" "}
+                were one run of characters, which is how Google printed the
+                phone number and the email address as a single word in the
+                snippet for every page on the site. */}{" "}
             <a
               href={`mailto:${site.email}`}
               className="text-ink-2 hover:text-grow mt-1.5 inline-block text-sm font-semibold [overflow-wrap:anywhere] transition-colors duration-200"
