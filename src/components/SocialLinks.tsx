@@ -42,7 +42,9 @@ export function SocialLinks({ className }: { className?: string }) {
             // grow on hover, not ink: these sit in the brand column beside
             // the phone, the email and the town links, which all warm up on
             // hover. The ink convention belongs to the legal row below.
-            className="text-muted hover:text-grow block p-3 transition-colors duration-200"
+            // An explicit 44px box rather than padding around the icon:
+            // padding plus an inline svg came out at 43.99999px in Firefox.
+            className="text-muted hover:text-grow grid size-11 place-items-center transition-colors duration-200"
           >
             <svg
               viewBox="0 0 24 24"
