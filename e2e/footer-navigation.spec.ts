@@ -240,13 +240,17 @@ test.describe("social profile links", () => {
 
       // 44px is the accessibility floor, and these are four small targets
       // sitting next to each other at the bottom of a phone screen.
+      // Rounded to a hundredth: Firefox lays out in sixtieths of a pixel, so
+      // a true 44px box that starts at a fractional x reports 43.99999. A
+      // genuinely small target (43.5, say) still fails.
       const box = await link.boundingBox();
+      const px = (n: number | undefined) => Math.round((n ?? 0) * 100) / 100;
       expect(
-        box?.width ?? 0,
+        px(box?.width),
         `${social.label} is tappable`,
       ).toBeGreaterThanOrEqual(44);
       expect(
-        box?.height ?? 0,
+        px(box?.height),
         `${social.label} is tappable`,
       ).toBeGreaterThanOrEqual(44);
     }
