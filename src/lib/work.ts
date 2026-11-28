@@ -318,8 +318,8 @@ const technical: WorkProject[] = [
     id: "claritas",
     name: "Claritas E2E",
     kind: "Automated testing",
-    url: "https://claritas-e2e.vercel.app",
-    host: "claritas-e2e.vercel.app",
+    url: "https://claritase2e.com",
+    host: "claritase2e.com",
     hook: "End-to-end testing for people who do not live in a terminal.",
     blurb:
       "A window into automated test runs with no command line, no IDE and no YAML to edit. Built on the observation that the people who most need to know whether the tests passed are usually the people least equipped to find out.",
